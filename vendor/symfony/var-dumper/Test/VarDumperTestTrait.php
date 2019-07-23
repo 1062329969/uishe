@@ -19,20 +19,21 @@ use Symfony\Component\VarDumper\Dumper\CliDumper;
  */
 trait VarDumperTestTrait
 {
-    public function assertDumpEquals($dump, $data, $filter = 0, $message = '')
+    public function assertDumpEquals($expected, $data, $filter = 0, $message = '')
     {
-        $this->assertSame(rtrim($dump), $this->getDump($data, null, $filter), $message);
+        $this->assertSame($this->prepareExpectation($expected, $filter), $this->getDump($data, null, $filter), $message);
     }
 
-    public function assertDumpMatchesFormat($dump, $data, $filter = 0, $message = '')
+    public function assertDumpMatchesFormat($expected, $data, $filter = 0, $message = '')
     {
-        $this->assertStringMatchesFormat(rtrim($dump), $this->getDump($data, null, $filter), $message);
+        $this->assertStringMatchesFormat($this->prepareExpectation($expected, $filter), $this->getDump($data, null, $filter), $message);
     }
 
     protected function getDump($data, $key = null, $filter = 0)
     {
         $flags = getenv('DUMP_LIGHT_ARRAY') ? CliDumper::DUMP_LIGHT_ARRAY : 0;
         $flags |= getenv('DUMP_STRING_LENGTH') ? CliDumper::DUMP_STRING_LENGTH : 0;
+        $flags |= getenv('DUMP_COMMA_SEPARATOR') ? CliDumper::DUMP_COMMA_SEPARATOR : 0;
 
         $cloner = new VarCloner();
         $cloner->setMaxItems(-1);
@@ -44,5 +45,14 @@ trait VarDumperTestTrait
         }
 
         return rtrim($dumper->dump($data, true));
+    }
+
+    private function prepareExpectation($expected, $filter)
+    {
+        if (!\is_string($expected)) {
+            $expected = $this->getDump($expected, null, $filter);
+        }
+
+        return rtrim($expected);
     }
 }

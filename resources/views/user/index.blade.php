@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@include('user.common',['message'=>'我是错误信息'])
+
 @section('content')
 
     当前用户{{ Auth::user()->user_login }}

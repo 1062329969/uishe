@@ -34,7 +34,9 @@ class UserController extends Controller
         //获取用户和积分消费
         $user_credit = Usermeta::getUserCredit( $user->ID );
         //获取用户收藏
-        $user_collect = Usermeta::getUserCollect( $user->ID, '' );
+        $user_collect = Usermeta::getUserCollect( $user->ID, 'count');
+        //获取用户收藏
+        $user_avatar = Usermeta::getUserAvatar( $user->ID );
         //获取用户下载记录
         $downlog = DownLog::getDownLog(0, $user->ID, '', 4, 0);
         return view('user.index', [
@@ -42,6 +44,16 @@ class UserController extends Controller
             'user_credit' => $user_credit,
             'user_collect' => $user_collect,
             'downlog' => $downlog,
+            'user_avatar' => $user_avatar,
+        ]);
+    }
+
+    public function collect(){
+        $user = Auth::user();
+        $user_collect = Usermeta::getUserCollect( 52233, false, 1);
+        dd($user_collect);
+        return view('user.collect', [
+            'user_collect' => $user_collect,
         ]);
     }
 

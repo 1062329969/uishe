@@ -14,6 +14,7 @@ Route::middleware(['auth'])->group(function () {
 
     //用户
     Route::get('/user/index', 'UserController@index')->name('user');
+    Route::get('/user/collect', 'UserController@collect')->name('collect');
     Route::get('/loginout', 'UserController@loginout')->name('loginout');
 });
 
