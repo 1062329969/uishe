@@ -46,7 +46,7 @@ class Usermeta extends Model
             $user_collect = count( $user_collect_arr );
         } else {
             if ($page) {
-                $user_collect = Posts::whereIn('ID', $user_collect_arr)->simplePaginate($page);
+                $user_collect = Posts::whereIn('ID', $user_collect_arr)->paginate($page);
             } else {
                 $user_collect = Posts::whereIn('ID', $user_collect_arr)->get()->toArray();
             }

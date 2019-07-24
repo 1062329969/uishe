@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DownLog;
+use App\Orders;
 use App\Posts;
 use App\User;
 use App\Usermeta;
@@ -50,10 +51,17 @@ class UserController extends Controller
 
     public function collect(){
         $user = Auth::user();
-        $user_collect = Usermeta::getUserCollect( 52233, false, 1);
-        dd($user_collect);
+        $user_collect = Usermeta::getUserCollect( 52233, false, 2);
         return view('user.collect', [
             'user_collect' => $user_collect,
+        ]);
+    }
+
+    public function orders(){
+        $user = Auth::user();
+        $user_order = Orders::getUserOrder( 1 );
+        return view('user.order', [
+            'user_order' => $user_order,
         ]);
     }
 
