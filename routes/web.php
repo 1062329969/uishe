@@ -14,6 +14,8 @@
 //迁移工具
 Route::get('/qianyi/category', 'QianyiController@category');
 Route::get('/qianyi/tag', 'QianyiController@movetag');
+Route::get('/qianyi/move_comment', 'QianyiController@move_comment');
+Route::get('/qianyi/move_posts', 'QianyiController@move_posts');
 
 
 

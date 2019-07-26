@@ -1040,6 +1040,57 @@
         ]
     },
     {
+        "name": "maxakawizard/json-collection-parser",
+        "version": "1.5.0",
+        "version_normalized": "1.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/MAXakaWIZARD/JsonCollectionParser.git",
+            "reference": "49eb6933a4cd4d7553b3a39c0ea9eecb6103e428"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/MAXakaWIZARD/JsonCollectionParser/zipball/49eb6933a4cd4d7553b3a39c0ea9eecb6103e428",
+            "reference": "49eb6933a4cd4d7553b3a39c0ea9eecb6103e428",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1",
+            "salsify/json-streaming-parser": "~6.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~7.0",
+            "satooshi/php-coveralls": "~2.0"
+        },
+        "suggest": {
+            "ext-zlib": "Needed to support GZIP-compressed files"
+        },
+        "time": "2019-02-03T21:01:49+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "JsonCollectionParser\\": "src/",
+                "JsonCollectionParser\\Tests\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Max Grigorian",
+                "email": "maxakawizard@gmail.com"
+            }
+        ],
+        "description": "Streaming parser for large JSON files containing array of objects",
+        "homepage": "https://github.com/MAXakaWIZARD/JsonCollectionParser",
+        "keywords": [
+            "json"
+        ]
+    },
+    {
         "name": "mockery/mockery",
         "version": "1.2.2",
         "version_normalized": "1.2.2.0",
@@ -2445,6 +2496,121 @@
             "guid",
             "identifier",
             "uuid"
+        ]
+    },
+    {
+        "name": "rodenastyle/stream-parser",
+        "version": "v1.2",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Rodenastyle/stream-parser.git",
+            "reference": "a160e49da1cefd1660f4e3628a21c3ed97ce31b8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Rodenastyle/stream-parser/zipball/a160e49da1cefd1660f4e3628a21c3ed97ce31b8",
+            "reference": "a160e49da1cefd1660f4e3628a21c3ed97ce31b8",
+            "shasum": ""
+        },
+        "require": {
+            "ext-xmlreader": "*",
+            "maxakawizard/json-collection-parser": "^1.1",
+            "php": "^7.1.3",
+            "tightenco/collect": "^5.7"
+        },
+        "require-dev": {
+            "mockery/mockery": "^0.9.9",
+            "phpunit/phpunit": "^6.0"
+        },
+        "time": "2018-10-29T10:35:06+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Rodenastyle\\StreamParser\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Sergio Ródenas",
+                "homepage": "https://rodenastyle.com",
+                "role": "developer"
+            }
+        ],
+        "description": "PHP Multiformat Streaming Parser",
+        "keywords": [
+            "PHP7",
+            "csv",
+            "json",
+            "laravel",
+            "parser",
+            "pull",
+            "stream",
+            "xml"
+        ]
+    },
+    {
+        "name": "salsify/json-streaming-parser",
+        "version": "v6.0.3",
+        "version_normalized": "6.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/salsify/jsonstreamingparser.git",
+            "reference": "0b6403c8a2b1fc4c5af77b5c0174c11bd958a9d2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/salsify/jsonstreamingparser/zipball/0b6403c8a2b1fc4c5af77b5c0174c11bd958a9d2",
+            "reference": "0b6403c8a2b1fc4c5af77b5c0174c11bd958a9d2",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": "^5.4 | ^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2017-09-02T14:02:01+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "JsonStreamingParser\\": "src",
+                "JsonStreamingParser\\Test\\": "tests"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Maxim Gnatenko",
+                "email": "mgnatenko@gmail.com"
+            },
+            {
+                "name": "Rob Gonzalez",
+                "email": "rob@salsify.com",
+                "homepage": "http://salsify.com/"
+            },
+            {
+                "name": "Max Grigorian",
+                "email": "maxakawizard@gmail.com",
+                "homepage": "http://wizardcat.com/"
+            }
+        ],
+        "description": "A streaming parser for JSON in PHP.",
+        "homepage": "https://github.com/salsify/jsonstreamingparser",
+        "keywords": [
+            "json",
+            "parser",
+            "streaming"
         ]
     },
     {
@@ -4537,6 +4703,58 @@
             }
         ],
         "description": "A small library for converting tokenized PHP source code into XML and potentially other formats"
+    },
+    {
+        "name": "tightenco/collect",
+        "version": "v5.8.29",
+        "version_normalized": "5.8.29.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tightenco/collect.git",
+            "reference": "cef25a65cbeeb20057f60449530d2ac8b16164d8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tightenco/collect/zipball/cef25a65cbeeb20057f60449530d2ac8b16164d8",
+            "reference": "cef25a65cbeeb20057f60449530d2ac8b16164d8",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3",
+            "symfony/var-dumper": ">=3.4 <5"
+        },
+        "require-dev": {
+            "mockery/mockery": "^1.0",
+            "nesbot/carbon": "^1.26.3",
+            "phpunit/phpunit": "^7.0"
+        },
+        "time": "2019-07-19T12:57:39+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/Collect/Support/helpers.php",
+                "src/Collect/Support/alias.php"
+            ],
+            "psr-4": {
+                "Tightenco\\Collect\\": "src/Collect"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylorotwell@gmail.com"
+            }
+        ],
+        "description": "Collect - Illuminate Collections as a separate package.",
+        "keywords": [
+            "collection",
+            "laravel"
+        ]
     },
     {
         "name": "tijsverkoyen/css-to-inline-styles",
