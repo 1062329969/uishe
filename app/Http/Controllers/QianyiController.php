@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\CategoryNew;
 use App\Comments;
 use App\News;
 use App\Postmeta;
 use App\Posts;
 use App\tag;
 use App\Libs\PasswordHash;
+use App\TagNew;
 use App\TermRelationships;
 use App\Terms;
 use App\Termtaxonomy;
@@ -122,7 +125,14 @@ class QianyiController extends Controller
     }
 
     public function move_posts(){
-        $this->get_posts(14463);
+        set_time_limit(360);
+
+        $post_main = Posts::where([
+            ['post_status', '=', 'publish'],
+        ])->get()->toArray();
+        foreach ($post_main as $value){
+            $this->get_posts($value['ID']);
+        }
     }
 
     public function get_posts($post_id){
@@ -133,13 +143,19 @@ class QianyiController extends Controller
 
         $taxonomy = Termtaxonomy::whereIn('term_id', $taxonomy_id)->get()->toArray();
         $terms = Terms::whereIn('term_id', $taxonomy_id)->get()->toArray();
-
+        $terms = array_column($terms, NULL, 'term_id');
+        
         $post_meta = Postmeta::where('post_id', $post_id)->get()->toArray();
 
-        $posts = Posts::where([
+        $post_main = Posts::where([
             ['ID', '=', $post_id],
-            ['post_status', '=', 'draft'],
-        ])->orWhere('post_parent', $post_id)->get()->toArray();
+            ['post_status', '=', 'publish'],
+        ])->first();
+        if($post_main){
+            $post_main->toArray();
+        }else{
+            return false;
+        }
 
         $tag_new = [];
         $category_new = [];
@@ -147,26 +163,27 @@ class QianyiController extends Controller
             if ($item['taxonomy'] == 'post_tag') {
                 $tag_new[] = [
                     'tag_new_id' => $post_id,
-                    'tag_id' => $item['term_id']
+                    'tag_id' => $item['term_id'],
+                    'tag' => $terms[ $item['term_id'] ]['name']
                 ];
             }
             if ($item['taxonomy'] == 'category') {
                 $category_new[] = [
                     'cat_new_id' => $post_id,
-                    'cat_id' => $item['term_id']
+                    'cat_id' => $item['term_id'],
+                    'category' => $terms[ $item['term_id'] ]['name']
                 ];
             }
         }
 
         $post_meta = array_column($post_meta, 'meta_value', 'meta_key');
-        $posts = array_column($posts, NULL, 'ID');
-        $post_main = $posts[$post_id];
-        dd($post_main);
-
-        $cover_img = $post_meta['cx-post-imgurl'];
+//        dd($post_meta);
+        if (!isset($post_meta['_post_downtype'])){
+            $post_meta['_post_downtype'] = 0;
+        }
 
         $new = [
-            'id' => '',
+            'id' => $post_main['ID'],
             'created_at' => $post_main['post_date'],
             'admin_id' => $post_main['post_author'],
             'title' => $post_main['post_title'],
@@ -174,19 +191,24 @@ class QianyiController extends Controller
             'status' => News::Status_Normal,
             'comment_status' => News::Comment_Status_On,
             'comment_count' => $comment_count,
-            'cover_img' => $post_main[''],
-            'down_type' => $post_main[''],
-            'down' => $post_main[''],
-            'down_price_type' => $post_main[''],
-            'down_price' => $post_main[''],
-            'down_url' => $post_main[''],
-            'views' => $post_main[''],
-            'like' => $post_main[''],
-            'collects' => $post_main[''],
-            'category_id' => $post_main[''],
-            'tag_id' => $post_main[''],
+            'cover_img' => $post_meta['cx-post-imgurl'] ?? '',
+            'down_num' => $post_meta['post_down_numter'] ?? 0,
+            'down_type' => News::getDownType($post_meta['_post_downtype']),
+            'down_level' => $post_meta['_post_downmianfei'] ?? 0,
+            'down_price' => $post_meta['_post_downpay'] ?? 0,
+            'down_url' => $post_meta['_post_downurl'] ?? '',
+            'views' => $post_meta['views'] ?? 0,
+            'like' => $post_meta['bigfa_ding'] ?? 0,
+            'collects' => $post_meta['chenxing_post_collects'] ?? 0,
+            'category_id' => json_encode(array_column($category_new, 'cat_id'), JSON_UNESCAPED_UNICODE),
+            'category' => json_encode(array_column($category_new, 'category'), JSON_UNESCAPED_UNICODE),
+            'tag_id' => json_encode(array_column($tag_new, 'tag_id'), JSON_UNESCAPED_UNICODE),
+            'tag' => json_encode(array_column($tag_new, 'tag'), JSON_UNESCAPED_UNICODE),
         ];
-
+//        dd($new);
+        News::insert($new);
+        CategoryNew::insert($category_new);
+        TagNew::insert($tag_new);
 
     }
 
