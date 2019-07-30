@@ -39,4 +39,15 @@ class News extends Model
 
     }
 
+    public static function getRecommendNews(){
+        $recommend = News::where([
+                ['status', '=', 'on'],
+                ['recommend', '=', 'on'],
+            ])
+            ->select(['title', 'id'])
+            ->get()
+            ->toArray();
+        return $recommend;
+    }
+
 }

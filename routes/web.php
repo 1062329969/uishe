@@ -31,4 +31,4 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', 'HomeController@index');
 Route::any('/login', 'HomeController@login')->name('login');
 
-
+Route::get('/{id}.html', 'NewsController@item')->where('id', '[0-9]+');

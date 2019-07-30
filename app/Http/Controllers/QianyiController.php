@@ -212,27 +212,15 @@ class QianyiController extends Controller
 
     }
 
+    public function moveUser(){
 
 
-/*admin_id
- * `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `title` varchar(255) DEFAULT NULL COMMENT '标题',
-  `content` text COMMENT '内容',
-  `update_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `status` varchar(255) DEFAULT NULL COMMENT '文章状态',
-  `comment_status` varchar(255) DEFAULT NULL COMMENT '是否允许评论',
-  `comment_count` int(11) DEFAULT NULL COMMENT '评论数量',
-  `cover_img` varchar(255) DEFAULT NULL COMMENT '封面图片',
-  `down_type` int(11) DEFAULT NULL COMMENT '下载配置',
-  `down` int(11) DEFAULT NULL COMMENT '是否允许下载',
-  `down_price_type` varchar(255) DEFAULT NULL COMMENT '货币类型',
-  `down_price` decimal(11,0) DEFAULT NULL COMMENT '下载价格',
-  `down_url` varchar(255) DEFAULT NULL COMMENT '下载链接',
-  `views` int(11) DEFAULT NULL COMMENT '浏览量',
-  `like` int(11) DEFAULT NULL COMMENT '点赞',
-  `collects` int(11) DEFAULT NULL COMMENT '收藏',
-  `category_id` varchar(255) DEFAULT NULL COMMENT '分类id',
-  `tag_id` varchar(255) DEFAULT NULL COMMENT '标签id',*/
+
+
+
+
+
+    }
 
 
 

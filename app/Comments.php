@@ -12,4 +12,20 @@ class Comments extends Model
 
     protected $table = 'comments';
     protected $primaryKey = 'id';
+
+    public static function getRecommendComments(){
+        $recommend = News::where([
+            ['status', '=', 'allow'],
+            ['recommend', '=', 'on'],
+        ])
+            ->select(['content', 'new_id', 'user_id', 'username', 'created_at'])
+            ->get()
+            ->toArray();
+
+        foreach ($recommend as &$item){
+            $item['new_title'] = News::where('id', $item['new_id'])->value('title');
+        }
+
+        return $recommend;
+    }
 }
