@@ -7,8 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $table = 'wp_users';
-    protected $primaryKey = 'ID';
+    protected $table = 'users';
+    protected $primaryKey = 'id';
     protected $rememberTokenName = '';
     /**
      * The attributes that are mass assignable.

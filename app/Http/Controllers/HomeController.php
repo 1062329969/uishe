@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libs\PasswordHash;
-use App\User;
+use App\WpUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         if ($request->dologin) {
 
-            $user = User::where('user_login', $request->user_login)->first();
+            $user = WpUsers::where('user_login', $request->user_login)->first();
             $wp_hasher=new PasswordHash(8, TRUE);
             $checkPassword=$wp_hasher->CheckPassword($request->user_pass, $user['user_pass']);
 

@@ -15,9 +15,13 @@ use App\TermRelationships;
 use App\Terms;
 use App\Termtaxonomy;
 use App\User;
+use App\UsersCollect;
+use App\UsersQQ;
+use App\UsersWeibo;
 use App\WpComments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Rodenastyle\StreamParser\StreamParser;
 
 class QianyiController extends Controller
@@ -94,16 +98,6 @@ class QianyiController extends Controller
         }
         return $new_tag;
     }
-    /*
-    `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `new_id` int(11) DEFAULT NULL,
-    `user_id` int(11) DEFAULT NULL,
-    `user_name` varchar(255) DEFAULT NULL,
-    `user_ip` varchar(255) DEFAULT NULL,
-    `content` varchar(255) DEFAULT NULL,
-    `status` varchar(255) DEFAULT NULL,
-    `agent` varchar(255) DEFAULT NULL COMMENT '代理，浏览器头部信息',
-    `parent_id` int(11) DEFAULT NULL,*/
 
     public function move_comment(){
         $comments = WpComments::where('comment_approved', 1)->get()->toArray();
@@ -212,18 +206,94 @@ class QianyiController extends Controller
 
     }
 
-    public function moveUser(){
+    public function move_users(){
 
 
+        set_time_limit(360);
 
-
-
-
+        $user = DB::table('wp_users')->get()->toArray();
+        foreach ($user as $value){
+            $this->optionUserData((array)$value);
+        }
 
     }
 
+    public function optionUserData($user){
 
+        $user_meta = DB::table('wp_usermeta')->where('user_id', $user['ID'])->get()->toArray();
 
+        $user_meta = array_column($user_meta, 'meta_value', 'meta_key');
+
+        DB::transaction();
+        $user_data = [
+            'login' => $user['login'],
+            'pass' => $user['pass'],
+            'nicename' => $user['nicename'],
+            'email' => $user['email'],
+            'url' => $user['url'],
+            'registered' => $user['registered'],
+            'status' => $user['status'],
+            'display_name' => $user['display_name'],
+            'nickname' => $user['nickname'],
+            'last_login_time' => $user['last_login_time'],
+            'avatar_url' => $user_meta['simple_local_avatar'] ?? '',
+            'credit' => $user_meta['chenxing_credit'] ?? 0,
+        ];
+
+        $insert = User::insert($user_data);
+        if (!$insert) {
+            DB::rollBack();
+        }
+
+        if (isset($user_meta['chenxing_collect'])){
+            $user_collect = [];
+            foreach (explode(',', $user_meta) as $item) {
+                $news = News::find($item);
+                if ($news) {
+                    $user_collect[] = [
+                        'user_id' => $user['ID'],
+                        'collect_id' => $item,
+                        'title' => $news['title'],
+                        'img' => $news['cover_img'],
+                    ];
+                }
+            }
+
+            $collect_insert = UsersCollect::insert($user_collect);
+            if (!$collect_insert) {
+                DB::rollBack();
+            }
+        }
+
+        if (isset($user_meta['chenxing_qq_openid'])) {
+            $qq_openid_data = [
+                'openid' => $user_meta['chenxing_qq_openid'],
+                'access_token' => $user_meta['chenxing_qq_access_token'],
+                'user_id' => $user['ID'],
+                'created_at' => $user_meta['chenxing_daily_sign'],
+            ];
+
+            $qq_res = UsersQQ::insert($qq_openid_data);
+            if (!$qq_res){
+                DB::rollBack();
+            }
+        }
+
+        if (isset($user_meta['chenxing_weibo_openid'])) {
+            $weibo_openid_data = [
+                'openid' => $user_meta['chenxing_weibo_openid'],
+                'access_token' => $user_meta['chenxing_weibo_access_token'],
+                'user_id' => $user['ID'],
+                'created_at' => $user_meta['chenxing_daily_sign'],
+            ];
+
+            $weibo_res = UsersWeibo::insert($weibo_openid_data);
+            if (!$weibo_res){
+                DB::rollBack();
+            }
+        }
+
+    }
 
 
 
