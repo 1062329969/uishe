@@ -15,10 +15,13 @@ use App\TermRelationships;
 use App\Terms;
 use App\Termtaxonomy;
 use App\User;
+use App\Usercredit;
 use App\UsersCollect;
 use App\UsersQQ;
 use App\UsersWeibo;
 use App\WpComments;
+use App\WpMessage;
+use App\WpVip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -207,8 +210,6 @@ class QianyiController extends Controller
     }
 
     public function move_users(){
-
-
         set_time_limit(360);
 
         $user = DB::table('wp_users')->get()->toArray();
@@ -224,6 +225,13 @@ class QianyiController extends Controller
 
         $user_meta = array_column($user_meta, 'meta_value', 'meta_key');
 
+        $vip = WpVip::where('user_id', $user['ID'])->first();
+        if(!$vip){
+            $vip['user_type'] = 0;
+            $vip['startTime'] = NULL;
+            $vip['endTime'] = NULL;
+        }
+
         DB::transaction();
         $user_data = [
             'login' => $user['login'],
@@ -238,6 +246,9 @@ class QianyiController extends Controller
             'last_login_time' => $user['last_login_time'],
             'avatar_url' => $user_meta['simple_local_avatar'] ?? '',
             'credit' => $user_meta['chenxing_credit'] ?? 0,
+            'user_type' => $vip['user_type'],
+            'startTime' => $vip['startTime'],
+            'endTime' => $vip['endTime'],
         ];
 
         $insert = User::insert($user_data);
@@ -296,10 +307,52 @@ class QianyiController extends Controller
     }
 
 
+    public function move_message(){
+
+        set_time_limit(360);
+
+        $user = DB::table('wp_users')->get()->toArray();
+        foreach ($user as $value){
+
+            $users = (array)$value;
+            $message = WpMessage::where('user_id', $users['ID'])->get();
+
+            if($message){
+                $message = $message->toArray();
+
+                foreach ($message as $item) {
+                    $new_message[] = [
+                        'id' => $item['msg_id'],
+                        'user_id' => $item['user_id'],
+                        'created_at' => $item['msg_date'],
+                        'content' => $item['msg_title'],
+                    ];
+                }
+                $mssage_res = Usercredit::insert($new_message);
+                if (!$mssage_res){
+                    DB::rollBack();
+                }
+            }
+
+        }
+
+    }
+
+
+    public function move_orders(){
+
+        set_time_limit(360);
+
+        $user = DB::table('wp_users')->get()->toArray();
+        foreach ($user as $value){
+            $users = (array)$value;
 
 
 
 
+        }
+
+    }
 
 
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DownLog;
-use App\Orders;
+use App\WpOrders;
 use App\Posts;
 use App\User;
 use App\Usermeta;
@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function orders(){
         $user = Auth::user();
-        $user_order = Orders::getUserOrder( 1 );
+        $user_order = WpOrders::getUserOrder( 1 );
         return view('user.order', [
             'user_order' => $user_order,
         ]);
