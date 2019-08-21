@@ -1,0 +1,158 @@
+/*bottom*/
+.bottom{min-width:1180px;width:100%;height:205px;background-color: #1b1b1b;}
+.bottom-content{width:1180px;margin:auto;}
+
+.aboutus{color:#d0d0d0;line-height: 34px;}
+.aboutus-link{margin-top:50px;}
+.aboutus-link span{margin:0 10px;}
+.aboutus-link a{color:#d0d0d0;}
+.aboutus-link a:hover,.cpright a:hover{color:#7371ef;}
+.cpright a{color:#d0d0d0;}
+
+
+.service{width:200px;margin-top:50px;color:#fff;}
+.service span{letter-spacing:1px;}
+.contact{width:200px;height:48px;line-height:48px;margin-top:20px;background-color: #565656;border-radius: 6px;color:#fff;}
+.contact:hover{background-color:#727272;color:#fff;}
+
+/*fixed-button*/
+.fixed-button{width:42px;position:fixed;top:400px;right:20px;z-index: 99;}
+.fixed-button a {width:42px;height:42px;*height:32px;background-color: #f3f3f3;margin-bottom:10px;border-radius:3px;padding:5px 0;color:#4a4a4a;box-shadow: 0 1px 2px rgba(0,0,0,0.15);}
+.turn_purple:hover{background: #7371ef;color:#fff;}
+
+.gotop-button{text-indent: -100em;margin-top:50px;*position:fixed;*right:20px;*top:380px;}
+.gotop-button:hover{width:100px;background-color: #7371ef;text-indent:0!important;color:#fff;height:42px;line-height: 42px;padding:0 28px 0 0!important;}
+.gotop-icon{width:10px;height:12px;margin-left:6px;background: url("../images/icon.png") -147px -87px no-repeat;background-size:400px 228px;vertical-align:middle;top:15px;right:16px;}	
+
+.fixed-button a.makemoney{width:42px;height:42px;background-size:42px 42px;background-color:transparent;background-image:url("../images/balloon.jpg");box-shadow:none;border-radius:none;top:-51px;}
+
+@keyframes move{
+	0% 	 {top: -120px;}
+	25%  {top: -130px;}
+	50%  {top: -140px;}
+	75%  {top: -130px;}
+	100% {top: -120px;}
+}
+
+.lijiqiang{position:fixed;z-index:99;box-shadow:0 10px 40px rgba(103,45,243,0.5);width:160px;height:100px;top:100px;right:20px;background:url("../images/all-access-bg.jpg") no-repeat;background-size:160px 100px;border-radius:4px;}
+.lijibtn{width:115px;height:30px;background:url("../images/all-access-btn.gif") no-repeat;top:62px;left:50%;margin-left:-58px;background-size:115px 30px;}
+
+
+.qr-code-model{
+	width: 180px;
+	text-align: center;
+	margin-top: 50px;
+}
+.qr-bottom-code{
+	height: 90px;
+	background-image: url("../images/public/qbar-80.png");
+	background-size: 80px 80px;
+	background-repeat: no-repeat;
+	background-position-x: center;
+	background-position-y: 0;
+}
+
+.qr-bottom-title{
+	text-align: center;
+}
+.qr-bottom-title-main{
+	font-size: 14px;
+	color: #4a4a4a;
+}
+
+.new-fixed-button{
+	width: 50px;
+	position: fixed;
+	top: 400px;
+	right: 20px;
+	z-index: 99;
+	background-color: #fff;
+	text-align: center;
+	box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+.new-fixed-button a{
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	margin: 0;
+}
+.new-fixed-button a span{
+	display: inline-block;
+	width: 32px;
+	height: 50px;
+	font-size: 12px;
+	margin: 0 auto;
+	padding: 9px 0px;
+}
+.new-fixed-button a:hover{
+	color: #fff;
+	background-color: #7371ef;
+}
+.bottom-border{
+	border-bottom: 1px solid #eee;
+}
+
+.weixin-act{
+	background-image: url("../images/public/icon-gift.png");
+	background-size: 28px 28px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.to-top{
+	display: inline-block;
+	width: 10px;
+	height: 12px;
+	background-image: url("../images/icon.png");
+	background-size: 400px 228px;
+	background-repeat: no-repeat;
+	background-position: -147px -87px;
+}
+.to-top:hover{
+	background-position: -157px -87px;
+}
+
+
+.weixin-login{
+
+	position: fixed;
+	width: 140px;
+	height: 180px;
+	top: 400px;
+	right: 76px;
+	z-index: 99;
+	background-color: #fff;
+	text-align: center;
+	box-shadow: 0 2px 8px rgba(0,0,0,.15);
+
+}
+.weixin-login:after{
+	content: '';
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 6px solid #fff;
+	position: absolute;
+	bottom: 150px;
+	right: -6px;
+}
+
+.qr-code{
+	width: 140px;
+	height: 130px;
+	background-image: url("../images/public/qbar-120.png");
+	background-size: 120px 120px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.qr-title{
+	text-align: center;
+}
+.qr-title-main{
+	font-size: 14px;
+	color: #4a4a4a;
+}
+.qr-title-detail{
+	font-size: 12px;
+	color: #888;
+}

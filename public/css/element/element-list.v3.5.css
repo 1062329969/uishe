@@ -1,0 +1,81 @@
+.flex-images {width:auto;overflow:hidden;}
+.flex-images .item { float: left;overflow: hidden; position: relative; margin:8px;}
+.flex-images .item img { display: block;margin:auto;}
+.element-box{width:280px;height:220px;box-shadow:0 0px 2px rgba(0,0,0,0.1);background-color:#f3f3f3;}
+.element-box-detail{width:100%;height:100%;background: url("../../images/lazy-logo.png") no-repeat center}
+.element a{display:block;color:#fff;}
+
+/*hide*/
+.hide-top,.fav-star{height:28px;top:-35px;}
+.hide-top{right:0px;}
+.hide-bottom{width:100%;height:32px;line-height:32px;text-align:center;bottom:-35px;z-index: 1;}
+.hide-bottom-bg{background-color: #000;opacity: 0.3;filter:Alpha(opacity=30);z-index: 0;}
+.hide-bottom span{display: block;color:#fff;font-size:12px;}
+.fav-star{left:0px;width:28px;border:1px solid #ededed;background-color: #fff;margin-left: 10px;cursor:pointer;}
+.fav-star span{width:14px;height:14px;margin:7px auto 0;background: url("../../images/search_icon_b_v1.png") 1px -67px no-repeat;background-size: 200px 110px;}
+.fav-star:hover span,.fav-star.on span{background-position:-12px -67px;}
+
+.psd-download,.png-download{width:90px;height:28px;line-height:28px;font-size:12px;text-align: center;background: url("../../images/search_icon_b_v1.png") no-repeat;background-size: 200px 110px;cursor:pointer;}
+.png-download{margin-right: 10px;background-position: -100px 0;}
+.png-download:hover{background-position: -100px -29px;}
+.psd-download{background-position: 0 0;margin-right:10px;}
+.psd-download:hover{background-position: 0 -29px;}
+.size{margin-left: 10px;}
+.fav-num{margin-right: 16px;background: url("../../images/search_icon_b_v1.png") -25px -57px no-repeat;padding-left:18px;background-size: 200px 110px;}
+.down-num{margin-right: 20px;padding-left:15px;background: url("../../images/search_icon_b_v1.png") 0 -79px no-repeat;background-size: 200px 110px;}
+.download-icon{width:12px;height:100%;margin-left:24px;background: url("../../images/search_icon_b_v1.png") 0 -82px no-repeat;background-size: 200px 110px;}
+.png,.psd{margin-left:6px;}	
+.copyright-icon{background:#000;width:24px;height: 24px;line-height: 24px;text-align: center;color:#fff;font-size: 18px;border-radius:2px;position: absolute;bottom: 4px;left: 4px;cursor: pointer;}
+
+
+.picList{overflow:hidden;clear:both;}
+.picList .picBox{width:280px;box-shadow:0 0 1px rgba(0,0,0,0.2);margin-right:19px;margin-bottom:19px;}
+.picList .picBox.last-line{margin-bottom:0px;}
+.picList .picBox.last-item{margin-right:0px;}
+.picList .picBox  img{display:block;width:280px;}
+.picList .picBox a{display:block;width:280px;overflow:hidden;background-color:#f3f3f3;background:url('../../images/lazy-logo.png') no-repeat center;}
+.picList .picBox .pic-item-title{width:100%;height:60px;line-height:60px;background:#fff;}
+.picList .picBox .pic-item-title .title-content {width:260px;text-align: center;height: 60px;margin: 0 auto; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.picList .picBox .pic-item-action{width:100%;height:60px;background:#fff;bottom:0px;left:0;z-index:30;}
+.picList .picBox:hover .pic-item-action{display:block;}
+.picList .picBox .pic-item-action-button{width:260px;height:40px;margin:0 auto;margin-top:10px;}
+.picList .picBox .pic-item-action-button-fav{width:40px;height:40px;background-color:#D8D8D8;background:url("../../images/icon-star.png") no-repeat center;background-size:17px 16px;}
+.picList .picBox .pic-item-action-button-fav.on,.picList .picBox .pic-item-action-button-fav:hover{background-color:#6b74e6;}
+.picList .picBox .pic-item-action-button-download{width:210px;height:40px;line-height:40px;background:#28DD8E;}
+.picList .picBox .img-per-mask {display:none;position: absolute;  width: 280px;  top: 0;  left: 0;  height: 152px;text-align: center;margin-top: 46px;cursor: pointer;}
+
+/*相关搜索*/
+.advice-model{
+    margin-top: 20px;width: 100%;font-size: 20px;text-align: center;color: #888;line-height: 20px;
+}
+.suggest-bottom {
+    display: inline-block;
+    height: 50px;
+    width: 160px;
+    margin: 40px auto 60px;
+    line-height: 50px;
+    border-radius: 50px;
+    background-color: #7371ef;
+    color: #fff;
+}
+.suggest-bottom:hover{
+    transition: all 0.2s;
+    box-shadow:0 4px 20px rgba(115,113,239,0.5);
+}
+
+.pptfromsucai{
+    position: absolute;
+    width: 48px;
+    height: 24px;
+    left: 4px;
+    top: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #000;
+    opacity: 0.5;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 2px;
+    cursor: pointer;
+}
