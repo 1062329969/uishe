@@ -3,18 +3,18 @@
 
 <head>
     <meta charset="utf-8">
-    <title>觅知网_PPT模板,海报,图片设计素材下载_优质原创设计资源站</title>
+    <title>UI社_PPT模板,海报,图片设计素材下载_优质原创设计资源站</title>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="keywords" content="PPT模板，海报，图片素材，ps素材，背景，ae模板，免扣素材，矢量素材" />
-    <meta name="description" content="觅知网专注于优质实用的设计资源下载。包括PPT模板、海报、视频、音频、摄图图片、PNG素材、插画等。除了作品创意与美感，我们更注重作品的实用性。深入研究每一类作品的使用人群，使用场景、受众、需要作品传递的信息，从文案、设计风格、创意、构图上真正符合用户的真实场景需求，做到下载即用。" />
+    <meta name="description" content="UI社专注于优质实用的设计资源下载。包括PPT模板、海报、视频、音频、摄图图片、PNG素材、插画等。除了作品创意与美感，我们更注重作品的实用性。深入研究每一类作品的使用人群，使用场景、受众、需要作品传递的信息，从文案、设计风格、创意、构图上真正符合用户的真实场景需求，做到下载即用。" />
     <link href="{{ asset('css/global.V3.6.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/index/index.v4.15.css') }}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 <link href="{{ asset('css/top.v4.11.css') }}" rel="stylesheet" type="text/css">
-<script>
+{{--<script>
     var miz = {};
     miz.startLoadTime = (new Date()).getTime();
     miz.pageCode = '10';
@@ -31,11 +31,11 @@
     miz.s_k_r = '';
     miz.sendRetinaRatio = false;
     miz.sopush = 0;
-</script>
+</script>--}}
 <div class="top top-fixed" id="top">
     <div class="top-content" id="top-content">
-        <a class="logo ibloc fl" href="https://www.51miz.com/">
-            <img src="//ss.51miz.com/images/logo.v4.png" class="iblock" alt="觅知网" title="觅知网" width="124px" height="36px" />
+        <a class="logo ibloc fl" href="{{ url('/') }}">
+            <img src="//ss.51miz.com/images/logo.v4.png" class="iblock" alt="UI社" title="UI社" width="124px" height="36px" />
         </a>
         <ul class="header-plate-box ul-nav fl pa">
             <li> <a href="https://www.51miz.com/ppt/" class="top-nav">PPT模板</a>
@@ -160,7 +160,7 @@
         <div class="top-item-right fr">
             <div class="top-item-login fr"> <a href="javascript:;" onclick="popup('login@isclose:1;')" class="login-button iblock fl on center fn14">请登录</a>  <a href="javascript:;" onclick="popup('login@isclose:1;')" class="register-button iblock fl center fn14">注册</a>
             </div>
-            <a rel="nofollow" onclick="payFrom(1)" href="https://www.51miz.com/index.php?m=pay&viptype=1" target="_blank" class="vip-pro fr iblock css3-background-size"></a>
+            <a rel="nofollow" href="https://www.51miz.com/index.php?m=pay&viptype=1" target="_blank" class="vip-pro fr iblock css3-background-size"></a>
         </div>
     </div>
 </div>
@@ -193,7 +193,7 @@
                     target="_blank" data-id="256" href="//www.51miz.com/so-sucai/86496.html" class="color-fff iblock">招生</a>   <span>·</span>   <a target="_blank" data-id="257" href="//www.51miz.com/so-sucai/84942.html" class="color-fff iblock">小清新</a>  </div>
     </div>
     <!--Banner 区域 ///end///-->
-    <h1 class="none">PPT模板,图片设计素材元素下载尽在觅知网</h1>
+    <h1 class="none">PPT模板,图片设计素材元素下载尽在UI社</h1>
     <!--Banner下方区域的专题 ///start///-->
     <div class="subject-father oh" style="width:1340px;height:240px;margin:0 auto;">
         <div class="subject pr">
@@ -984,7 +984,7 @@
                 <div class="aboutus-link"> <a href="https://www.51miz.com/aboutus/" class="fn14" target="_blank" rel="nofollow">关于我们</a><span>|</span>  <a href="https://www.51miz.com/shengming/" class="fn14" target="_blank" rel="nofollow">版权声明</a><span>|</span>  <a href="https://www.51miz.com/agreement/"
                                                                                                                                                                                                                                                                           class="fn14" target="_blank" rel="nofollow">注册协议</a><span>|</span>  <a href="https://www.51miz.com/tag/" class="fn14" target="_blank">热门搜索</a><span>|</span>  <a href="https://www.51miz.com/sitemap.html" class="fn14" target="_blank">网站地图</a>
                 </div>
-                <div class="cpright fn14">Copyright © 2016-2019 觅知网络科技有限公司  ·  <a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">沪ICP备16055192号-1</a>
+                <div class="cpright fn14">Copyright © 2016-2019 UI社络科技有限公司  ·  <a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">沪ICP备16055192号-1</a>
                     <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502009177" target="_blank"
                        rel="nofollow">
                         <img src="//ss.51miz.com/images/beian.png" alt="备案" width="16" style="position: relative;top: 2px">沪公网安备 31011502009177号</a>

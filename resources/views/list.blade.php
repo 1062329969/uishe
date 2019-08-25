@@ -1,9 +1,9 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>党课视频模板-党课AE视频素材下载-觅知网</title>
+    <title>党课视频模板-党课AE视频素材下载-UI社</title>
     <meta name="keywords" content="党课视频模板，党课视频素材，党课AE视频">
-    <meta name="description" content="觅知网专注于党课视频模板，党课AE视频素材在线下载，更多精美党课视频素材，尽在觅知网。">
+    <meta name="description" content="UI社专注于党课视频模板，党课AE视频素材在线下载，更多精美党课视频素材，尽在UI社。">
     <link href="//ss.51miz.com/css/global.V3.6.css" rel="stylesheet" type="text/css">
     <link href="//ss.51miz.com/css/search/search.v4.7.bak.css" rel="stylesheet" type="text/css">
     <style>.main-content, .search-sorting-box-cus, .search-sorting-box-cus-hide {
@@ -40,8 +40,8 @@
     miz.sendRetinaRatio = false;
     miz.sopush = 0;</script>
 <div class="top top-fixed" id="top">
-    <div class="top-content" id="top-content"><a class="logo ibloc fl" href="https://www.51miz.com/"> <img
-                    src="//ss.51miz.com/images/logo.v4.png" class="iblock" alt="觅知网" title="觅知网" width="124px"
+    <div class="top-content" id="top-content"><a class="logo ibloc fl" href="{{ url('/') }}"> <img
+                    src="//ss.51miz.com/images/logo.v4.png" class="iblock" alt="UI社" title="UI社" width="124px"
                     height="36px"> </a>
         <ul class="header-plate-box ul-nav fl pa">
             <li><a href="https://www.51miz.com/ppt/" class="top-nav">PPT模板</a></li>
@@ -112,7 +112,7 @@
                                               class="login-button iblock fl on center fn14">请登录</a> <a
                         href="javascript:;" onclick="popup('login@isclose:1;')"
                         class="register-button iblock fl center fn14">注册</a></div>
-            <a rel="nofollow" onclick="payFrom(1)" href="https://www.51miz.com/index.php?m=pay&amp;viptype=1"
+            <a rel="nofollow" href="https://www.51miz.com/index.php?m=pay&amp;viptype=1"
                target="_blank" class="vip-pro fr iblock css3-background-size"
                style="background-image: url(&quot;https://ss.51miz.com/images/signonAct/vip-bounce@2x.png&quot;);"></a>
         </div>
@@ -1048,7 +1048,7 @@
                                                                  target="_blank" rel="nofollow">注册协议</a><span>|</span>
                 <a href="https://www.51miz.com/tag/" class="fn14" target="_blank">热门搜索</a><span>|</span> <a
                         href="https://www.51miz.com/sitemap.html" class="fn14" target="_blank">网站地图</a></div>
-            <div class="cpright fn14">Copyright © 2016-2019 觅知网络科技有限公司&nbsp;&nbsp;·&nbsp;&nbsp;<a
+            <div class="cpright fn14">Copyright © 2016-2019 UI社络科技有限公司&nbsp;&nbsp;·&nbsp;&nbsp;<a
                         href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">沪ICP备16055192号-1</a> <a
                         href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502009177"
                         target="_blank" rel="nofollow"><img src="//ss.51miz.com/images/beian.png" alt="备案" width="16"

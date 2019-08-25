@@ -25,7 +25,10 @@ class NewsController extends Controller
             $tags_recommend = Tag::getRecommendTags();
             $tags_recommend = Comments::getRecommendComments();
         }
-
+        return view('templet');
     }
 
+    public function category(Request $request, $id){
+        echo  $id;
+    }
 }

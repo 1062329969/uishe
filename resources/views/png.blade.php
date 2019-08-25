@@ -1,9 +1,9 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>水彩党建党政党课践行初心使命主题免扣字体免费下载-觅知网</title>
+    <title>水彩党建党政党课践行初心使命主题免扣字体免费下载-UI社</title>
     <meta name="keywords" content="水彩,党建,党政,党课,不忘初心牢记使命">
-    <meta name="description" content="觅知网提供水彩党建党政党课践行初心使命主题免扣字体供会员免费下载，更有水彩,党建,党政,党课,不忘初心牢记使命等艺术字。更多高品质图片素材，尽在觅知网">
+    <meta name="description" content="UI社提供水彩党建党政党课践行初心使命主题免扣字体供会员免费下载，更有水彩,党建,党政,党课,不忘初心牢记使命等艺术字。更多高品质图片素材，尽在UI社">
     <meta property="og:type" content="image">
     <meta property="og:image" content="//img.51miz.com/preview/element/00/01/08/85/E-1088562-FD06A306.jpg">
     <link href="//ss.51miz.com/css/global.V3.6.css" rel="stylesheet" type="text/css">
@@ -75,9 +75,9 @@
 }</style> <![endif]-->
 <div class="top" id="top">
     <div class="top-content">
-        <div class="top-item"><a href="https://www.51miz.com/" class="block logo fl pr"> <img width="124" height="36"
+        <div class="top-item"><a href="{{ url('/') }}" class="block logo fl pr"> <img width="124" height="36"
                                                                                               src="//ss.51miz.com/images/logo.v4.png"
-                                                                                              alt="觅知网" class="pa"> </a>
+                                                                                              alt="UI社" class="pa"> </a>
             <!--search-box start-->
             <div class="tsearch-box fl pr">
                 <div class="tsearch-menu fl pr">
@@ -131,7 +131,7 @@
                                                   class="login-button iblock fl on center fn14">请登录</a> <a
                             href="javascript:;" onclick="popup('login@isclose:1;')"
                             class="register-button iblock fl center fn14">注册</a></div>
-                <a rel="nofollow" onclick="payFrom(1)" href="https://www.51miz.com/index.php?m=pay&amp;viptype=1"
+                <a rel="nofollow" href="https://www.51miz.com/index.php?m=pay&amp;viptype=1"
                    target="_blank" class="vip-pro fr iblock css3-background-size"
                    style="background-image: url(&quot;https://ss.51miz.com/images/signonAct/vip-bounce@2x.png&quot;);"></a>
                 <style>.signon-pro {
@@ -209,7 +209,7 @@
             </div>
             <div class="fn12"
                  style="margin-top: 435px;line-height:18px;color: rgb(160,160,160);position: absolute;width: 640px;">
-                此作品是原创商用作品，所有原创作品（含预览图）均受著作权法保护，著作权及相关权利归觅知网所有，未经许可，不得转售
+                此作品是原创商用作品，所有原创作品（含预览图）均受著作权法保护，著作权及相关权利归UI社所有，未经许可，不得转售
             </div>
             <div class="info-box fr pr">
                 <div class="title-banner">
@@ -220,7 +220,7 @@
                             &nbsp;
                             <div class="element_tip iftip" style="display:none">
                                 <div class="inner"></div>
-                                <div style="margin:4px;">觅知网独家版权作品</div>
+                                <div style="margin:4px;">UI社独家版权作品</div>
                             </div>
                             <h1 class="iftip"
                                 style="display:inline-block;font-size:18px;font-weight:normal;width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;float:left;*zoom: 1;*display: inline;*float:none;">
@@ -752,7 +752,7 @@
                                                                  target="_blank" rel="nofollow">注册协议</a><span>|</span>
                 <a href="https://www.51miz.com/tag/" class="fn14" target="_blank">热门搜索</a><span>|</span> <a
                         href="https://www.51miz.com/sitemap.html" class="fn14" target="_blank">网站地图</a></div>
-            <div class="cpright fn14">Copyright © 2016-2019 觅知网络科技有限公司&nbsp;&nbsp;·&nbsp;&nbsp;<a
+            <div class="cpright fn14">Copyright © 2016-2019 UI社络科技有限公司&nbsp;&nbsp;·&nbsp;&nbsp;<a
                         href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">沪ICP备16055192号-1</a> <a
                         href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502009177"
                         target="_blank" rel="nofollow"><img src="//ss.51miz.com/images/beian.png" alt="备案" width="16"

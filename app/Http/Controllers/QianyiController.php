@@ -339,22 +339,6 @@ class QianyiController extends Controller
     }
 
 
-    public function move_orders(){
-
-        set_time_limit(360);
-
-        $user = DB::table('wp_users')->get()->toArray();
-        foreach ($user as $value){
-            $users = (array)$value;
-
-
-
-
-        }
-
-    }
-
-
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libs\PasswordHash;
+use App\WebOption;
 use App\WpUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $index_menu = WebOption::getIndexMenu();
+        return view('index', [
+            'index_menu' => $index_menu,
+        ]);
+    }
+    public function templet()
+    {
+        return view('templet');
     }
 
     public function login(Request $request) {

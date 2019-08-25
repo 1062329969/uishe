@@ -26,52 +26,6 @@ image_flexImages(null,rowHeight,flexTruncate);
 
 var protocol = "http://";
 
-if(document.location.protocol === 'https:')
-{
-	protocol = "https://";
-}
-/*判断网站协议 end*/
-
-function popup(popup)
-{	
-	if(popup != "" && popup != "undefined" && popup)
-	{
-		var domain = window.location.host;
-		
-		$.get(protocol+domain+"/?m=popup&popup="+popup+"&ajax=1&t="+(new Date()).getTime()+"&callback=?",function(data){
-			$("body").append(data);
-		});		
-	}
-}
-
-popup(miz.popup);
-
-/*element download*/
-$(".download-png,.png-download,.download-eps,.psd-download").click(function(){
-
-		if($(this).hasClass("photo-download-btn"))
-		{
-			
-		}else{
-			if(typeof($(this).attr("onclick")) == "undefined")
-			{
-				var type   = ($(this).hasClass("download-png") || $(this).hasClass("png-download")) ? "image" : "source";
-				
-				var picid  = $(this).attr("data-id");
-				
-				$.getJSON(protocol+"www.51miz.com/?m=download&a=download&plate_id=17&ajaxd=1&id="+picid+"&format="+type+"&t="+(new Date()).getTime(),function(result){
-				
-					if(result.status == 200)
-					{
-						location.href=result.url;
-					
-					}else{
-						popup(result.popup);
-					}
-				});
-			}
-		}
-});
 
 /*function [getElementsByClass]*/
 var getElementsByClass = function(searchClass,node,tag)
@@ -520,7 +474,7 @@ $(".click-me-collect").live("click",function() {
 			window.sidebar.addPanel(title, url, "");
 		}
 		catch (e) {
-			alert("请按 Ctrl+D 收藏觅知网");
+			alert("请按 Ctrl+D 收藏UI社");
 		}
 	}
 });
@@ -648,76 +602,6 @@ $(".top-ul .top-li").hover(function() {
 });
 
 
-
-window.onload = function(){
-	
-	
-	miz.loadTime = ((new Date()).getTime()-miz.startLoadTime)/1000;
-	
-	if(miz.pageCode > 0 && (miz.exeTime > 0 || miz.loadTime > 0))
-	{
-        $.ajax({
-            type:'get',
-            url:'/?m=pageCount&ajax=1&t='+(new Date()).getTime(),
-            data:{pageCode:miz.pageCode,exeTime:miz.exeTime,loadTime:miz.loadTime,url:miz.url,s_s:miz.s_s,s_k_i:miz.s_k_i,s_k:miz.s_k,s_k_r:miz.s_k_r,s_p_p:miz.s_p_p,referer:miz.referer,plate_id:miz.plate_id},
-            dataType : 'jsonp',
-            jsonp:"jsoncallback",
-            success  : function() {
-            },
-            error : function() {
-            }
-        });
-	}
-	
-	
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?d8453059bf561226f5e970ffb07bd9d2";
-	  var s = document.getElementsByTagName("script")[0];
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?aa0de2c55d65303b7191698178841e01";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	
-	
-    (function(){
-        var _qha_data = {};
-        _qha_data['domain']=158497;
-        _qha_data['e360']='2864205987';
-        _qha_data['pageClk']=null;
-        _qha_data['urlClk']=0;
-        _qha_data['idClk']=null;
-        _qha_data['mvid']='406084';
-        _qha_data['host']='s.union.360.cn';
-        window._qha_data = _qha_data;
-        var element=document.createElement('script');
-        element.type='text/javascript';
-        element.async=true;
-        var src="http://s6.qhres.com/static/b19a194389610ad6.js";
-        if(document.location.protocol === 'https:'){
-            src = src.replace(/http:\/\/([s|p])[0-9].(qhimg|qhres).com/, 'https://$10.ssl.qhimg.com');
-        }
-        element.src = src;
-        var node=document.getElementsByTagName('script')[0];
-        node.parentNode.insertBefore(element, node);
-
-        var _ping = window.location.protocol + '//'+ _qha_data['host'] +'/s.gif'; //
-        var _img  = new Image();
-        _img.src  = _ping + '?et=99&t=' + (+new Date()) + '&si=' + _qha_data.domain;
-		
-	   })();
-	   
-	
-
-}
-
 /*这里放新版本的js---------------------------------------------------------end*/
 // 右侧动画关闭
 $('.page-right-animation').on('click', '.close', function(e){
@@ -727,20 +611,6 @@ $('.page-right-animation').on('click', '.close', function(e){
     $(this).parent().fadeOut();
 });
 /*这里放新版本的js---------------------------------------------------------end*/
-/*统计充值页来源*/
-function payFrom(type) {
-    $.ajax({
-        type:'get',
-        url:'/?m=payTransfer&ajax=1&t='+(new Date()).getTime(),
-        data:{type:type,plate_id:miz.plate_id},
-        dataType : 'jsonp',
-        jsonp:"jsoncallback",
-        success  : function() {
-        },
-        error : function() {
-        }
-    });
-}
 /*这里放新版本的js---------------------------------------------------------end*/
 function addBlurEvent() {
     $('.search-advice ul li a').mousedown(function (e) {

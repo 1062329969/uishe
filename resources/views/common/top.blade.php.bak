@@ -1,0 +1,200 @@
+<div class="top top-fixed" id="top">
+    <div class="top-content" id="top-content">
+        <a class="logo ibloc fl" href="{{ url('/') }}" style="line-height: 80px;">
+            <img src="{{ asset('images/logo.png') }}" class="iblock" alt="UI社" title="UI社"/>
+        </a>
+        <ul class="header-plate-box ul-nav fl pa">
+            <li>
+                <a href="https://www.51miz.com/ppt/" class="top-nav">PPT模板</a>
+                <div class="top-nav-more ppt-category pa none"><a href="https://www.51miz.com/ppt/gongzuozongjieppt/" target="_blank" class="block fn14 fl ">工作总结PPT</a>
+                    <a href="https://www.51miz.com/ppt/gongsijieshao/" target="_blank" class="block fn14 fl ">公司介绍PPT</a>
+                    <a href="https://www.51miz.com/ppt/shuzhi/" target="_blank" class="block fn14 fl last-margin">述职PPT</a>
+                    <a href="https://www.51miz.com/ppt/dangke/" target="_blank" class="block fn14 fl ">党课PPT</a>
+                    <a href="https://www.51miz.com/so-ppt/15228.html" target="_blank" class="block fn14 fl ">商业计划书PPT</a>
+                    <a href="https://www.51miz.com/so-ppt/84946.html" target="_blank" class="block fn14 fl last-margin">儿童PPT</a>
+                    <a href="https://www.51miz.com/ppt/shangwuppt/" target="_blank" class="block fn14 fl ">商务PPT</a>
+                    <a href="https://www.51miz.com/so-ppt/84811.html" target="_blank" class="block fn14 fl ">家长会PPT</a>
+                    <a href="https://www.51miz.com/ppt/zhongguomeng/" target="_blank" class="block fn14 fl last-margin">中国梦PPT</a>
+                </div>
+            </li>
+            <li class="pr"><span class="top-element-icon iblock pa"></span><a href="https://www.51miz.com/sucai/" class="top-nav">设计素材</a>
+                <div class="top-nav-more material-category pa none">
+                    <div class="material-type oh">
+                        <div class="material-type-name fl fn14"><a href="https://www.51miz.com/png/" target="_blank">PNG素材</a>
+                        </div>
+                        <div class="tag-class fl">
+                            <div class="tag-class-name fl fn14">场景</div>
+                            <div class="tags fl oh"><a href="https://www.51miz.com/so-png/86378.html" target="_blank" class="block fl oh">运动会</a>
+                                <a href="https://www.51miz.com/so-png/87779.html" target="_blank" class="block fl oh">比赛</a>
+                                <a href="https://www.51miz.com/so-png/84915.html" target="_blank" class="block fl oh">年会</a>
+                                <a href="https://www.51miz.com/so-png/86020.html" target="_blank" class="block fl oh">招聘</a>
+                                <a href="https://www.51miz.com/so-png/153295.html" target="_blank" class="block fl oh">腊八节</a>
+                                <a href="https://www.51miz.com/so-sucai/158143.html" target="_blank" class="block fl oh">大队委</a>
+                                <a href="https://www.51miz.com/so-png/1657071.html" target="_blank" class="block fl oh">大寒</a>
+                                <a href="https://www.51miz.com/so-png/84836.html" target="_blank" class="block fl oh">猪年</a>
+                            </div>
+                            <div class="tag-class-name fl fn14">分类</div>
+                            <div class="tags fl oh"><a href="https://www.51miz.com/so-png/164158.html" target="_blank" class="block fl oh">城市剪影</a>
+                                <a href="https://www.51miz.com/so-png/132071.html" target="_blank" class="block fl oh">水彩花卉</a>
+                                <a href="https://www.51miz.com/so-png/89640.html" target="_blank" class="block fl oh">天空</a>
+                                <a href="https://www.51miz.com/so-png/96793.html" target="_blank" class="block fl oh">花瓣</a>
+                                <a href="https://www.51miz.com/so-png/137647.html" target="_blank" class="block fl oh">毛笔</a>
+                                <a href="https://www.51miz.com/so-png/96353.html" target="_blank" class="block fl oh">祥云</a>
+                                <a href="https://www.51miz.com/so-png/86028.html" target="_blank" class="block fl oh">火焰</a>
+                                <a href="https://www.51miz.com/so-png/85064.html" target="_blank" class="block fl oh">建筑</a>
+                            </div>
+                            <div class="tag-class-name fl fn14">效果</div>
+                            <div class="tags fl oh"><a href="https://www.51miz.com/so-png/183039.html" target="_blank" class="block fl oh">光效</a>
+                                <a href="https://www.51miz.com/so-png/169964.html" target="_blank" class="block fl oh">烟雾</a>
+                                <a href="https://www.51miz.com/so-png/100065.html" target="_blank" class="block fl oh">泼墨</a>
+                                <a href="https://www.51miz.com/so-png/220986.html" target="_blank" class="block fl oh">光晕</a>
+                                <a href="https://www.51miz.com/so-png/88359.html" target="_blank" class="block fl oh">墨迹</a>
+                                <a href="https://www.51miz.com/so-png/138111.html" target="_blank" class="block fl oh">爆炸</a>
+                                <a href="https://www.51miz.com/so-png/192231.html" target="_blank" class="block fl oh">粉末</a>
+                                <a href="https://www.51miz.com/so-png/98898--0-0-default/p_1/" target="_blank" class="block fl oh">笔刷</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="material-type oh">
+                        <div class="material-type-name fl fn14"><a href="https://www.51miz.com/beijing/"  target="_blank">背景素材</a>
+                        </div>
+                        <div class="tag-class fl">
+                            <div class="tag-class-name fl fn14">版式</div>
+                            <div class="tags fl oh"><a href="https://www.51miz.com//beijing/0-0-2-default/p_1/" target="_blank" class="block fl oh" rel="nofollow">横版</a>
+                                <a href="https://www.51miz.com//beijing/0-0-1-default/p_1/" target="_blank" class="block fl oh" rel="nofollow">竖版</a>
+                                <a href="https://www.51miz.com//beijing/0-0-3-default/p_1/" target="_blank" class="block fl oh" rel="nofollow">方图</a>
+                            </div>
+                            <div class="tag-class-name fl fn14">风格</div>
+                            <div class="tags fl oh"><a href="https://www.51miz.com/so-beijing/85525.html" target="_blank" class="block fl oh">红色背景</a>
+                                <a href="https://www.51miz.com/so-beijing/85126.html" target="_blank" class="block fl oh">星空背景</a>
+                                <a href="https://www.51miz.com/so-beijing/84918.html" target="_blank" class="block fl oh">黑色背景</a>
+                                <a href="https://www.51miz.com/so-beijing/86650.html" target="_blank" class="block fl oh">纯色背景</a>
+                                <a href="https://www.51miz.com/so-beijing/84855.html" target="_blank" class="block fl oh">淡雅背景</a>
+                                <a href="https://www.51miz.com/so-beijing/85236.html" target="_blank" class="block fl oh">卡通背景</a>
+                                <a href="https://www.51miz.com/so-beijing/84962.html" target="_blank" class="block fl oh">唯美背景</a>
+                                <a href="https://www.51miz.com/so-beijing/85003.html" target="_blank" class="block fl oh">白色背景</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="material-type oh">
+                        <div class="material-type-name fl fn14"><a href="https://www.51miz.com/yishuzi/"  target="_blank">艺术字</a>
+                        </div>
+                        <div class="tag-class fl">
+                            <div class="tag-class-name fl fn14">场景</div>
+                            <div class="tags fl oh"><a href="https://www.51miz.com/so-yishuzi/86418.html" target="_blank" class="block fl oh">婚庆</a>
+                                <a href="https://www.51miz.com/so-yishuzi/84836.html" target="_blank" class="block fl oh">新年</a>
+                                <a href="https://www.51miz.com/so-yishuzi/86322.html" target="_blank" class="block fl oh">文艺汇演</a>
+                                <a href="https://www.51miz.com/so-yishuzi/86020.html" target="_blank" class="block fl oh">招聘</a>
+                                <a href="https://www.51miz.com/so-yishuzi/136924.html" target="_blank" class="block fl oh">2019</a>
+                                <a href="https://www.51miz.com/so-yishuzi/1762286.html" target="_blank" class="block fl oh">团圆饭</a>
+                                <a href="https://www.51miz.com/so-yishuzi/84915.html" target="_blank" class="block fl oh">年会</a>
+                                <a href="https://www.51miz.com/so-yishuzi/153295.html" target="_blank" class="block fl oh">腊八节</a>
+                            </div>
+                            <div class="tag-class-name fl fn14">效果</div>
+                            <div class="tags fl oh"><a href="https://www.51miz.com/so-yishuzi/137647.html" target="_blank" class="block fl oh">毛笔</a>
+                                <a href="https://www.51miz.com/so-yishuzi/1544932.html" target="_blank" class="block fl oh">3D立体</a>
+                                <a href="https://www.51miz.com/so-yishuzi/85198.html" target="_blank" class="block fl oh">手绘</a>
+                                <a href="https://www.51miz.com/so-yishuzi/147477.html" target="_blank" class="block fl oh">手写</a>
+                                <a href="https://www.51miz.com/so-yishuzi/85236.html" target="_blank" class="block fl oh">卡通</a>
+                                <a href="https://www.51miz.com/so-yishuzi/85691.html" target="_blank" class="block fl oh">黑板</a>
+                                <a href="https://www.51miz.com/so-yishuzi/84814.html" target="_blank" class="block fl oh">创意</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="poster"><span class="top-muban-icon iblock pa"></span> <a href="https://www.51miz.com/muban/" class="top-nav">平面模板</a>
+            </li>
+            <li>
+                <a href="https://www.51miz.com/tupian/" class="top-nav">图片</a>
+                <div class="top-nav-more photo-category oh pa center none"><a href="https://www.51miz.com/so-tupian/85757.html" target="_blank" class="block fl">人物</a>
+                    <a href="https://www.51miz.com/so-tupian/86201.html" target="_blank" class="block fl">美女</a>
+                    <a href="https://www.51miz.com/so-tupian/85501.html" target="_blank" class="block fl">水果</a>
+                    <a href="https://www.51miz.com/so-tupian/84949.html" target="_blank" class="block fl">美食</a>
+                    <a href="https://www.51miz.com/so-tupian/85178.html" target="_blank" class="block fl">商务</a>
+                    <a href="https://www.51miz.com/so-tupian/85064.html" target="_blank" class="block fl">建筑</a>
+                    <a href="https://www.51miz.com/so-tupian/85039.html" target="_blank" class="block fl">家具</a>
+                    <a href="https://www.51miz.com/so-tupian/84866.html" target="_blank" class="block fl">团队</a>
+                    <a href="https://www.51miz.com/so-tupian/85446.html" target="_blank" class="block fl">金融</a>
+                    <a href="https://www.51miz.com/so-tupian/85001.html" target="_blank" class="block fl">科技</a>
+                    <a href="https://www.51miz.com/so-tupian/91506.html" target="_blank" class="block fl">秋</a>
+                </div>
+            </li>
+            <li>
+                <a href="https://www.51miz.com/shipin/" class="top-nav">视频</a>
+                <div class="top-nav-more video-category pa center none"><a href="https://www.51miz.com/shipin/ae/"          target="_blank"          class="block fl fn14">AE模板</a>
+                    <a href="https://www.51miz.com/shipin/beijing/" target="_blank" class="block fl fn14">视频背景</a>
+                    <a href="https://www.51miz.com/shipin/duanpian/" target="_blank" class="block fl fn14">实拍短片</a>
+                </div>
+            </li>
+            <li><span class="iblock pa"></span> <a href="https://www.51miz.com/sound/" class="top-nav">音效配乐</a>
+            </li>
+            <li class="more">
+                <a href="javascript:;" class="top-nav iblock css3-background-size">更多</a>
+                <div class="top-nav-more other-category pa center none">
+                    <a href="https://www.51miz.com/fonts/" class="block fn13">字体库</a>
+                    <a href="https://www.51miz.com/wendang/wordqiuzhi/" class="block fn13">Word简历</a>
+                    <a href="https://www.51miz.com/biaoge/" class="block fn13">Excel模板</a>
+                    <a href="https://www.51miz.com/shouchaobao/" class="block fn13">手抄报模板</a>
+                    <a href="https://www.51miz.com/shiliang/" class="block fn13">矢量素材</a>
+                    <a href="https://www.51miz.com/dianshang/" class="block fn13">电商模板</a>
+                    <a href="https://www.51miz.com/xinxitubiao/" class="block fn13">PPT图表</a>
+                </div>
+            </li>
+        </ul>
+        <!--search-box start-->
+        <div class="tsearch-box fl pr none">
+            <div class="tsearch-menu fl pr">
+                <div class="tsearch-menu-class fn13 center" style="width: 91px"><span class="tsearch-menu-head block fl">设计素材</span> <span class="tsearch-menu-icon block fl css3-background-size"></span>
+                </div>
+                <div class="tsearch-menu-box pa none">
+                    <ul>
+                        <li>
+                            <a href="javascript:;" class="block tsearch-menu-list fn14" data-plate-path="sucai" data-plate-id="17" data-plate-name="设计素材">设计素材</a>
+                            <div class="tsearch-menu-child">
+                                <a href="javascript:;" class="block" data-plate-path="png" data-plate-id="13" data-plate-name="PNG素材">- PNG素材</a>
+                                <a href="javascript:;" class="block" data-plate-path="beijing" data-plate-id="14" data-plate-name="背景素材">- 背景素材</a>
+                                <a href="javascript:;" class="block" data-plate-path="yishuzi" data-plate-id="14" data-plate-name="艺术字">- 艺术字</a>
+                                <!--<a href="javascript:;" class="block" data-plate-path="shiliang" data-plate-name="矢量素材">— 矢量素材</a>-->
+                                <a href="javascript:;" class="block" data-plate-path="muban" data-plate-id="18" data-plate-name="设计模板">- 设计模板</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="block tsearch-menu-list fn14" data-plate-path="ppt" data-plate-id="9" data-plate-name="PPT模板">PPT模板</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="block tsearch-menu-list fn14" data-plate-path="tupian" data-plate-id="3" data-plate-name="图片">图片</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="block tsearch-menu-list fn14" data-plate-path="shipin" data-plate-id="5" data-plate-name="视频">视频</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="block tsearch-menu-list fn14" data-plate-path="sound" data-plate-id="21" data-plate-name="音效配乐">音效配乐</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="block tsearch-menu-list fn14" data-plate-path="wendang" data-plate-id="10" data-plate-name="文档">文档</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="block tsearch-menu-list fn14" data-plate-path="biaoge" data-plate-id="11" data-plate-name="excel模板">excel模板</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="block tsearch-menu-list fn14" data-plate-path="shouchaobao" data-plate-id="8" data-plate-name="手抄报">手抄报</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="tsearch-input fl color-888 fn13" data-search-width="560" data-margin-left="89"
+                   data-search-top="38" placeholder="搜索设计素材" data-plate-id="0" data-keyword-id="0"
+                   data-plate-path="sucai"/>
+            <a class="tsearch-submit pa css3-background-size"></a>
+        </div>
+        <!--search-box end-->
+        <div class="top-item-right fr">
+            <div class="top-item-login fr">
+                <a href="javascript:;" onclick="popup('login@isclose:1;')" class="login-button iblock fl on center fn14">请登录</a>
+                <a href="javascript:;" onclick="popup('login@isclose:1;')" class="register-button iblock fl center fn14">注册</a>
+            </div>
+            <a rel="nofollow" href="https://www.51miz.com/index.php?m=pay&viptype=1" target="_blank" class="vip-pro fr iblock css3-background-size"></a>
+        </div>
+    </div>
+</div>
