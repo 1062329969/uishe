@@ -23,12 +23,14 @@ class NewsController extends Controller
         if ( !$vip ){
             $news_recommend = News::getRecommendNews();
             $tags_recommend = Tag::getRecommendTags();
-            $tags_recommend = Comments::getRecommendComments();
+            $comments_recommend = Comments::getRecommendComments();
         }
-        return view('templet');
+        return view('png');
+//        return view('templet');
     }
 
     public function category(Request $request, $id){
-        echo  $id;
+//        echo  $id;
+        return view('list');
     }
 }

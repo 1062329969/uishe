@@ -26,7 +26,7 @@
 
 
 /*category-box*/
-.category{width:100%;border-top:2px solid #f4f4f4;}
+/*.category{width:100%;border-top:2px solid #f4f4f4;}*/
 .category.no-border{border:none;}
 .category-box{margin:8px 20px 8px 20px;overflow:hidden;}
 .category-box-outer{width:100%;border:1px solid #eee;background-color: #fbfbfb;}

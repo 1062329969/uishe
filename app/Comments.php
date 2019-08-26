@@ -14,11 +14,11 @@ class Comments extends Model
     protected $primaryKey = 'id';
 
     public static function getRecommendComments(){
-        $recommend = News::where([
+        $recommend = Comments::where([
             ['status', '=', 'allow'],
             ['recommend', '=', 'on'],
         ])
-            ->select(['content', 'new_id', 'user_id', 'username', 'created_at'])
+            ->select(['content', 'new_id', 'user_id', 'user_name', 'created_at'])
             ->get()
             ->toArray();
 

@@ -11,7 +11,7 @@ class Tag extends Model
     protected $primaryKey = 'id';
 
     public static function getRecommendTags(){
-        $recommend = News::where([
+        $recommend = Tag::where([
                 ['recommend', '=', 'on'],
             ])
             ->select(['name', 'id'])
