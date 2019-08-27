@@ -38,6 +38,7 @@ class Authenticate
      */
     public function handle($request, Closure $next, ...$guards)
     {
+//        dd($this->auth->guard());
         $this->authenticate($guards);
 
         return $next($request);
@@ -53,6 +54,7 @@ class Authenticate
      */
     protected function authenticate(array $guards)
     {
+//        dd($guards);
         if (empty($guards)) {
             return $this->auth->authenticate();
         }

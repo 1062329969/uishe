@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         //
         \DB::listen(
             function ($sql) {
@@ -61,6 +63,14 @@ class AppServiceProvider extends ServiceProvider
             return Response::json_unicode(['code' => 0, 'msg' => 'SUCCESS', 'token' => $token, 'data' => $value]);
         });
 
+        view()->composer('admin.layout',function($view){
+            $menus = \App\Models\Permission::with([
+                'childs'=>function($query){$query->with('icon');}
+                ,'icon'])->where('parent_id',0)->orderBy('sort','desc')->get();
+            $unreadMessage = \App\Models\Message::where('read',1)->where('accept_uuid',auth()->user()->uuid)->count();
+            $view->with('menus',$menus);
+            $view->with('unreadMessage',$unreadMessage);
+        });
     }
 
     /**
