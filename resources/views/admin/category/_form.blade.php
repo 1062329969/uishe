@@ -22,6 +22,12 @@
     </div>
 </div>
 <div class="layui-form-item">
+    <label for="" class="layui-form-label">URL别名</label>
+    <div class="layui-input-block">
+        <input type="text" name="alias" value="{{ $category->alias ?? old('alias') }}" lay-verify="required" placeholder="请输入URL别名" class="layui-input" >
+    </div>
+</div>
+<div class="layui-form-item">
     <label for="" class="layui-form-label">排序</label>
     <div class="layui-input-block">
         <input type="text" name="sort" value="{{ $category->sort ?? 0 }}" lay-verify="required|number" placeholder="请输入数字" class="layui-input" >

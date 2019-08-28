@@ -21,7 +21,7 @@
 </div>
 
 <script src="/js/jquery.min.js"></script>
-<script src="/js/socket.io.js"></script>
+{{--<script src="/js/socket.io.js"></script>--}}
 <script src="/static/admin/layuiadmin/layui/layui.js"></script>
 <script>
     $.ajaxSetup({
