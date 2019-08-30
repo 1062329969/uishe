@@ -224,6 +224,8 @@ class Filesystem
      */
     public function link($target, $link)
     {
+//        dump($target);
+//        dd($link);
         if (! windows_os()) {
             return symlink($target, $link);
         }

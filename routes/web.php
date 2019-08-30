@@ -44,3 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/order', 'UserController@orders')->name('order');
     Route::get('/loginout', 'UserController@loginout')->name('loginout');
 });
+
+
+//文件上传接口，前后台共用
+Route::post('uploadImg', 'PublicController@uploadImg')->name('uploadImg');

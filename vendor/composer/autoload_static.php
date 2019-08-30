@@ -19,6 +19,7 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
+        '841780ea2e1d6545ea3a253239d59c05' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/functions.php',
         'fe62ba7e10580d903cc46d808b5961a4' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/helpers.php',
         'caf31cc6ec7cf2241cb6f12c226c3846' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/alias.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
@@ -69,12 +70,17 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Stevenyangecho\\UEditor\\' => 23,
             'Spatie\\Permission\\' => 18,
         ),
         'R' => 
         array (
             'Rodenastyle\\StreamParser\\' => 25,
             'Ramsey\\Uuid\\' => 12,
+        ),
+        'Q' => 
+        array (
+            'Qiniu\\' => 6,
         ),
         'P' => 
         array (
@@ -259,6 +265,10 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Stevenyangecho\\UEditor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src',
+        ),
         'Spatie\\Permission\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
@@ -270,6 +280,10 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
+        ),
+        'Qiniu\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu',
         ),
         'Psy\\' => 
         array (
@@ -416,10 +430,13 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Admin\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CategoryController.php',
         'App\\Http\\Controllers\\Admin\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/IndexController.php',
         'App\\Http\\Controllers\\Admin\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/LoginController.php',
+        'App\\Http\\Controllers\\Admin\\NewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/NewsController.php',
         'App\\Http\\Controllers\\Admin\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PermissionController.php',
         'App\\Http\\Controllers\\Admin\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RoleController.php',
+        'App\\Http\\Controllers\\Admin\\TagController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TagController.php',
         'App\\Http\\Controllers\\Admin\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UserController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -437,9 +454,9 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-        'App\\Http\\Requests\\ArticleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ArticleRequest.php',
         'App\\Http\\Requests\\MemberCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/MemberCreateRequest.php',
         'App\\Http\\Requests\\MemberUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/MemberUpdateRequest.php',
+        'App\\Http\\Requests\\NewsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ArticleRequest.php',
         'App\\Http\\Requests\\PermissionCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PermissionCreateRequest.php',
         'App\\Http\\Requests\\PermissionUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PermissionUpdateRequest.php',
         'App\\Http\\Requests\\RoleCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/RoleCreateRequest.php',
@@ -3089,6 +3106,26 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'Psy\\VersionUpdater\\GitHubChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/GitHubChecker.php',
         'Psy\\VersionUpdater\\IntervalChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/IntervalChecker.php',
         'Psy\\VersionUpdater\\NoopChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/NoopChecker.php',
+        'Qiniu\\Auth' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Auth.php',
+        'Qiniu\\Cdn\\CdnManager' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Cdn/CdnManager.php',
+        'Qiniu\\Config' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Config.php',
+        'Qiniu\\Etag' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Etag.php',
+        'Qiniu\\Http\\Client' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Client.php',
+        'Qiniu\\Http\\Error' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Error.php',
+        'Qiniu\\Http\\Request' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Request.php',
+        'Qiniu\\Http\\Response' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Response.php',
+        'Qiniu\\Processing\\ImageUrlBuilder' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Processing/ImageUrlBuilder.php',
+        'Qiniu\\Processing\\Operation' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Processing/Operation.php',
+        'Qiniu\\Processing\\PersistentFop' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Processing/PersistentFop.php',
+        'Qiniu\\Region' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Region.php',
+        'Qiniu\\Rtc\\AppClient' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Rtc/AppClient.php',
+        'Qiniu\\Sms\\Sms' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Sms/Sms.php',
+        'Qiniu\\Storage\\ArgusManager' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/ArgusManager.php',
+        'Qiniu\\Storage\\BucketManager' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/BucketManager.php',
+        'Qiniu\\Storage\\FormUploader' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/FormUploader.php',
+        'Qiniu\\Storage\\ResumeUploader' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/ResumeUploader.php',
+        'Qiniu\\Storage\\UploadManager' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/UploadManager.php',
+        'Qiniu\\Zone' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Zone.php',
         'Ramsey\\Uuid\\BinaryUtils' => __DIR__ . '/..' . '/ramsey/uuid/src/BinaryUtils.php',
         'Ramsey\\Uuid\\Builder\\DefaultUuidBuilder' => __DIR__ . '/..' . '/ramsey/uuid/src/Builder/DefaultUuidBuilder.php',
         'Ramsey\\Uuid\\Builder\\DegradedUuidBuilder' => __DIR__ . '/..' . '/ramsey/uuid/src/Builder/DegradedUuidBuilder.php',
@@ -3265,6 +3302,15 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'Spatie\\Permission\\Traits\\HasPermissions' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasPermissions.php',
         'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
         'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
+        'Stevenyangecho\\UEditor\\Controller' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Controller.php',
+        'Stevenyangecho\\UEditor\\Lists' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Lists.php',
+        'Stevenyangecho\\UEditor\\ListsQiniu' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/ListsQiniu.php',
+        'Stevenyangecho\\UEditor\\UEditorServiceProvider' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/UEditorServiceProvider.php',
+        'Stevenyangecho\\UEditor\\Uploader\\Upload' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Uploader/Upload.php',
+        'Stevenyangecho\\UEditor\\Uploader\\UploadCatch' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Uploader/UploadCatch.php',
+        'Stevenyangecho\\UEditor\\Uploader\\UploadFile' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Uploader/UploadFile.php',
+        'Stevenyangecho\\UEditor\\Uploader\\UploadQiniu' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Uploader/UploadQiniu.php',
+        'Stevenyangecho\\UEditor\\Uploader\\UploadScrawl' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Uploader/UploadScrawl.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
