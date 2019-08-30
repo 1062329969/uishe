@@ -24,7 +24,7 @@
             <li>
                 <a href="{{ url('/') }}" class="top-nav">首页</a>
             </li>
-            @foreach(\App\WebOption::getIndexMenu() as $k => $v)
+            @foreach(\App\Models\WebOption::getIndexMenu() as $k => $v)
                 <li>
                     <a href="{{ url('/'.$v['op_parameter']) }}" class="top-nav on">{{ $v['op_value'] }}</a>
                 </li>

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Comments;
-use App\News;
-use App\Tag;
+use App\Models\Comments;
+use App\Models\News;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

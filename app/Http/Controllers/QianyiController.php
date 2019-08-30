@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\CategoryNew;
-use App\Comments;
-use App\News;
-use App\Postmeta;
-use App\Posts;
-use App\tag;
+use App\Models\Category;
+use App\Models\CategoryNew;
+use App\Models\Comments;
+use App\Models\News;
+use App\Models\Postmeta;
+use App\Models\Posts;
+use App\Models\Tag;
 use App\Libs\PasswordHash;
-use App\TagNew;
-use App\TermRelationships;
-use App\Terms;
-use App\Termtaxonomy;
-use App\User;
-use App\Usercredit;
-use App\UsersCollect;
-use App\UsersQQ;
-use App\UsersWeibo;
-use App\WpComments;
-use App\WpMessage;
-use App\WpVip;
+use App\Models\TagNew;
+use App\Models\TermRelationships;
+use App\Models\Terms;
+use App\Models\Termtaxonomy;
+use App\Models\User;
+use App\Models\Usercredit;
+use App\Models\UsersCollect;
+use App\Models\UsersQQ;
+use App\Models\UsersWeibo;
+use App\Models\WpComments;
+use App\Models\WpMessage;
+use App\Models\WpVip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,7 @@ use Rodenastyle\StreamParser\StreamParser;
 
 class QianyiController extends Controller
 {
-    public function tag(){
+    public function category(){
         $category = Termtaxonomy::where([
             ['parent', '=', '0'],
             ['taxonomy', '=', 'category'],

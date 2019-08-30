@@ -110,8 +110,9 @@
                         </dl>
                     </li>
                     @foreach($menus as $menu)
-                        <?php dump($menu->name) ?>
+                        <?php dump($menu->name);dump(\Illuminate\Support\Facades\Auth::user()->can($menu->name)); ?>
                         @can($menu->name)
+                            <?php // if($menu->name=="zixun.manage"){ die; } ?>
                         <li data-name="{{$menu->name}}" class="layui-nav-item">
                             <a href="javascript:;" lay-tips="{{$menu->display_name}}" lay-direction="2">
                                 <i class="layui-icon {{$menu->icon->class??''}}"></i>

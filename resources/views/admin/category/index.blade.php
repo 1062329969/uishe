@@ -46,6 +46,9 @@
                         {checkbox: true,fixed: true}
                         ,{field: 'id', title: 'ID', sort: true,width:80}
                         ,{field: 'name', title: '分类名称'}
+                        ,{field: 'alias', title: '别名名称(实际经过URL编码处理)', unresize: false, templet: function(d){
+                            return decodeURI(d.alias)
+                        }}
                         ,{field: 'sort', title: '排序'}
                         ,{field: 'created_at', title: '创建时间'}
                         ,{field: 'updated_at', title: '更新时间'}

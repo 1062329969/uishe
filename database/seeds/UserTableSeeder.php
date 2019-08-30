@@ -109,14 +109,14 @@ class UserTableSeeder extends Seeder
                         ]
                     ],
                     [
-                        'name' => 'zixun.article',
+                        'name' => 'zixun.news',
                         'display_name' => '文章管理',
-                        'route' => 'admin.article',
+                        'route' => 'admin.news',
                         'icon_id' => '89',
                         'child' => [
-                            ['name' => 'zixun.article.create', 'display_name' => '添加文章','route'=>'admin.article.create'],
-                            ['name' => 'zixun.article.edit', 'display_name' => '编辑文章','route'=>'admin.article.edit'],
-                            ['name' => 'zixun.article.destroy', 'display_name' => '删除文章','route'=>'admin.article.destroy'],
+                            ['name' => 'zixun.news.create', 'display_name' => '添加文章','route'=>'admin.news.create'],
+                            ['name' => 'zixun.news.edit', 'display_name' => '编辑文章','route'=>'admin.news.edit'],
+                            ['name' => 'zixun.news.destroy', 'display_name' => '删除文章','route'=>'admin.news.destroy'],
                         ]
                     ],
                 ]

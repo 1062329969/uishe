@@ -6,14 +6,14 @@
             <h2>更新文章</h2>
         </div>
         <div class="layui-card-body">
-            <form class="layui-form" action="{{route('admin.article.update',['id'=>$article->id])}}" method="post">
+            <form class="layui-form" action="{{route('admin.news.update',['id'=>$news->id])}}" method="post">
                 {{ method_field('put') }}
-                @include('admin.article._form')
+                @include('admin.news._form')
             </form>
         </div>
     </div>
 @endsection
 
 @section('script')
-    @include('admin.article._js')
+    @include('admin.news._js')
 @endsection

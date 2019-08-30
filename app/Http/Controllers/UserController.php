@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\DownLog;
-use App\WpOrders;
-use App\Posts;
-use App\User;
-use App\Usermeta;
+use App\Models\DownLog;
+use App\Models\WpOrders;
+use App\Models\Posts;
+use App\Models\User;
+use App\Models\Usermeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

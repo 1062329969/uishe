@@ -44,10 +44,15 @@
                     ,cols: [[ //表头
                         {checkbox: true,fixed: true}
                         ,{field: 'id', title: 'ID', sort: true,width:80}
-                        ,{field: 'name', title: '分类名称'}
+                        ,{field: 'name', title: '标签名称'}
+                        ,{field: 'alias', title: '别名名称(实际经过URL编码处理)', unresize: false, templet: function(d){
+                            return decodeURI(d.alias)
+                        }}
                         ,{field: 'sort', title: '排序'}
+                        ,{field: 'recommend', title: '是否推荐', templet: function(d){
+                            return d.recommend == 'on' ? '是' : '否'
+                        }}
                         ,{field: 'created_at', title: '创建时间'}
-                        ,{field: 'updated_at', title: '更新时间'}
                         ,{fixed: 'right', width: 220, align:'center', toolbar: '#options'}
                     ]]
                 });

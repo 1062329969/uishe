@@ -9,6 +9,9 @@ class Tag extends Model
     //
     protected $table = 'tag';
     protected $primaryKey = 'id';
+    public $timestamps = false;
+
+    public $fillable = ['name','sort','parent_id', 'alias', 'recommend'];
 
     public static function getRecommendTags(){
         $recommend = Tag::where([
@@ -18,6 +21,12 @@ class Tag extends Model
             ->get()
             ->toArray();
         return $recommend;
+    }
+
+    //与文章多对多关联
+    public function news()
+    {
+        return $this->belongsToMany('App\Models\News','tag_news','id','news_id');
     }
 
 }

@@ -9,8 +9,8 @@
 */
 Route::group(['namespace'=>'Admin','prefix'=>'admin'],function (){
     //登录、注销
-//    Route::get('login','LoginController@showLoginForm')->name('admin.loginForm');
-//    Route::post('login','LoginController@login')->name('admin.login');
+    Route::get('login','LoginController@showLoginForm')->name('admin.loginForm');
+    Route::post('login','LoginController@login')->name('admin.login');
     Route::get('logout','LoginController@logout')->name('admin.logout');
 
 });
@@ -116,17 +116,17 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::delete('category/destroy', 'CategoryController@destroy')->name('admin.category.destroy')->middleware('permission:zixun.category.destroy');
     });
     //文章管理
-    Route::group(['middleware' => 'permission:zixun.article'], function () {
-        Route::get('article/data', 'ArticleController@data')->name('admin.article.data');
-        Route::get('article', 'ArticleController@index')->name('admin.article');
+    Route::group(['middleware' => 'permission:zixun.news'], function () {
+        Route::get('news/data', 'NewsController@data')->name('admin.news.data');
+        Route::get('news', 'NewsController@index')->name('admin.news');
         //添加
-        Route::get('article/create', 'ArticleController@create')->name('admin.article.create')->middleware('permission:zixun.article.create');
-        Route::post('article/store', 'ArticleController@store')->name('admin.article.store')->middleware('permission:zixun.article.create');
+        Route::get('news/create', 'NewsController@create')->name('admin.news.create')->middleware('permission:zixun.news.create');
+        Route::post('news/store', 'NewsController@store')->name('admin.news.store')->middleware('permission:zixun.news.create');
         //编辑
-        Route::get('article/{id}/edit', 'ArticleController@edit')->name('admin.article.edit')->middleware('permission:zixun.article.edit');
-        Route::put('article/{id}/update', 'ArticleController@update')->name('admin.article.update')->middleware('permission:zixun.article.edit');
+        Route::get('news/{id}/edit', 'NewsController@edit')->name('admin.news.edit')->middleware('permission:zixun.news.edit');
+        Route::put('news/{id}/update', 'NewsController@update')->name('admin.news.update')->middleware('permission:zixun.news.edit');
         //删除
-        Route::delete('article/destroy', 'ArticleController@destroy')->name('admin.article.destroy')->middleware('permission:zixun.article.destroy');
+        Route::delete('news/destroy', 'NewsController@destroy')->name('admin.news.destroy')->middleware('permission:zixun.news.destroy');
     });
     //标签管理
     Route::group(['middleware' => 'permission:zixun.tag'], function () {

@@ -24,7 +24,24 @@ class News extends Model
     protected $primaryKey = 'id';
 
 
+    protected $fillable = ['category_id','title','keywords','description','content','thumb','click'];
 
+    /*//文章所属分类
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }*/
+    //文章所属分类
+    public function category()
+    {
+        return $this->belongsToMany('App\Models\Category','category_new','cat_new_id','cat_id');
+    }
+
+    //与标签多对多关联
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag','tag_new','tag_new_id','tag_id');
+    }
 
 
     public static function getDownType($key){

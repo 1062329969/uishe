@@ -55,6 +55,9 @@ class CategoryController extends Controller
             'sort'  => 'required|numeric',
             'parent_id' => 'required|numeric'
         ]);
+
+        $request->offsetSet('alias', urlencode($request->alias));
+
         if (Category::create($request->all())){
             return redirect(route('admin.category'))->with(['status'=>'添加完成']);
         }
@@ -100,6 +103,9 @@ class CategoryController extends Controller
             'sort'  => 'required|numeric',
             'parent_id' => 'required|numeric'
         ]);
+
+        $request->offsetSet('alias', urlencode($request->alias));
+
         $category = Category::findOrFail($id);
         if ($category->update($request->all())){
             return redirect(route('admin.category'))->with(['status'=>'更新成功']);
@@ -119,11 +125,11 @@ class CategoryController extends Controller
         if (empty($ids)){
             return response()->json(['code'=>1,'msg'=>'请选择删除项']);
         }
-        $category = Category::with(['childs','articles'])->find($ids);
+        $category = Category::with(['childs','news'])->find($ids);
         if (!$category){
             return response()->json(['code'=>1,'msg'=>'请选择删除项']);
         }
-        if (!$category->childs->isEmpty() || !$category->articles->isEmpty()){
+        if (!$category->childs->isEmpty() || !$category->news->isEmpty()){
             return response()->json(['code'=>1,'msg'=>'该分类下有子分类或者文章，不能删除']);
         }
         if ($category->delete()){

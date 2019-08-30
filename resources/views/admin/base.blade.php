@@ -54,7 +54,7 @@
             layer.msg("{{session('status')}}",{icon:6});
         @endif
 
-        //监听消息推送
+        /*//监听消息推送
         $(document).ready(function () {
             // 连接服务端
             var socket = io("{{config('custom.PUSH_MESSAGE_LOGIN')}}");
@@ -73,7 +73,7 @@
                     time: 5000
                 })
             });
-        });
+        });*/
 
     });
 

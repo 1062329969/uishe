@@ -4,11 +4,11 @@
     <div class="layui-card">
         <div class="layui-card-header layuiadmin-card-header-auto">
             <div class="layui-btn-group ">
-                @can('zixun.article.destroy')
+                @can('zixun.news.destroy')
                     <button class="layui-btn layui-btn-sm layui-btn-danger" id="listDelete">删 除</button>
                 @endcan
-                @can('zixun.article.create')
-                    <a class="layui-btn layui-btn-sm" href="{{ route('admin.article.create') }}">添 加</a>
+                @can('zixun.news.create')
+                    <a class="layui-btn layui-btn-sm" href="{{ route('admin.news.create') }}">添 加</a>
                 @endcan
                 <button class="layui-btn layui-btn-sm" id="searchBtn">搜 索</button>
             </div>
@@ -40,10 +40,10 @@
             <table id="dataTable" lay-filter="dataTable"></table>
             <script type="text/html" id="options">
                 <div class="layui-btn-group">
-                    @can('zixun.article.edit')
+                    @can('zixun.news.edit')
                         <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
                     @endcan
-                    @can('zixun.article.destroy')
+                    @can('zixun.news.destroy')
                         <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
                     @endcan
                 </div>
@@ -57,14 +57,16 @@
                 @{{# }); }}
             </script>
             <script type="text/html" id="category">
-                @{{ d.category.name }}
+                @{{#  layui.each(d.category, function(index, item){ }}
+                <button type="button" class="layui-btn layui-btn-sm">@{{ item.name }}</button>
+                @{{# }); }}
             </script>
         </div>
     </div>
 @endsection
 
 @section('script')
-    @can('zixun.article')
+    @can('zixun.news')
         <script>
             layui.use(['layer','table','form'],function () {
                 var layer = layui.layer;
@@ -74,7 +76,7 @@
                 var dataTable = table.render({
                     elem: '#dataTable'
                     ,height: 500
-                    ,url: "{{ route('admin.article.data') }}" //数据接口
+                    ,url: "{{ route('admin.news.data') }}" //数据接口
                     ,page: true //开启分页
                     ,cols: [[ //表头
                         {checkbox: true,fixed: true}
@@ -97,7 +99,7 @@
                         ,layEvent = obj.event; //获得 lay-event 对应的值
                     if(layEvent === 'del'){
                         layer.confirm('确认删除吗？', function(index){
-                            $.post("{{ route('admin.article.destroy') }}",{_method:'delete',ids:[data.id]},function (result) {
+                            $.post("{{ route('admin.news.destroy') }}",{_method:'delete',ids:[data.id]},function (result) {
                                 if (result.code==0){
                                     obj.del(); //删除对应行（tr）的DOM结构
                                 }
@@ -106,11 +108,11 @@
                             });
                         });
                     } else if(layEvent === 'edit'){
-                        location.href = '/admin/article/'+data.id+'/edit';
+                        location.href = '/admin/news/'+data.id+'/edit';
                     }
                 });
 
-                @can('zixun.article.edit')
+                @can('zixun.news.edit')
                 //监听是否显示
                 form.on('switch(isShow)', function(obj){
                     var index = layer.load();
@@ -138,7 +140,7 @@
                     }
                     if (ids.length>0){
                         layer.confirm('确认删除吗？', function(index){
-                            $.post("{{ route('admin.article.destroy') }}",{_method:'delete',ids:ids},function (result) {
+                            $.post("{{ route('admin.news.destroy') }}",{_method:'delete',ids:ids},function (result) {
                                 if (result.code==0){
                                     dataTable.reload()
                                 }

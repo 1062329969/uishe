@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Libs\PasswordHash;
-use App\WebOption;
-use App\WpUsers;
+use App\Models\WebOption;
+use App\Models\WpUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
