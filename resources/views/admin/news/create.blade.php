@@ -9,6 +9,7 @@
             <form class="layui-form" action="{{route('admin.news.store')}}" method="post">
                 @include('admin.news._form')
             </form>
+            <input type="hidden" id="tags_json" value="{{ json_encode(array_column($tags->toArray(), 'name', 'id')) }}">
         </div>
     </div>
 @endsection

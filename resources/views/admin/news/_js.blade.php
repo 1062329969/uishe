@@ -35,9 +35,50 @@
         z-index:999;
         cursor: pointer;
     }
+    .tags_span{background-color: #009688;display: inline-block;padding-left: 10px;color: #fff;}
+    .tags_input{background-color: #009688;border: 0;padding: 7px;color: #fff;}
 </style>
 <script>
-    layui.use(['upload'],function () {
+    layui.use(['upload','form'],function () {
+        var form = layui.form
+        form.on('select(tags_select)', function(data){
+//            console.log(data.elem); //得到select原始DOM对象
+//            console.log(data.value); //得到被选中的值
+//            console.log(data.othis); //得到美化后的DOM对象
+            setTags('layui', data.value);
+            $("#tags_select").next().removeClass('layui-form-selected');
+            $('#tags_input').val('')
+        });
+        window.search = function () {
+            var value = $("#tags_input").val();
+            form.render();
+            $("#tags_select").next().addClass('layui-form-selected');
+            var dl = $("#tags_select").next().find("dl").children();
+            var j = -1;
+            for (var i = 0; i < dl.length; i++) {
+                if (dl[i].innerHTML.indexOf(value) <= -1) {
+                    dl[i].style.display = "none";
+                    j++;
+                }
+                if (j == dl.length-1) {
+                    $("#tags_select").next().removeClass('layui-form-selected');
+                }
+            }
+
+        }
+        $("#tags_input").bind({
+            keydown:function(e){
+                if(e.keyCode == 13){
+                    if($.trim($(this).val())){
+                        setTags('blur', $(this).val());
+                    }
+                }
+            },
+            blur:function () {
+                return false;
+            }
+        });
+
         var upload = layui.upload
 
         //普通图片上传
@@ -67,6 +108,51 @@
             }
         });
     })
+
+    function setTags(from, datas) {
+
+        if(from == 'layui'){
+            var tag_obj = JSON.parse($('#tags_json').val())
+            var tags = tag_obj[datas]
+            var tags_input_name = 'tags'
+        }else{
+            var tags = datas
+            var tags_input_name = 'new_tags'
+        }
+        var bool = true;
+        $('.tags_span').each(function (m, n) {
+            console.log($(n).find('span').html())
+            console.log(tags)
+            console.log($(n).find('span').html() == tags)
+            if($(n).find('span').html() == tags){
+                console.log('---------')
+                bool = false
+                return false
+                console.log('+++++++++')
+            }
+        })
+        if(!bool){
+            return false
+        }
+        var _html = `
+        <span class="tags_span">
+            <span>`+tags+`</span>
+            <input type="text" name="`+tags_input_name+`[]" value="`+datas+`" style="display: none">
+            <input class="tags_input" type="button" value="x" onclick="deltags(this)">
+        </span>
+        `
+        $('#tags_select_div').show()
+        $('#tags_select_div').append(_html)
+        $('#tags_input').val('')
+    }
+
+    function deltags(_self) {
+        $(_self).parent().remove()
+        if($('#tags_select_div').find('input').length == 0){
+            $('#tags_select_div').hide()
+        }
+    }
+
 </script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">

@@ -23,10 +23,19 @@
 
 <div class="layui-form-item">
     <label for="" class="layui-form-label">标签</label>
+    <!-- 标签的star -->
+    <div class="layui-input-block" id="tags_select_div" style="display: none"></div>
+    <!-- 标签的star -->
     <div class="layui-input-block">
-        @foreach($tags as $tag)
-            <input type="checkbox" name="tags[]" {{ $tag->checked??'' }} value="{{ $tag->id }}" title="{{ $tag->name }}">
-        @endforeach
+    <div class="layui-input-inline">
+        <input type="text" name="tags_input" id="tags_input" class="layui-input" style="position:absolute;z-index:2;width:80%;" lay-verify="required" value="" onkeyup="search()" autocomplete="off">
+        <select type="text" id="tags_select" lay-filter="tags_select" autocomplete="off" placeholder="移交单位全称" lay-verify="required" class="layui-select" lay-search>
+        {{--<select lay-filter="tags_select" id="tags" lay-verify="" lay-search>--}}
+            @foreach($tags as $tag)
+                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+            @endforeach
+        </select>
+    </div>
     </div>
 </div>
 
@@ -88,7 +97,7 @@
 
 <div class="layui-form-item">
     <div class="layui-input-block">
-        <button type="submit" class="layui-btn" lay-submit="" lay-filter="formDemo">确 认</button>
+        <button type="button" class="layui-btn" lay-submit="" lay-filter="formDemo">确 认</button>
         <a  class="layui-btn" href="{{route('admin.news')}}" >返 回</a>
     </div>
 </div>

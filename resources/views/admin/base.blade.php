@@ -32,7 +32,8 @@
     layui.config({
         base: '/static/admin/layuiadmin/' //静态资源所在路径
     }).extend({
-        index: 'lib/index' //主入口模块
+        index: 'lib/index', //主入口模块
+        inputTags: 'lib/extend/inputTags'
     }).use(['element','form','layer','table','upload','laydate'],function () {
         var element = layui.element;
         var layer = layui.layer;

@@ -53,7 +53,7 @@ class NewsController extends Controller
         //分类
         $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
         //标签
-        $tags = Tag::get();
+        $tags = Tag::select(['id', 'name'])->get();
         return view('admin.news.create',compact('tags','categorys'));
     }
 
@@ -65,6 +65,7 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
+        dd($request->toArray());
         $data = $request->only(['category_id','title','keywords','description','content','thumb','click']);
         $news = News::create($data);
         if ($news && !empty($request->get('tags')) ){
