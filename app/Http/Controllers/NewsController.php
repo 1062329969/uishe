@@ -25,12 +25,12 @@ class NewsController extends Controller
             $tags_recommend = Tag::getRecommendTags();
             $comments_recommend = Comments::getRecommendComments();
         }
-        return view('png');
+        return view('home.png');
 //        return view('templet');
     }
 
     public function category(Request $request, $id){
 //        echo  $id;
-        return view('list');
+        return view('home.list');
     }
 }

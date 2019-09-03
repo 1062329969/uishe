@@ -9,16 +9,14 @@
                 <span>|</span>
                 <a href="{{ url('/copyright') }} https://www.51miz.com/agreement/" class="fn14" target="_blank" rel="nofollow">版权声明</a>
             </div>
-            <div class="cpright fn14">版权所有 Copyright © 2019 UI社 .AllRights Reserved  ·  <a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">京ICP备09081444号-2</a>
-                <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502009177" target="_blank" rel="nofollow">
-                    <img src="//ss.51miz.com/images/beian.png" alt="备案" width="16" style="position: relative;top: 2px">沪公网安备 31011502009177号
-                </a>
+            <div class="cpright fn14">版权所有 Copyright © 2019 UI社 .AllRights Reserved  ·  <a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">{{ $site['copyright'] }}</a>
             </div>
             <div class="cpright fn14">UI社交流群：385330021 （注明来自UI社） 客服QQ: 1829020117 （注明来自UI社）</div>
         </div>
     </div>
 </div>
 </body>
+<script src="https://s19.cnzz.com/z_stat.php?id=4875190&web_id=4875190" language="JavaScript"></script>
 <script type="text/javascript" src="{{ asset('js/global.V3.32.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.bxslider.min.v1.3.js') }}"></script>
 <script>

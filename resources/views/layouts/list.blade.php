@@ -1,7 +1,7 @@
 <link href="{{ asset('css/search/search.v4.7.bak.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/video_category.css') }}" rel="stylesheet" type="text/css">
 
-@include('common.top')
+@include('home.common.top')
 
 <div class="main"> <!--search-banner start-->
 
@@ -67,7 +67,7 @@
     </div>
 </div>
 
-@include('common.bottom')
+@include('home.common.bottom')
 
 <style>
     .main-content, .search-sorting-box-cus, .search-sorting-box-cus-hide {

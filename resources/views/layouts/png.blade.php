@@ -1,6 +1,6 @@
 <link href="{{ asset('css/top_simple.v3.9.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/element/element-view.v3.7.css') }}" rel="stylesheet" type="text/css">
-@include('common.top')
+@include('home.common.top')
 <div class="main"> <!--location start-->
     <div class="location-box oh">
         <div class="location fn12"><span>当前位置：</span> <a href="https://www.51miz.com/sucai/">设计素材</a> <span>/</span><a
@@ -591,7 +591,7 @@
     </div>
     <div style="height:70px;"></div>
 </div>
-@include('common.bottom')
+@include('home.common.bottom')
 <script>$().ready(function () {
         var relative_form_ajax = '';
         if (!relative_form_ajax) {

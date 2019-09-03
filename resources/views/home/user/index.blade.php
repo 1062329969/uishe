@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@include('user.common',['message'=>'我是错误信息'])
+@include('home.user.common',['message'=>'我是错误信息'])
 
 @section('content')
 

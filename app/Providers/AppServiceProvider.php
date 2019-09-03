@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Site;
 use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -71,6 +72,15 @@ class AppServiceProvider extends ServiceProvider
             $view->with('menus',$menus);
             $view->with('unreadMessage',$unreadMessage);
         });
+
+        view()->composer(['home.common.top', 'home.common.bottom'], function ($view){
+            $menus = \App\Models\WebOption::getIndexMenu();
+            $view->with('menus',$menus);
+
+            $site = Site::get()->toArray();
+            $view->with('site',array_column($site, 'value', 'key'));
+        });
+
     }
 
     /**

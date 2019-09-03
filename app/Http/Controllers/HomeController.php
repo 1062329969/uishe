@@ -28,13 +28,13 @@ class HomeController extends Controller
     public function index()
     {
         $index_menu = WebOption::getIndexMenu();
-        return view('index', [
+        return view('home.index', [
             'index_menu' => $index_menu,
         ]);
     }
     public function templet()
     {
-        return view('templet');
+        return view('home.templet');
     }
 
     public function login(Request $request) {
@@ -52,7 +52,7 @@ class HomeController extends Controller
                 echo '登录失败';
             }
         } else {
-            return view('login');
+            return view('home.login');
         }
     }
 }

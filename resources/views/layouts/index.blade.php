@@ -1,4 +1,4 @@
-@include('common.top')
+@include('home.common.top')
 <div class="main" id="main">
     <!--Banner 区域 ///start///-->
     <div class="banner pr css3-background-size " id="banner">
@@ -860,5 +860,5 @@
     <!--back to top end-->
 </div>
 
-@include('common.bottom')
+@include('home.common.bottom')
 </html>

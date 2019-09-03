@@ -24,7 +24,7 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'],function (){
 | 后台需要授权的路由 admins
 |
 */
-Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth'],function (){
+Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth:web'],function (){
     //后台布局
     Route::get('/','IndexController@layout')->name('admin.layout');
     //后台首页
@@ -36,7 +36,7 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth'],funct
 });
 
 //系统管理
-Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth','permission:system.manage']],function (){
+Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth:web','permission:system.manage']],function (){
     //数据表格接口
     Route::get('data','IndexController@data')->name('admin.data')->middleware('permission:system.role|system.user|system.permission');
     //用户管理
@@ -101,7 +101,7 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth','perm
 
 
 //资讯管理
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'permission:zixun.manage']], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:zixun.manage']], function () {
     //分类管理
     Route::group(['middleware' => 'permission:zixun.category'], function () {
         Route::get('category/data', 'CategoryController@data')->name('admin.category.data');
@@ -143,7 +143,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     });
 });
 //配置管理
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'permission:config.manage']], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:config.manage']], function () {
     //站点配置
     Route::group(['middleware' => 'permission:config.site'], function () {
         Route::get('site', 'SiteController@index')->name('admin.site');
@@ -177,7 +177,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     });
 });
 //会员管理
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'permission:member.manage']], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:member.manage']], function () {
     //账号管理
     Route::group(['middleware' => 'permission:member.member'], function () {
         Route::get('member/data', 'MemberController@data')->name('admin.member.data');
@@ -193,7 +193,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     });
 });
 //消息管理
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'permission:message.manage']], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:message.manage']], function () {
     //消息管理
     Route::group(['middleware' => 'permission:message.message'], function () {
         Route::get('message/data', 'MessageController@data')->name('admin.message.data');
