@@ -43,15 +43,13 @@ class PublicController extends Controller
 //        $res = $disk->put($newFile,file_get_contents($file->getRealPath()));
         $path=$file->getRealPath();
         $bool= Storage::disk('local')->put($newFile,file_get_contents($path));
-dump($bool);
 
-        dd($newFile);
-        if($res){
+        if($bool){
             $data = [
                 'code'  => 0,
                 'msg'   => '上传成功',
                 'data'  => $newFile,
-                'url'   => $disk->downloadUrl($newFile)
+//                'url'   => $disk->downloadUrl($newFile)
             ];
         }else{
             $data['data'] = $file->getErrorMessage();

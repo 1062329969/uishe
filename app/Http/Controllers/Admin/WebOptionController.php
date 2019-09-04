@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\NewsRequest;
-use App\Models\News;
-use App\Models\Category;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -66,31 +62,7 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        dd($request->toArray());
-
-/*
-`cover_img` text COMMENT '封面图片',
-`down_num` int(11) DEFAULT NULL COMMENT '下载次数',
-`down_type` varchar(11) DEFAULT NULL COMMENT '下载类型',
-`down_level` varchar(255) DEFAULT NULL COMMENT '免费下载群体 0所有人 1黄金 2钻石 3终身',
-`down_price` decimal(11,0) DEFAULT NULL COMMENT '下载价格',
-`down_url` varchar(255) DEFAULT NULL COMMENT '下载链接',
-`views` int(11) DEFAULT NULL COMMENT '浏览量',
-`like` int(11) DEFAULT NULL COMMENT '点赞',
-`collects` int(11) DEFAULT NULL COMMENT '收藏',
-`category_id` varchar(255) DEFAULT NULL COMMENT '分类id',
-`category` varchar(255) DEFAULT NULL,
-`tag_id` varchar(255) DEFAULT NULL COMMENT '标签id',
-`tag` varchar(255) DEFAULT NULL,
-`recommend` varchar(255) DEFAULT 'off' COMMENT '推荐',*/
-
-
-
-        $data = $request->only(['category_id', 'title', 'keywords', 'content', 'thumb', 'click']);
-        $data['admin_id'] = Auth::id();
-        $data['status'] = News::Status_Normal;
-        $data['comment_status'] = News::Comment_Status_On;
-
+        $data = $request->only(['category_id','title','keywords','description','content','thumb','click']);
         $news = News::create($data);
         if ($news && !empty($request->get('tags')) ){
             $news->tags()->sync($request->get('tags'));

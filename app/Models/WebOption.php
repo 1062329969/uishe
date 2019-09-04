@@ -30,10 +30,31 @@ class WebOption extends Model
 
     public static function getBanner(){
         return WebOption::where([
-            ['op_type', '=', 'banner'],
+                ['op_type', '=', 'banner'],
+                ['op_status', '=', 'enable'],
+            ])
+            ->orderBy('op_sort', 'asc')
+            ->get()
+            ->toArray();
+    }
+
+    public static function getOption($type, $json = false){
+        $option = WebOption::where([
+            ['op_type', '=', $type],
             ['op_status', '=', 'enable'],
         ])
-            ->orderBy('op_sort', 'asc')
-            ->get();
+            ->first()
+            ->toArray();
+        if($json){
+            $option['op_value'] = json_decode($option['op_value'], true);
+        }
+
+        return $option;
+    }
+
+    public function toArray(){
+        $item  = parent::toArray();
+        $item['op_json'] = json_decode($item['op_json'], true);
+        return $item;
     }
 }

@@ -138,6 +138,7 @@
         <span class="tags_span">
             <span>`+tags+`</span>
             <input type="text" name="`+tags_input_name+`[]" value="`+datas+`" style="display: none">
+            <input type="text" name="tags_name[]" value="`+tags+`" style="display: none">
             <input class="tags_input" type="button" value="x" onclick="deltags(this)">
         </span>
         `

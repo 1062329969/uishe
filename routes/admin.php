@@ -175,6 +175,20 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         //删除
         Route::delete('advert/destroy', 'AdvertController@destroy')->name('admin.advert.destroy')->middleware('permission:config.advert.destroy');
     });
+
+    //首页配置
+    Route::group(['middleware' => 'permission:config.weboption'], function () {
+        Route::get('weboption/data', 'WebOptionController@data')->name('admin.weboption.data');
+        Route::get('weboption', 'WebOptionController@index')->name('admin.weboption');
+        //添加
+        Route::get('weboption/create', 'WebOptionController@create')->name('admin.weboption.create')->middleware('permission:config.weboption.create');
+        Route::post('weboption/store', 'WebOptionController@store')->name('admin.weboption.store')->middleware('permission:config.weboption.create');
+        //编辑
+        Route::get('weboption/{id}/edit', 'WebOptionController@edit')->name('admin.weboption.edit')->middleware('permission:config.weboption.edit');
+        Route::put('weboption/{id}/update', 'WebOptionController@update')->name('admin.weboption.update')->middleware('permission:config.weboption.edit');
+        //删除
+        Route::delete('weboption/destroy', 'WebOptionController@destroy')->name('admin.weboption.destroy')->middleware('permission:config.weboption.destroy');
+    });
 });
 //会员管理
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:member.manage']], function () {

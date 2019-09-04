@@ -158,7 +158,7 @@ function supportBackgroundImage()
 	if(supportCss3("background-size"))
 	{
 		
-		var a = (new Date).getTime();
+		/*var a = (new Date).getTime();
 		var arr = getElementsByClass("css3-background-size");
 		var b = (new Date).getTime();
 		//alert(b-a);
@@ -183,7 +183,7 @@ function supportBackgroundImage()
 					}
 				}
 			}
-		}
+		}*/
 
 	}
 }

@@ -41,7 +41,7 @@
         <!--search-box end-->
         <div class="top-item-right fr">
             <div class="top-item-login fr">
-                @auth
+                @auth('users')
                 <a href="{{ url('/') }}">Home</a>
                 @else
                     <a href="{{ route('login') }}" class="login-button iblock fl on center fn14">请登录</a>
