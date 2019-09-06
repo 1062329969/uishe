@@ -1,10 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Traits\Msg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use zgldh\QiniuStorage\QiniuStorage;
 
 class PublicController extends Controller
 {
@@ -49,7 +47,7 @@ class PublicController extends Controller
                 'code'  => 0,
                 'msg'   => '上传成功',
                 'data'  => $newFile,
-//                'url'   => $disk->downloadUrl($newFile)
+                'url'   => env('APP_IMG_URL').$newFile
             ];
         }else{
             $data['data'] = $file->getErrorMessage();

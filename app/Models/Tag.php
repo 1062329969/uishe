@@ -29,4 +29,22 @@ class Tag extends Model
         return $this->belongsToMany('App\Models\News','tag_news','id','news_id');
     }
 
+    public static function save_tag($tag){
+        $tag_model = new Tag();
+        if(isset($tag['id'])){
+            $tag_model = Tag::find($tag['id']);
+        }
+
+        $tag_model->id =  $tag['id'] ?? NULL;
+        $tag_model->name = $tag['name'];
+        $tag_model->alias = urlencode($tag['name']);
+
+        $tags = $tag_model->save();
+        if($tags){
+            return $tag_model->id;
+        }else{
+            return false;
+        }
+    }
+
 }

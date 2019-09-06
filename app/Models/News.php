@@ -20,11 +20,32 @@ class News extends Model
     const Down_Type_Integral = 'integral'; // 积分下载
     const Down_Type_Vip = 'vip'; // VIP下载
 
+    const Recommend_ON = 'on';
+    const Recommend_Off = 'off';
+
     protected $table = 'news';
     protected $primaryKey = 'id';
 
 
-    protected $fillable = ['category_id','title','keywords','description','content','thumb','click'];
+    protected $fillable = [
+        'category_id',
+        'title',
+        'content',
+        'cover_img',
+        'down_type',
+        'views',
+        'down_level',
+        'down_price',
+        'comment_status',
+        'recommend',
+        'admin_id',
+        'status',
+        'comment_status',
+        'recommend',
+        'tag_id',
+        'tag',
+        'category',
+    ];
 
     /*//文章所属分类
     public function category()

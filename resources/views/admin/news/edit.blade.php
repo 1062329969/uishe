@@ -10,6 +10,7 @@
                 {{ method_field('put') }}
                 @include('admin.news._form')
             </form>
+            <input type="hidden" id="tags_json" value="{{ json_encode(array_column($tags->toArray(), 'name', 'id')) }}">
         </div>
     </div>
 @endsection

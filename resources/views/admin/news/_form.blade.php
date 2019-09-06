@@ -24,7 +24,18 @@
 <div class="layui-form-item">
     <label for="" class="layui-form-label">标签</label>
     <!-- 标签的star -->
-    <div class="layui-input-block" id="tags_select_div" style="display: none"></div>
+    <div class="layui-input-block" id="tags_select_div" @if(!isset($news->tags)) style="display: none" @endif>
+        @if(isset($news->tags))
+        @foreach($news->tags as $tag_item)
+            <span class="tags_span">
+                <span>{{ $tag_item['name'] }}</span>
+                <input type="text" name="tags[]" value="{{ $tag_item['id'] }}" style="display: none">
+                <input type="text" name="tags_name[]" value="{{ $tag_item['name'] }}" style="display: none">
+                <input class="tags_input" type="button" value="x" onclick="deltags(this)">
+            </span>
+        @endforeach
+        @endif
+    </div>
     <!-- 标签的star -->
     <div class="layui-input-block">
     <div class="layui-input-inline">
@@ -47,23 +58,9 @@
 </div>
 
 <div class="layui-form-item">
-    <label for="" class="layui-form-label">关键词</label>
-    <div class="layui-input-block">
-        <input type="text" name="keywords" value="{{$news->keywords??old('keywords')}}" lay-verify="required" placeholder="请输入关键词" class="layui-input" >
-    </div>
-</div>
-
-<div class="layui-form-item">
-    <label for="" class="layui-form-label">描述</label>
-    <div class="layui-input-block">
-        <textarea name="description" placeholder="请输入描述" class="layui-textarea">{{$news->description??old('description')}}</textarea>
-    </div>
-</div>
-
-<div class="layui-form-item">
-    <label for="" class="layui-form-label">点击量</label>
-    <div class="layui-input-block">
-        <input type="number" name="click" value="{{$news->click??mt_rand(100,500)}}" lay-verify="required|numeric"  class="layui-input" >
+    <label for="" class="layui-form-label">点击(浏览)量</label>
+    <div class="layui-input-inline">
+        <input type="number" name="views" value="{{$news->views??mt_rand(100,500)}}" lay-verify="required|numeric"  class="layui-input" >
     </div>
 </div>
 
@@ -74,11 +71,11 @@
             <button type="button" class="layui-btn" id="uploadPic"><i class="layui-icon">&#xe67c;</i>图片上传</button>
             <div class="layui-upload-list" >
                 <ul id="layui-upload-box" class="layui-clear">
-                    @if(isset($news->thumb))
-                        <li><img src="{{ $news->thumb }}" /><p>上传成功</p></li>
+                    @if(isset($news->cover_img))
+                        <li><img src="{{ $news->cover_img }}" /><p>上传成功</p><span onclick="$('#cover_img').val(''); $(this).parent().remove()">X</span></li>
                     @endif
                 </ul>
-                <input type="hidden" name="thumb" id="thumb" value="{{ $news->thumb??'' }}">
+                <input type="hidden" name="cover_img" id="cover_img" value="{{ $news->cover_img??'' }}">
             </div>
         </div>
     </div>
@@ -119,6 +116,32 @@
     <label for="" class="layui-form-label">商品售价</label>
     <div class="layui-input-inline">
         <input type="text" name="down_price" value="{{$news->down_price??old('down_price', 0)}}" lay-verify="required" placeholder="请输入标题" class="layui-input" >
+    </div>
+</div>
+
+<div class="layui-form-item">
+    <label for="" class="layui-form-label">是否允许评论</label>
+    <div class="layui-input-inline">
+        <input type="checkbox" name="comment_status"
+                lay-skin="switch"
+                lay-text="{{ \App\Models\News::Comment_Status_On }}|{{ \App\Models\News::Comment_Status_Off }}"
+                @if( isset($news->recommend) and $news->recommend == \App\Models\News::Comment_Status_On )
+                    checked
+                @endif
+        >
+    </div>
+</div>
+
+<div class="layui-form-item">
+    <label for="" class="layui-form-label">是否推荐</label>
+    <div class="layui-input-inline">
+        <input type="checkbox" name="recommend"
+                lay-skin="switch"
+                lay-text="{{ \App\Models\News::Recommend_ON }}|{{ \App\Models\News::Recommend_Off }}"
+                @if( isset($news->recommend) and $news->recommend == \App\Models\News::Recommend_ON )
+                    checked
+                @endif
+        >
     </div>
 </div>
 

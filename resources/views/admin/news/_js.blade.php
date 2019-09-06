@@ -24,6 +24,19 @@
         background-color: #333;
         opacity: 0.6;
     }
+    #layui-upload-box li span {
+        width: 20%;
+        height: 22px;
+        font-size: 12px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        line-height: 22px;
+        text-align: center;
+        color: #fff;
+        background-color: #000;
+        opacity: 0.6;
+    }
     #layui-upload-box li i{
         display: block;
         width: 20px;
@@ -93,14 +106,14 @@
                  $('#layui-upload-box').append('<li><img src="'+result+'" /><p>待上传</p></li>')
                  });*/
                 obj.preview(function(index, file, result){
-                    $('#layui-upload-box').html('<li><img src="'+result+'" /><p>上传中</p></li>')
+                    $('#layui-upload-box').html('<li><img src="'+result+'" /><p>上传中</p><span onclick="$(\'#cover_img\').val(\'\'); $(this).parent().remove()">X</span></li>')
                 });
 
             }
             ,done: function(res){
                 //如果上传失败
                 if(res.code == 0){
-                    $("#thumb").val(res.url);
+                    $("#cover_img").val(res.url);
                     $('#layui-upload-box li p').text('上传成功');
                     return layer.msg(res.msg);
                 }

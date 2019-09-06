@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\NewsRequest;
+use App\Models\CategoryNew;
 use App\Models\News;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\TagNew;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -66,36 +69,70 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        dd($request->toArray());
+//        dump($request->toArray());
+        DB::beginTransaction();
+        $tag_id = $request->tags;
+        $tag_new = [];
+        $request->new_tags = $request->new_tags ?? [];
+        foreach($request->new_tags as $item){
+            $new_tag_id = Tag::save_tag(['name'=>$item]);
+            if( !$new_tag_id ){
+                DB::rollBack();
+                return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
+            }
+            $tag_new[] = [
+                'tag_id' => $new_tag_id,
+                'tag' => $item,
+            ];
+            $tag_id[] = $new_tag_id;
+        }
 
-/*
-`cover_img` text COMMENT '封面图片',
-`down_num` int(11) DEFAULT NULL COMMENT '下载次数',
-`down_type` varchar(11) DEFAULT NULL COMMENT '下载类型',
-`down_level` varchar(255) DEFAULT NULL COMMENT '免费下载群体 0所有人 1黄金 2钻石 3终身',
-`down_price` decimal(11,0) DEFAULT NULL COMMENT '下载价格',
-`down_url` varchar(255) DEFAULT NULL COMMENT '下载链接',
-`views` int(11) DEFAULT NULL COMMENT '浏览量',
-`like` int(11) DEFAULT NULL COMMENT '点赞',
-`collects` int(11) DEFAULT NULL COMMENT '收藏',
-`category_id` varchar(255) DEFAULT NULL COMMENT '分类id',
-`category` varchar(255) DEFAULT NULL,
-`tag_id` varchar(255) DEFAULT NULL COMMENT '标签id',
-`tag` varchar(255) DEFAULT NULL,
-`recommend` varchar(255) DEFAULT 'off' COMMENT '推荐',*/
-
-
-
-        $data = $request->only(['category_id', 'title', 'keywords', 'content', 'thumb', 'click']);
+        $data = $request->only([
+            'category_id',
+            'title',
+            'content',
+            'cover_img',
+            'down_type',
+            'views',
+            'down_level',
+            'down_price',
+            'comment_status',
+            'recommend',
+        ]);
         $data['admin_id'] = Auth::id();
         $data['status'] = News::Status_Normal;
-        $data['comment_status'] = News::Comment_Status_On;
-
+        $data['comment_status'] = $request->comment_status;
+        $data['recommend'] = $request->recommend;
+        $data['tag_id'] = json_encode($tag_id);
+        $data['tag'] = json_encode($request->tags_name, JSON_UNESCAPED_UNICODE);
+        $data['category'] = Category::where('id', $request->category_id)->value('name');
         $news = News::create($data);
-        if ($news && !empty($request->get('tags')) ){
-            $news->tags()->sync($request->get('tags'));
+        if ($news){
+            if(!empty($request->get('new_tags'))){
+                foreach ($tag_new as &$item){
+                    $item['tag_new_id'] = $news->id;
+                }
+                $tag_new_bool = TagNew::insert($tag_new);
+                if(!$tag_new_bool){
+                    DB::rollBack();
+                    return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
+                }
+            }
+            $category_new_bool = CategoryNew::insert([
+                'cat_new_id' => $news->id,
+                'cat_id' => $request->category_id,
+                'category' => $data['category'],
+            ]);
+            if(!$category_new_bool){
+                DB::rollBack();
+                return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
+            }
+
+            DB::commit();
+            return redirect(route('admin.news'))->with(['status'=>'添加成功']);
+        }else{
+            return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
         }
-        return redirect(route('admin.news'))->with(['status'=>'添加成功']);
     }
 
     /**
@@ -124,10 +161,7 @@ class NewsController extends Controller
         //分类
         $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
         //标签
-        $tags = Tag::get();
-        foreach ($tags as $tag){
-            $tag->checked = $news->tags->contains($tag) ? 'checked' : '';
-        }
+        $tags = Tag::select(['id', 'name'])->get();
         return view('admin.news.edit',compact('news','categorys','tags'));
 
     }
@@ -141,10 +175,68 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, $id)
     {
+//        dd($request->toArray());
+        DB::beginTransaction();
+        $tag_id = $request->tags;
+        $tag_new = [];
+        $request->new_tags = $request->new_tags ?? [];
+        foreach($request->new_tags as $item){
+            $new_tag_id = Tag::save_tag(['name'=>$item]);
+            if( !$new_tag_id ){
+                DB::rollBack();
+                return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
+            }
+            $tag_new[] = [
+                'tag_id' => $new_tag_id,
+                'tag' => $item,
+            ];
+            $tag_id[] = $new_tag_id;
+        }
+
         $news = News::with('tags')->findOrFail($id);
-        $data = $request->only(['category_id','title','keywords','description','content','thumb','click']);
+
+        $data = $request->only([
+            'category_id',
+            'title',
+            'content',
+            'cover_img',
+            'down_type',
+            'views',
+            'down_level',
+            'down_price',
+            'comment_status',
+            'recommend',
+        ]);
+        $data['comment_status'] = $request->comment_status;
+        $data['recommend'] = $request->recommend;
+        $data['tag_id'] = json_encode($tag_id);
+        $data['tag'] = json_encode($request->tags_name, JSON_UNESCAPED_UNICODE);
+        $data['category'] = Category::where('id', $request->category_id)->value('name');
+
         if ($news->update($data)){
-            $news->tags()->sync($request->get('tags',[]));
+
+            if(!empty($request->get('new_tags'))){
+                foreach ($tag_new as &$item){
+                    $item['tag_new_id'] = $news->id;
+                }
+                $tag_new_bool = TagNew::insert($tag_new);
+                if(!$tag_new_bool){
+                    DB::rollBack();
+                    return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
+                }
+            }
+            $category_new_bool = CategoryNew::insert([
+                'cat_new_id' => $news->id,
+                'cat_id' => $request->category_id,
+                'category' => $data['category'],
+            ]);
+            if(!$category_new_bool){
+                DB::rollBack();
+                return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
+            }
+
+            DB::commit();
+            die;
             return redirect(route('admin.news'))->with(['status'=>'更新成功']);
         }
         return redirect(route('admin.news'))->withErrors(['status'=>'系统错误']);
