@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class WebOption extends Model
 {
     //
+    const OP_STATUS_ENABLE = 'enable';
+    const OP_STATUS_DISABLED = 'disabled';
+
     protected $table = 'web_option';
     protected $primaryKey = 'id';
 

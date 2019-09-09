@@ -83,10 +83,9 @@
                         ,{field: 'id', title: 'ID', sort: true,width:80}
                         ,{field: 'category', title: '分类',toolbar:'#category'}
                         ,{field: 'title', title: '标题'}
-                        ,{field: 'thumb', title: '缩略图',toolbar:'#thumb',width:100}
-                        ,{field: 'keywords', title: '关键词'}
+                        ,{field: 'cover_img', title: '缩略图',toolbar:'#cover_img',width:100}
                         ,{field: 'tags', title: '标签',toolbar:'#tags',width:300}
-                        ,{field: 'click', title: '点击量'}
+                        ,{field: 'views', title: '浏览量'}
                         ,{field: 'created_at', title: '创建时间'}
                         ,{field: 'updated_at', title: '更新时间'}
                         ,{fixed: 'right', width: 220, align:'center', toolbar: '#options'}

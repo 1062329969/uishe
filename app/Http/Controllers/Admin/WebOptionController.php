@@ -3,83 +3,51 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\NewsRequest;
+use App\Models\Category;
+use App\Models\WebOption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class NewsController extends Controller
+class WebOptionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $op_type = [
+            [
+                'name' => '导航栏显示分类',
+                'value' => 'category',
+            ],
+            [
+                'name' => '友情链接',
+                'value' => 'links',
+            ],
+            [
+                'name' => '轮播图',
+                'value' => 'banner',
+            ],
+            [
+                'name' => '首页配置',
+                'value' => 'index',
+            ],
+        ];
+
     public function index()
     {
-        //分类
-        $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
-        return view('admin.news.index',compact('categorys'));
+
+        return view('admin.weboption.index');
     }
 
     public function data(Request $request)
     {
 
-        $model = News::query();
-        if ($request->get('category_id')){
-            $model = $model->where('category_id',$request->get('category_id'));
-        }
-        if ($request->get('title')){
-            $model = $model->where('title','like','%'.$request->get('title').'%');
-        }
-        $res = $model->orderBy('created_at','desc')->with(['tags','category'])->paginate($request->get('limit',30))->toArray();
+        $op_type = $this->op_type;
         $data = [
             'code' => 0,
             'msg'   => '正在请求中...',
-            'count' => $res['total'],
-            'data'  => $res['data']
+            'data'  => $op_type
         ];
         return response()->json($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //分类
-        $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
-        //标签
-        $tags = Tag::select(['id', 'name'])->get();
-        return view('admin.news.create',compact('tags','categorys'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(NewsRequest $request)
-    {
-        $data = $request->only(['category_id','title','keywords','description','content','thumb','click']);
-        $news = News::create($data);
-        if ($news && !empty($request->get('tags')) ){
-            $news->tags()->sync($request->get('tags'));
-        }
-        return redirect(route('admin.news'))->with(['status'=>'添加成功']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -87,21 +55,26 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $weboption)
     {
-        $news = News::with('tags')->findOrFail($id);
-        if (!$news){
-            return redirect(route('admin.news'))->withErrors(['status'=>'文章不存在']);
-        }
-        //分类
-        $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
-        //标签
-        $tags = Tag::get();
-        foreach ($tags as $tag){
-            $tag->checked = $news->tags->contains($tag) ? 'checked' : '';
-        }
-        return view('admin.news.edit',compact('news','categorys','tags'));
+        $op_type = $weboption;
+        switch ($op_type){
+            case 'category':
+                $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
+                $data['categorys'] = $categorys;
+                $data['op_type'] = $op_type;
+                break;
+            case 'links':
 
+                break;
+            case 'banner':
+
+                break;
+            case 'index':
+
+                break;
+        }
+        return view('admin.weboption.edit',$data);
     }
 
     /**
