@@ -25,9 +25,16 @@
                 <a href="{{ url('/') }}" class="top-nav {{ Request::getPathInfo()=='/' ? 'on' : '' }}">首页</a>
             </li>
             @foreach($menus as $k => $v)
-                <li>
-                    <a href="{{ url('/'.$v['op_parameter']) }}" class="top-nav {{ Request::getPathInfo() == '/'.$v['op_parameter'] ? 'on' : '' }}">{{ $v['op_value'] }}</a>
-                </li>
+                @if($v['op_json'] == 'url')
+                    <li>
+                        <a href="{{ $v['op_parameter'] }}"target="_blank" class="top-nav">{{ $v['op_value'] }}</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ url('/'.$v['op_parameter']) }}" class="top-nav {{ Request::getPathInfo() == '/'.$v['op_parameter'] ? 'on' : '' }}">{{ $v['op_value'] }}</a>
+                    </li>
+                @endif
+
             @endforeach
             <li>
                 <a href="{{ url('/huiyuan') }}" class="top-nav">免费获得VIP会员</a>

@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Site;
-use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
         Schema::defaultStringLength(191);
         //
@@ -62,6 +64,33 @@ class AppServiceProvider extends ServiceProvider
 
         Response::macro('string', function($value, $token = '') {
             return Response::json_unicode(['code' => 0, 'msg' => 'SUCCESS', 'token' => $token, 'data' => $value]);
+        });
+
+        Response::macro('json_unicode', function($arr) use($request) {
+
+            if(Auth::guard('api')->check()){
+                $api_caller = Auth::user();
+                if (empty($arr['token']))
+                {
+                    if ($api_caller == null || $api_caller->getCallerType() == ApiCallerContract::Caller_Type_OpenApp) {
+                        array_pull($arr, 'token');
+                    } else {
+                        // open_app 无需返回token。
+                        //if ($api_caller->getCallerType() != ApiCallerContract::Caller_Type_OpenApp) {
+                        $arr['token'] = $api_caller->getApiToken();
+                        //}
+                    }
+                }
+
+                if (env('Enable_Api_Log', false)) {
+                    ApiLog::create($request, json_encode($arr, JSON_UNESCAPED_UNICODE));
+                }
+
+                return response()->json($arr)->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+            }else{
+                return response()->json($arr)->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+            }
+
         });
 
         view()->composer('admin.layout',function($view){

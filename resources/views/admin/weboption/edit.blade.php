@@ -29,3 +29,20 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    @switch($op_type)
+        @case('category')
+            @include('admin.weboption.category_js')
+            @break
+        @case('links')
+            @include('admin.weboption.links_js')
+            @break
+        @case('banner')
+            @include('admin.weboption.banner_js')
+            @break
+        @case('index')
+            @include('admin.weboption.index_js')
+            @break
+    @endswitch
+@endsection

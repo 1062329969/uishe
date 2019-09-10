@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\NewsRequest;
 use App\Models\Category;
 use App\Models\WebOption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class WebOptionController extends Controller
 {
@@ -61,7 +61,9 @@ class WebOptionController extends Controller
         switch ($op_type){
             case 'category':
                 $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
+                $all_categorys = Category::get();
                 $data['categorys'] = $categorys;
+                $data['all_categorys'] = array_column($all_categorys->toArray(), 'name', 'id');
                 $data['op_type'] = $op_type;
                 break;
             case 'links':
@@ -84,15 +86,24 @@ class WebOptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request, $id)
+    public function update(Request $request, $weboption)
     {
-        $news = News::with('tags')->findOrFail($id);
-        $data = $request->only(['category_id','title','keywords','description','content','thumb','click']);
-        if ($news->update($data)){
-            $news->tags()->sync($request->get('tags',[]));
-            return redirect(route('admin.news'))->with(['status'=>'更新成功']);
+        switch ($request->op_type){
+            case 'category':
+                DB::beginTransaction();
+                $del_res = WebOption::where('op_type', 'category')->delete();
+                if($del_res){
+                    $add_res = WebOption::insert($request->data);
+                    if($add_res){
+                        DB::commit();
+                        return response()->success('修改成功');
+                    }
+                }
+                DB::rollBack();
+                return response()->error(500, '修改失败');
+                break;
         }
-        return redirect(route('admin.news'))->withErrors(['status'=>'系统错误']);
+//        return redirect(route('admin.news'))->withErrors(['status'=>'系统错误']);
     }
 
     /**
