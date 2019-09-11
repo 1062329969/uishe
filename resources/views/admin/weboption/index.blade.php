@@ -28,7 +28,7 @@
                     ,height: 'auto'
                     ,url: "{{ route('admin.weboption.data') }}" //数据接口
                     ,cols: [[ //表头
-                        {field: 'name', title: 'ID', sort: true}
+                        {field: 'name', title: '配置项', sort: true}
                         ,{fixed: 'right',align:'center', toolbar: '#options'}
                     ]]
                 });

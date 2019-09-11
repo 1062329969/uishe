@@ -59,8 +59,7 @@
     </div>
 
 
-
-    <div id="data_div" class="layui-collapse layui-col-md4 layui-hide" lay-accordion>
+    <div id="data_div" class="layui-collapse layui-col-md4 @if(!$all_option->toArray()) layui-hide @endif" lay-accordion>
         <div class="layui-colla-item layui-hide category_tpl">
             <h2 class="layui-colla-title"></h2>
             <div class="layui-colla-content">
@@ -86,6 +85,42 @@
             <input type="hidden" name="op_value">
             <input type="hidden" name="op_ids">
         </div>
+
+        @foreach($all_option as $index => $item)
+        <div class="layui-colla-item" name="layui-colla-item-data">
+            <h2 class="layui-colla-title">{{ $item['op_value'] }}</h2>
+            <div class="layui-colla-content layui-show">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: auto" name="tmp_label">
+                        @if($item['op_json'] == 'url')
+                            URL
+                        @else
+                            别名
+                        @endif
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="data" value="" class="layui-input" placeholder="{{ $item['op_parameter'] }}">
+                        <span style="color: red;font-size: 10px">注：此字段为地址栏显示，可自行修改,默认为URL编码数据</span>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: auto">排序</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="sort" value="{{ $item['op_sort'] }}" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <button type="button" class="layui-btn layui-btn-danger" onclick="delData(this)">删除</button>
+                </div>
+            </div>
+            <input type="hidden" name="op_type" value="{{ $item['op_type'] }}">
+            <input type="hidden" name="op_value" value="{{ $item['op_value'] }}">
+            <input type="hidden" name="op_ids" value="{{ $item['op_ids'] }}">
+        </div>
+        @endforeach
+
+
         <div class="layui-form-item"></div>
         <div class="layui-form-item">
             <div class="layui-input-block">

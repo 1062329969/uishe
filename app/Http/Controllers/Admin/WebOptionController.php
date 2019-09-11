@@ -57,17 +57,20 @@ class WebOptionController extends Controller
      */
     public function edit(Request $request, $weboption)
     {
-        $op_type = $weboption;
-        switch ($op_type){
+        switch ($weboption){
             case 'category':
+                $all_option = WebOption::where('op_type', $weboption)->orderBy('op_sort','desc')->get();
                 $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
                 $all_categorys = Category::get();
                 $data['categorys'] = $categorys;
                 $data['all_categorys'] = array_column($all_categorys->toArray(), 'name', 'id');
-                $data['op_type'] = $op_type;
+                $data['op_type'] = $weboption;
+                $data['all_option'] = $all_option;
                 break;
             case 'links':
-
+                $all_option = WebOption::where('op_type', $weboption)->orderBy('op_sort','desc')->get();
+                $data['op_type'] = $weboption;
+                $data['all_option'] = $all_option;
                 break;
             case 'banner':
 
@@ -88,43 +91,44 @@ class WebOptionController extends Controller
      */
     public function update(Request $request, $weboption)
     {
-        switch ($request->op_type){
+        switch ($weboption){
             case 'category':
                 DB::beginTransaction();
-                $del_res = WebOption::where('op_type', 'category')->delete();
-                if($del_res){
-                    $add_res = WebOption::insert($request->data);
-                    if($add_res){
-                        DB::commit();
-                        return response()->success('修改成功');
-                    }
+                $del_res = WebOption::where('op_type', $weboption)->delete();
+                $add_res = WebOption::insert($request->data);
+                if($add_res){
+                    DB::commit();
+                    return response()->success('修改成功');
                 }
                 DB::rollBack();
                 return response()->error(500, '修改失败');
                 break;
-        }
-//        return redirect(route('admin.news'))->withErrors(['status'=>'系统错误']);
-    }
+            case 'links':
+                DB::beginTransaction();
+                $data = [];
+                foreach ($request->op_value as $index => $item){
+                    if (!$item){
+                        continue;
+                    }
+                    $data[] = [
+                        'op_value' => $item,
+                        'op_parameter' => $request->op_parameter[$index],
+                        'op_sort' => $request->op_sort[$index],
+                        'op_status' => 'enable',
+                        'op_type' => $weboption,
+                    ];
+                }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
-    {
-        $ids = $request->get('ids');
-        if (empty($ids)){
-            return response()->json(['code'=>1,'msg'=>'请选择删除项']);
+                $del_res = WebOption::where('op_type', $weboption)->delete();
+                $add_res = WebOption::insert($data);
+                if($add_res){
+                    DB::commit();
+                    return redirect(route('admin.weboption'))->withErrors(['status'=>'更新成功']);
+                }
+                DB::rollBack();
+                return redirect(route('admin.weboption'))->with(['status'=>'更新失败']);
+                break;
         }
-        foreach (News::whereIn('id',$ids)->get() as $model){
-            //清除中间表数据
-            $model->tags()->sync([]);
-            //删除文章
-            $model->delete();
-        }
-        return response()->json(['code'=>0,'msg'=>'删除成功']);
     }
 
 }

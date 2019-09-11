@@ -222,7 +222,7 @@ class NewsController extends Controller
                 $tag_new_bool = TagNew::insert($tag_new);
                 if(!$tag_new_bool){
                     DB::rollBack();
-                    return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
+                    return redirect(route('admin.news'))->withErrors(['status'=>'更新失败']);
                 }
             }
             $category_new_bool = CategoryNew::insert([
@@ -232,11 +232,10 @@ class NewsController extends Controller
             ]);
             if(!$category_new_bool){
                 DB::rollBack();
-                return redirect(route('admin.news'))->withErrors(['status'=>'添加失败']);
+                return redirect(route('admin.news'))->withErrors(['status'=>'更新失败']);
             }
 
             DB::commit();
-            die;
             return redirect(route('admin.news'))->with(['status'=>'更新成功']);
         }
         return redirect(route('admin.news'))->withErrors(['status'=>'系统错误']);

@@ -1,9 +1,12 @@
 <script>
+    $('.layui-card-header').find('h2').html('首页菜单配置')
+
     var element;
+    var layer
     var all_categorys = JSON.parse($('#all_categorys').val())
-    layui.use(['element','form'],function () {
+    layui.use(['element','form', 'layer'],function () {
+        layer = layui.layer;
         var form = layui.form
-        var element = layui.element;
         form.on('radio(type)', function(data){
             var type = data.value
             console.log(type)
@@ -16,8 +19,11 @@
                 $('div[name=category_div]').addClass('layui-hide')
             }
         });
-
     })
+
+    setTimeout(function () {
+        console.log(layer)
+    },1000)
 
     function setData() {
         var type = $('input[name="type"]:checked').val()
@@ -51,6 +57,7 @@
         data_div.attr('name', 'layui-colla-item-data')
         data_div.find('input[name=op_type]').val(op_type)
         data_div.find('input[name=op_ids]').val(op_ids)
+        data_div.find('label').html(label)
 
         $('.layui-colla-content').removeClass('layui-show')
 
@@ -70,12 +77,12 @@
             $('#data_div').addClass('layui-hide');
         }
     }
-    
+
     function delData(_self) {
         $(_self).parents('div.layui-colla-item').remove()
         addData()
     }
-    
+
     function saveData() {
         var data = {}
         $('div[name=layui-colla-item-data]').each(function (m,n) {
@@ -97,13 +104,19 @@
             data:{op_type:'{{ $op_type }}', data:data},
             async:false,
             success:function (data) {
+                console.log(layer)
                 if(data.code == 0){
-                    layer.msg(data,msg, {
+                    layer.msg(data.msg, {
                         icon: 1,
-                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        time: 1500 //2秒关闭（如果不配置，默认是3秒）
                     }, function(){
                         location.href = '{{route('admin.weboption')}}';
                     });
+                }else{
+                    layer.msg(data.msg, {
+                        icon: 2,
+                        time: 1500 //2秒关闭（如果不配置，默认是3秒）
+                    })
                 }
             }
         })
