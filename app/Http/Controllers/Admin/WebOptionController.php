@@ -73,7 +73,9 @@ class WebOptionController extends Controller
                 $data['all_option'] = $all_option;
                 break;
             case 'banner':
-
+                $all_option = WebOption::where('op_type', $weboption)->orderBy('op_sort','desc')->get();
+                $data['op_type'] = $weboption;
+                $data['all_option'] = $all_option;
                 break;
             case 'index':
 
