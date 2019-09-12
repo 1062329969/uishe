@@ -105,6 +105,7 @@ class WebOptionController extends Controller
                 DB::rollBack();
                 return response()->error(500, '修改失败');
                 break;
+
             case 'links':
                 DB::beginTransaction();
                 $data = [];
@@ -125,10 +126,39 @@ class WebOptionController extends Controller
                 $add_res = WebOption::insert($data);
                 if($add_res){
                     DB::commit();
-                    return redirect(route('admin.weboption'))->withErrors(['status'=>'更新成功']);
+                    return redirect(route('admin.weboption'))->with(['status'=>'更新成功']);
                 }
                 DB::rollBack();
-                return redirect(route('admin.weboption'))->with(['status'=>'更新失败']);
+                return redirect(route('admin.weboption'))->withErrors(['status'=>'更新失败']);
+                break;
+
+            case 'banner':
+                DB::beginTransaction();
+                $data = [];
+                foreach ($request->op_value as $index => $item){
+                    if (!$item){
+                        continue;
+                    }
+                    $data[] = [
+                        'op_value' => $item,
+                        'op_parameter' => $request->op_parameter[$index],
+                        'op_sort' => $request->op_sort[$index],
+                        'op_status' => 'enable',
+                        'op_type' => $weboption,
+                    ];
+                }
+
+                $del_res = WebOption::where('op_type', $weboption)->delete();
+                $add_res = WebOption::insert($data);
+                if($add_res){
+                    DB::commit();
+                    return redirect(route('admin.weboption'))->with(['status'=>'更新成功']);
+                }
+                DB::rollBack();
+                return redirect(route('admin.weboption'))->withErrors(['status'=>'更新失败']);
+                break;
+
+
                 break;
         }
     }
