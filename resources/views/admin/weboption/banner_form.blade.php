@@ -1,5 +1,8 @@
 {{csrf_field()}}
-<div class="layui-row layui-col-space10 links_div" >
+    <div class="layui-form-item layui-input-block">
+        <button type="button" class="layui-btn close" onclick="addData()">添加</button>
+    </div>
+<div class="layui-row layui-col-space10 " id="banner_div" >
 
     @foreach($all_option as $key => $item)
         <div style="position: relative">
@@ -7,15 +10,15 @@
                 <label for="" class="layui-form-label">轮播图</label>
                 <div class="layui-input-block">
                     <div class="layui-upload">
-                        <button type="button" class="layui-btn uploadPic {{ $key }}"><i class="layui-icon  {{ $key }}">&#xe67c;</i>图片上传</button>
-                        <div class="layui-upload-list" >
-                            <ul class="layui-upload-box layui-clear">
-                                @if(isset($item['op_parameter']))
-                                    <li><img src="{{ $item['op_parameter'] }}" /><p>上传成功</p><span onclick="del_img(this)">X</span></li>
-                                @endif
-                            </ul>
-                            <input type="hidden" name="op_parameter[]" value="{{ $item['op_parameter']??'' }}">
-                        </div>
+                        <button type="button" class="layui-btn uploadPic "><i class="layui-icon ">&#xe67c;</i>图片上传</button>
+                    </div>
+                    <div class="layui-upload-list" >
+                        <ul class="layui-upload-box layui-clear">
+                            @if(isset($item['op_parameter']))
+                                <li><img src="{{ $item['op_parameter'] }}" /><p>上传成功</p><span onclick="del_img(this)">X</span></li>
+                            @endif
+                        </ul>
+                        <input type="hidden" name="op_parameter[]" value="{{ $item['op_parameter']??'' }}">
                     </div>
                 </div>
             </div>
