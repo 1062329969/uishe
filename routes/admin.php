@@ -118,6 +118,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     //文章管理
     Route::group(['middleware' => 'permission:zixun.news'], function () {
         Route::get('news/data', 'NewsController@data')->name('admin.news.data');
+        Route::get('news/getbycategory/{id}', 'NewsController@getbycategory')->name('admin.news.getbycategory');
         Route::get('news', 'NewsController@index')->name('admin.news');
         //添加
         Route::get('news/create', 'NewsController@create')->name('admin.news.create')->middleware('permission:zixun.news.create');

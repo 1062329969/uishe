@@ -93,7 +93,6 @@
     })
 
     setTimeout(function () {
-        console.log(upload)
     },1000)
 
 

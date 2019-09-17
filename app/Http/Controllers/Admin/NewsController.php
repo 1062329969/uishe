@@ -136,14 +136,22 @@ class NewsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function show($id)
+    public function getbycategory($id)
     {
-        //
+        $news_list = News::where([
+                ['status', '=', News::Status_Normal],
+                ['category_id', '=', $id],
+            ])
+            ->select(['id', 'title', 'cover_img'])
+            ->get()
+            ->toArray();
+        if($news_list){
+            $news_list = array_column($news_list, NULL, 'id');
+        }
+        return response()->success($news_list);
     }
 
     /**

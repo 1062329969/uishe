@@ -78,7 +78,12 @@ class WebOptionController extends Controller
                 $data['all_option'] = $all_option;
                 break;
             case 'index':
-
+                $all_option = WebOption::where('op_type', $weboption)->value('op_value');
+                $data['op_type'] = $weboption;
+                $data['all_option'] = json_decode($all_option, true);
+                //分类
+                $data['categorys'] = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
+                $data['all_categorys'] = Category::select(['id', 'name'])->get();
                 break;
         }
         return view('admin.weboption.edit',$data);

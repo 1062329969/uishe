@@ -165,7 +165,7 @@ class QianyiController extends Controller
                 ];
             }
             if ($item['taxonomy'] == 'category') {
-                $category_new[] = [
+                $category_new = [
                     'cat_new_id' => $post_id,
                     'cat_id' => $item['term_id'],
                     'category' => $terms[ $item['term_id'] ]['name']
@@ -178,7 +178,12 @@ class QianyiController extends Controller
         if (!isset($post_meta['_post_downtype'])){
             $post_meta['_post_downtype'] = 0;
         }
-
+        if(isset($post_meta['cx-post-imgurl'])){
+            $cover_img = json_decode($post_meta['cx-post-imgurl'], true);
+            $cover_img = $cover_img[0];
+        }else{
+            $cover_img = '';
+        }
         $new = [
             'id' => $post_main['ID'],
             'created_at' => $post_main['post_date'],
@@ -188,7 +193,7 @@ class QianyiController extends Controller
             'status' => News::Status_Normal,
             'comment_status' => News::Comment_Status_On,
             'comment_count' => $comment_count,
-            'cover_img' => $post_meta['cx-post-imgurl'] ?? '',
+            'cover_img' => $cover_img,
             'down_num' => $post_meta['post_down_numter'] ?? 0,
             'down_type' => News::getDownType($post_meta['_post_downtype']),
             'down_level' => $post_meta['_post_downmianfei'] ?? 0,
@@ -197,8 +202,8 @@ class QianyiController extends Controller
             'views' => $post_meta['views'] ?? 0,
             'like' => $post_meta['bigfa_ding'] ?? 0,
             'collects' => $post_meta['chenxing_post_collects'] ?? 0,
-            'category_id' => json_encode(array_column($category_new, 'cat_id'), JSON_UNESCAPED_UNICODE),
-            'category' => json_encode(array_column($category_new, 'category'), JSON_UNESCAPED_UNICODE),
+            'category_id' => $category_new['cat_id'],
+            'category' => $category_new['category'],
             'tag_id' => json_encode(array_column($tag_new, 'tag_id'), JSON_UNESCAPED_UNICODE),
             'tag' => json_encode(array_column($tag_new, 'tag'), JSON_UNESCAPED_UNICODE),
         ];
