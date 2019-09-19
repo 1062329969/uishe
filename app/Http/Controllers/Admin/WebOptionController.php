@@ -162,9 +162,36 @@ class WebOptionController extends Controller
                 DB::rollBack();
                 return redirect(route('admin.weboption'))->withErrors(['status'=>'更新失败']);
                 break;
+            case 'index':
+                $data = array_column($request->data, NULL, 'sort');
+                ksort($data);
+                foreach ($data as $sort => $item){
+                    $category_id = $item['category_id'] ?? 0;
+                    if (!$category_id) {
+                        return response()->error(500, '主分类不能为空');
+                    }
+                    if ( count($item['content'])<=0 ) {
+                        return response()->error(500, '内容不能为空');
+                    }
 
-
+                    $data[$sort]['category_alias'] = Category::where('id', $category_id)->value('name');
+                }
+                $index = [
+                    'op_value' => json_encode($data, JSON_UNESCAPED_UNICODE),
+                    'op_sort' => 1,
+                    'op_status' => 'enable',
+                    'op_type' => $weboption,
+                ];
+                $del_res = WebOption::where('op_type', $weboption)->delete();
+                $add_res = WebOption::insert($index);
+                if($add_res){
+                    DB::commit();
+                    return response()->success('修改成功');
+                }
+                DB::rollBack();
+                return response()->error(500, '修改失败');
                 break;
+
         }
     }
 
