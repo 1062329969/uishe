@@ -27,7 +27,7 @@ Route::get('/qianyi/move_users', 'QianyiController@move_users');
 Route::get('/', 'HomeController@index');
 Route::get('/{category}', function(Request $request, $category) {
     return (new NewsController())->category($request, $category);
-})->where('category', implode('|', $category));
+})->where('category', implode('|', $category)); // 正则表达式 | 或
 Route::get('/huiyuan', 'HomeController@huiyuan');
 Route::get('/{id}.html', 'NewsController@item')->where('id', '[0-9]+');
 Route::any('/login', 'HomeController@login')->name('login');

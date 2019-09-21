@@ -42,11 +42,13 @@
                 <span class="plate-title-dotted iblock">•</span>
             </h2>
         </div>
-        <div class="plate-keyword-box">
+        @if(isset($v['search']))
+        <div class="plate-keyword-box" >
             @foreach($v['child'] as $c_k => $c_v)
                 <a target="_blank" href="{{ url('/'.$v['category_alias'].'/'.$c_v['category_alias']) }}">{{ $c_v['category_alias'] }}</a>
             @endforeach
         </div>
+        @endif
         <div class="plate-subject-box oh">
             @foreach($v['content'] as $con_k => $con_v)
                 <a target="_blank" href="{{ url('/'.$con_v['id']) }}" alt="{{ $con_v['title'] }}" title="{{ $con_v['title'] }}">
@@ -62,6 +64,7 @@
                 </a>
             @endforeach
         </div>
+        @if(isset($v['search']))
         <ul class="seo-keyword oh">
             @foreach($v['search'] as $s_k => $s_v)
             <a target="_blank" href="{{ url('/?s='.$s_v) }}">
@@ -69,6 +72,7 @@
             </a>
             @endforeach
         </ul>
+        @endif
     </div>
     @endforeach
     <!--why start-->

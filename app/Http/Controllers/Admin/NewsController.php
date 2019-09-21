@@ -98,6 +98,7 @@ class NewsController extends Controller
             'down_price',
             'comment_status',
             'recommend',
+            'down_url'
         ]);
         $data['admin_id'] = Auth::id();
         $data['status'] = News::Status_Normal;
@@ -214,6 +215,7 @@ class NewsController extends Controller
             'down_price',
             'comment_status',
             'recommend',
+            'down_url'
         ]);
         $data['comment_status'] = $request->comment_status;
         $data['recommend'] = $request->recommend;

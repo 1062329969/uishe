@@ -14,9 +14,9 @@
             <div class="cpright fn14">UI社交流群：385330021 （注明来自UI社） 客服QQ: 1829020117 （注明来自UI社）</div>
         </div>
     </div>
+    <div style="display: none" id="cnzz"><script src="https://s19.cnzz.com/z_stat.php?id=4875190&web_id=4875190" language="JavaScript"></script></div>
 </div>
 </body>
-<script src="https://s19.cnzz.com/z_stat.php?id=4875190&web_id=4875190" language="JavaScript"></script>
 <script type="text/javascript" src="{{ asset('js/global.V3.32.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.bxslider.min.v1.3.js') }}"></script>
 <script>

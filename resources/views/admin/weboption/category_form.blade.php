@@ -67,7 +67,7 @@
                     <label class="layui-form-label" style="width: auto" name="tmp_label"></label>
                     <div class="layui-input-inline">
                         <input type="text" name="data" value="" class="layui-input" >
-                        <span style="color: red;font-size: 10px">注：此字段为地址栏显示，可自行修改,默认为URL编码数据</span>
+                        {{--<span style="color: red;font-size: 10px">注：此字段为地址栏显示，可自行修改,默认为URL编码数据</span>--}}
                     </div>
                 </div>
 
@@ -99,8 +99,12 @@
                         @endif
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" name="data" value="" class="layui-input" placeholder="{{ $item['op_parameter'] }}">
-                        <span style="color: red;font-size: 10px">注：此字段为地址栏显示，可自行修改,默认为URL编码数据</span>
+                        @if($item['op_json'] == 'url')
+                            <input type="text" name="data" value="" class="layui-input" placeholder="{{ $item['op_parameter'] }}">
+                        @else
+                            <input type="text" name="data" value="" class="layui-input" placeholder="{{ $item['op_parameter'] }}" disabled>
+                        @endif
+                        {{--<span style="color: red;font-size: 10px">注：此字段为地址栏显示，可自行修改,默认为URL编码数据</span>--}}
                     </div>
                 </div>
 

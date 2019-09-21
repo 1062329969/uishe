@@ -63,7 +63,7 @@ class WebOptionController extends Controller
                 $categorys = Category::with('allChilds')->where('parent_id',0)->orderBy('sort','desc')->get();
                 $all_categorys = Category::get();
                 $data['categorys'] = $categorys;
-                $data['all_categorys'] = array_column($all_categorys->toArray(), 'name', 'id');
+                $data['all_categorys'] = array_column($all_categorys->toArray(), NULL, 'id');
                 $data['op_type'] = $weboption;
                 $data['all_option'] = $all_option;
                 break;

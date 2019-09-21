@@ -1,5 +1,5 @@
 .picList{overflow:hidden;clear:both;}
-.picList .picBox{width:280px;box-shadow:0 0 1px rgba(0,0,0,0.2);margin-right:19px;margin-bottom:19px;}
+.picList .picBox{width:280px;box-shadow:0 0 1px rgba(0,0,0,0.2);margin-right:15px;margin-bottom:19px;}
 .picList .picBox.last-line{margin-bottom:0px;}
 .picList .picBox.last-item{margin-right:0px;}
 .picList .picBox  img{display:block;width:280px;}

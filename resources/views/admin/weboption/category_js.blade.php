@@ -29,8 +29,8 @@
         var type = $('input[name="type"]:checked').val()
         if(type == 'category'){
 
-            var title = all_categorys[$('select').val()]
-            var data = encodeURI(title)
+            var title = all_categorys[$('select').val()].name
+            var data = all_categorys[$('select').val()].alias
             var label = '别名'
             var op_type = 'category'
             var op_ids = $('select').val()
@@ -52,6 +52,7 @@
         data_div.find('input[name="data"]').html(title)
         data_div.find('input[name=op_value]').val(title)
         data_div.find('input[name="data"]').attr('placeholder', data)
+        data_div.find('input[name="data"]').attr('disabled', 'disabled')
         data_div.find('input[name="sort"]').val(op_sort)
         data_div.find('.layui-colla-content').addClass('layui-show')
         data_div.attr('name', 'layui-colla-item-data')
@@ -91,7 +92,11 @@
             data_tmp.op_value = $(n).find('input[name=op_value]').val()
             data_tmp.op_status = '{{ \App\Models\WebOption::OP_STATUS_ENABLE }}'
             data_tmp.op_sort = $(n).find('input[name="sort"]').val()
-            data_tmp.op_parameter = $(n).find('input[name="data"]').attr('placeholder')
+            if($(n).find('input[name="data"]').val()){
+                data_tmp.op_parameter = $(n).find('input[name="data"]').val()
+            }else{
+                data_tmp.op_parameter = $(n).find('input[name="data"]').attr('placeholder')
+            }
             data_tmp.op_json = $(n).find('input[name="op_type"]').val()
             data_tmp.op_type = '{{ $op_type }}'
 

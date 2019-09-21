@@ -146,6 +146,13 @@
 </div>
 
 <div class="layui-form-item">
+    <label for="" class="layui-form-label">下载链接</label>
+    <div class="layui-input-block">
+        <input type="text" name="title" value="{{$news->down_url??old('down_url')}}" lay-verify="required" placeholder="请输入下载链接" class="layui-input" >
+    </div>
+</div>
+
+<div class="layui-form-item">
     <div class="layui-input-block">
         <button type="button" class="layui-btn" lay-submit="" lay-filter="formDemo" onclick="$('form').submit()">确 认</button>
         <a  class="layui-btn" href="{{route('admin.news')}}" >返 回</a>

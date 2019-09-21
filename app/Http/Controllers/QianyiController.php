@@ -126,7 +126,7 @@ class QianyiController extends Controller
 
         $post_main = Posts::where([
             ['post_status', '=', 'publish'],
-        ])->get()->toArray();
+        ])->limit(1000)->orderBy('ID', 'desc')->get()->toArray();
         foreach ($post_main as $value){
             $this->get_posts($value['ID']);
         }
@@ -180,9 +180,12 @@ class QianyiController extends Controller
         }
         if(isset($post_meta['cx-post-imgurl'])){
             $cover_img = json_decode($post_meta['cx-post-imgurl'], true);
-            $cover_img = $cover_img[0];
+            $cover_img = reset($cover_img);
         }else{
             $cover_img = '';
+        }
+        if( !isset($category_new['cat_id']) || empty($category_new['cat_id']) ){
+            return false;
         }
         $new = [
             'id' => $post_main['ID'],
@@ -202,8 +205,8 @@ class QianyiController extends Controller
             'views' => $post_meta['views'] ?? 0,
             'like' => $post_meta['bigfa_ding'] ?? 0,
             'collects' => $post_meta['chenxing_post_collects'] ?? 0,
-            'category_id' => $category_new['cat_id'],
-            'category' => $category_new['category'],
+            'category_id' => $category_new['cat_id'] ?? 0,
+            'category' => $category_new['category'] ?? '',
             'tag_id' => json_encode(array_column($tag_new, 'tag_id'), JSON_UNESCAPED_UNICODE),
             'tag' => json_encode(array_column($tag_new, 'tag'), JSON_UNESCAPED_UNICODE),
         ];

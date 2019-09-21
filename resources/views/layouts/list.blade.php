@@ -1,6 +1,6 @@
 <link href="{{ asset('css/search/search.v4.7.bak.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/video_category.css') }}" rel="stylesheet" type="text/css">
-
+<link href="{{ asset('css/video/video-list.v3.0.css') }}" rel="stylesheet" type="text/css">
 @include('home.common.top')
 
 <div class="main"> <!--search-banner start-->
@@ -14,47 +14,85 @@
         <div class="clear"></div>
     </div>
 
-    <div class="category-box-outer oh pr"> <div class="category-box oh"> <div class="category oh"> <div class="child-category-box category-height oh fl" classid="1"> <a href="https://www.51miz.com/shipin/0-0-0-default-1.html" class="child-category-title fn14 on" rel="nofollow">全部分类</a><a href="https://www.51miz.com/shipin/ae/" class="child-category fn14">AE模板</a><a href="https://www.51miz.com/shipin/huiying/" class="child-category fn14">会声会影</a><a href="https://www.51miz.com/shipin/beijing/" class="child-category fn14">视频背景</a><a href="https://www.51miz.com/shipin/duanpian/" class="child-category fn14">实拍短片</a></div> </div> <div class="category oh" classid="2"> <div class="child-category-box category-height oh fl"> <a href="https://www.51miz.com/shipin/0-0-0-default-1.html" class="child-category-title fn14 on" rel="nofollow">全部用途</a><a href="https://www.51miz.com/shipin/0-1-0-default-1.html" class="child-category fn14">开场片头</a><a href="https://www.51miz.com/shipin/0-12-0-default-1.html" class="child-category fn14">节日</a><a href="https://www.51miz.com/shipin/0-11-0-default-1.html" class="child-category fn14">年会</a><a href="https://www.51miz.com/shipin/0-10-0-default-1.html" class="child-category fn14">颁奖典礼</a><a href="https://www.51miz.com/shipin/0-9-0-default-1.html" class="child-category fn14">党建</a><a href="https://www.51miz.com/shipin/0-8-0-default-1.html" class="child-category fn14">生日</a><a href="https://www.51miz.com/shipin/0-7-0-default-1.html" class="child-category fn14">图文展示</a><a href="https://www.51miz.com/shipin/0-6-0-default-1.html" class="child-category fn14">企业宣传</a><a href="https://www.51miz.com/shipin/0-5-0-default-1.html" class="child-category fn14">LOGO演绎</a><a href="https://www.51miz.com/shipin/0-4-0-default-1.html" class="child-category fn14">相册动画</a><a href="https://www.51miz.com/shipin/0-3-0-default-1.html" class="child-category fn14">婚礼婚庆</a><a href="https://www.51miz.com/shipin/0-2-0-default-1.html" class="child-category fn14">倒计时</a><a href="https://www.51miz.com/shipin/0-13-0-default-1.html" class="child-category fn14">栏目包装</a></div> </div> <div class="category oh noborder" classid="3"> <div class="child-category-box category-height oh fl"> <a href="https://www.51miz.com/shipin/0-0-0-default-1.html" class="child-category-title fn14 on" rel="nofollow">全部效果</a><a href="https://www.51miz.com/shipin/0-0-1-default-1.html" class="child-category fn14">粒子特效</a><a href="https://www.51miz.com/shipin/0-0-13-default-1.html" class="child-category fn14">烟雾</a><a href="https://www.51miz.com/shipin/0-0-12-default-1.html" class="child-category fn14">花瓣飘落</a><a href="https://www.51miz.com/shipin/0-0-11-default-1.html" class="child-category fn14">波纹</a><a href="https://www.51miz.com/shipin/0-0-10-default-1.html" class="child-category fn14">爆炸</a><a href="https://www.51miz.com/shipin/0-0-9-default-1.html" class="child-category fn14">火焰</a><a href="https://www.51miz.com/shipin/0-0-8-default-1.html" class="child-category fn14">线条</a><a href="https://www.51miz.com/shipin/0-0-7-default-1.html" class="child-category fn14">转场</a><a href="https://www.51miz.com/shipin/0-0-6-default-1.html" class="child-category fn14">水墨</a><a href="https://www.51miz.com/shipin/0-0-5-default-1.html" class="child-category fn14">漩涡特效</a><a href="https://www.51miz.com/shipin/0-0-4-default-1.html" class="child-category fn14">科技感</a><a href="https://www.51miz.com/shipin/0-0-3-default-1.html" class="child-category fn14">震撼</a><a href="https://www.51miz.com/shipin/0-0-2-default-1.html" class="child-category fn14">图片汇聚</a><a href="https://www.51miz.com/shipin/0-0-14-default-1.html" class="child-category fn14">中国风</a></div> </div> </div> </div>
+    <div class="category-box-outer oh pr">
+        <div class="category-box oh">
+            @if(!$category_list->isEmpty())
+            <div class="category oh">
+                <a href="https://www.51miz.com/shipin/0-0-0-default-1.html" class="child-category-title fn14 fl on" rel="nofollow">全部分类</a>
+                <div class="oh fl" classid="1" style="width: 90%;">
+                    @foreach($category_list as $category_item)
+                    <a href="javascript:;" style="display: inline-block; margin-bottom: 5px" class="child-category fn14">{{ $category_item }}</a>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
+            @if($tag_list)
+            <div class="category oh" classid="2">
+                <a href="javascript:;" class="child-category-title fn14 fl on" rel="nofollow">全部标签</a>
+                <div class="oh fl" style="width: 90%;">
+                    @foreach($tag_list as $tag_item)
+                        <a href="javascript:;" style="display: inline-block;margin-bottom: 5px;" class="child-category fn14">{{ $tag_item }}</a>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
+            <div class="category oh noborder" classid="3">
+                <div class="child-category-box category-height oh fl">
+                    <a href="javascript:;" class="child-category-title fn14 on" rel="nofollow">排序</a>
+                    <a href="https://www.51miz.com/shipin/0-0-1-default-1.html" class="child-category fn14">发布时间</a>
+                    <a href="https://www.51miz.com/shipin/0-0-13-default-1.html" class="child-category fn14">评论最多</a>
+                    <a href="https://www.51miz.com/shipin/0-0-12-default-1.html" class="child-category fn14">浏览数量</a>
+                    <a href="https://www.51miz.com/shipin/0-0-11-default-1.html" class="child-category fn14">点赞最多</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main-content oh pr"> <!-- 面包屑开始 --><!-- 面包屑结束 --><!--已经选择的属性 satrt-->
         <div class="selected-block-box" style="margin-top:0px;"></div> <!--已经选择的属性 end--> <!--相关搜索和搜索结果汇总合并-->
          <!-- sucai标签添加 --><!-- sucai标签结束 --> <!-- 映射词 开始--><!-- 映射词 结束 -->
         <div class="relative_model oh"></div>
         <!--Piclist start-->
         <!--搜索内容-->
-        <link href="//ss.51miz.com/css/video/video-list.v3.0.css" rel="stylesheet" type="text/css">
+        @if(!$data->isEmpty())
         <div class="picList" style="z-index:20">
+            @foreach($data as $item)
             <div class="video-Box picBox fl pr">
                 <a href="{{ url('/123214.html') }}" rel="nofollow" style="height:158px" target="_blank" class="pr picBox-a" data-id="108875" data-plate-id="5">
-                    <img class="lazyload" src="//img.51miz.com/preview/video/00/00/10/88/V-108875-26D37AA1.jpg!/quality/90/unsharp/true/compress/true/format/webp/fw/280" alt="建国七十70周年国庆节党政党建大气图文展示企业宣传片头AE模板" title="建国七十70周年国庆节党政党建大气图文展示企业宣传片头AE模板" >{{-- style="z-index: 20; position: absolute; top: 50%; margin-top: -78.75px; display: block;" --}}
+                    <img class="lazyload" src="{{ $item['cover_img'] }}" alt="建国七十70周年国庆节党政党建大气图文展示企业宣传片头AE模板" title="建国七十70周年国庆节党政党建大气图文展示企业宣传片头AE模板" >{{-- style="z-index: 20; position: absolute; top: 50%; margin-top: -78.75px; display: block;" --}}
                 </a>
                 <div class="pic-item-title center fn14 color-444">
                     <div class="color-444 fn14 seo-h3">
-                        <a class="title-content" href="{{ url('/123214.html') }}" target="_blank" style="display: block;background: none;color:#444;">
-                            建国七十70周年国庆节党政党建大气图文展示企业宣传片头AE模板
+                        <a class="title-content" href="{{ url('/' . $item['id'] . '.html') }}" target="_blank" style="display: block;background: none;color:#444;">
+                            {{ $item['title'] }}
                         </a>
                     </div>
                 </div>
                 <div class="pic-item-action center pa none" style="display: none;">
                     <div class="pic-item-action-button">
-                        <a class="pic-item-action-button-fav fav fl css3-background-size block fav-5-108875" onclick="fav(108875,5);" href="javascript:;" rel="nofollow" style="background-image: url('{{ asset('images/icon-star@2x.png') }}');"></a>
+                        <a class="pic-item-action-button-fav fav fl css3-background-size block fav-5-108875" onclick="fav(108875,5);" href="javascript:;" rel="nofollow" style="background-image: url('{{ asset('images/icon-star.png') }}');"></a>
                         <a class="pic-item-action-button-download fr color-fff block" target="_blank" href="https://www.51miz.com/?m=download&amp;id=108875&amp;plate_id=5" rel="nofollow" data-id="108875" data-plate-id="5">立即下载</a>
                     </div>
                 </div>
-                <input type="hidden" class="tools tools-v-108875" data-id="v-108875"></div>
-
-        </div><!--无结果时的相关推荐-->
-        <div class="bottom_no_pleased">
-            <div class="fn14" style="margin-top: 20px;text-align: center;">
-                搜索结果不满意？换个搜索词试试
-                <span class="main_bottom_advice">
-                    <a class="bottom_advice" href="https://www.51miz.com/so-shipin/1852684.html">不忘初心牢记使命党课</a>
-                </span>或者
-                <a class="bottom_suggest" onclick="popup('suggest@isclose:1;')">提交您的需求</a>
+                <input type="hidden" class="tools tools-v-108875" data-id="v-108875">
             </div>
-        </div> <!--分页-->
+            @endforeach
+        </div><!--无结果时的相关推荐-->
         <div id="pageNum">
-            <div></div>
+            <div>
+                {{ $data->links() }}
+            </div>
         </div>
+        @else
+        <div>
+            <div style="margin: auto;margin: 50px;text-align: center">
+                <div class="advice" style="margin-top: 20px;width: 100%;font-size: 20px;text-align: center;color: #888;height: 20px;line-height: 20px;">
+                    暂无相关内容，请切换分类或更短的搜索词，
+                </div>
+            </div>
+        </div>
+        @endif
         <div class="hotSearch pr oh" style="width: 100%;line-height: 28px;margin: 10px auto 20px;z-index: 9;   ">
             <div class="hotSearch_model oh">
                 <div class="hotSearch-search fn14 fl">热门推荐：</div>
@@ -70,6 +108,8 @@
 @include('home.common.bottom')
 
 <style>
+    .suggest-bottom {display: inline-block;height: 50px;width: 160px;margin: 40px auto 60px;line-height: 50px;border-radius: 50px;background-color: #7371ef;color: #fff;}
+    .suggest-bottom:hover {transition: all 0.2s;box-shadow: 0 4px 20px rgba(115, 113, 239, 0.5);}
     .main-content, .search-sorting-box-cus, .search-sorting-box-cus-hide {
         width: 1182px;
         z-index: 0;
