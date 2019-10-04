@@ -92,6 +92,13 @@
 </div>
 
 <div class="layui-form-item">
+    <label for="" class="layui-form-label">介绍</label>
+    <div class="layui-input-inline">
+        <textarea name="introduction" placeholder="请输入介绍，如果默认为空，则会显示下载设置价格等">{{ $news->introduction ?? old('introduction') }}</textarea>
+    </div>
+</div>
+
+<div class="layui-form-item">
     <label for="" class="layui-form-label">下载类型</label>
     <div class="layui-input-block">
         <input type="radio" name="down_type" value="close" title="关闭">
@@ -125,7 +132,7 @@
         <input type="checkbox" name="comment_status"
                 lay-skin="switch"
                 lay-text="{{ \App\Models\News::Comment_Status_On }}|{{ \App\Models\News::Comment_Status_Off }}"
-                @if( isset($news->recommend) and $news->recommend == \App\Models\News::Comment_Status_On )
+                @if( isset($news->comment_status) and $news->comment_status == \App\Models\News::Comment_Status_On )
                     checked
                 @endif
         >
@@ -148,7 +155,7 @@
 <div class="layui-form-item">
     <label for="" class="layui-form-label">下载链接</label>
     <div class="layui-input-block">
-        <input type="text" name="title" value="{{$news->down_url??old('down_url')}}" lay-verify="required" placeholder="请输入下载链接" class="layui-input" >
+        <input type="text" name="down_url" value="{{$news->down_url??old('down_url')}}" lay-verify="required" placeholder="请输入下载链接" class="layui-input" >
     </div>
 </div>
 

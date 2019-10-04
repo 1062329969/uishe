@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="keywords" content="{{ $site['keywords'] }}" />
     <meta name="description" content="{{ $site['description'] }}" />
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <link href="{{ asset('css/global.V3.6.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/index/index.v4.15.css') }}" rel="stylesheet" type="text/css">
 </head>
@@ -41,8 +42,8 @@
             </li>
         </ul>
         <!--search-box start-->
-        <form class="tsearch-box fl pr none">
-            <input type="text" class="tsearch-input fl color-888 fn13" />
+        <form class="tsearch-box fl pr none" action="{{ url('/getNewsList') }}">
+            <input type="text" class="tsearch-input fl color-888 fn13" name="search"/>
             <input class="tsearch-submit pa css3-background-size" style="background-image: url('{{ asset('images/search.png') }}'); border: 0;" value="" type="submit" />
         </form>
         <!--search-box end-->

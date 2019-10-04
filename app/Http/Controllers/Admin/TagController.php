@@ -56,7 +56,7 @@ class TagController extends Controller
 
         $request->offsetSet('alias', urlencode($request->alias));
         if(!$request->recommend){
-            $request->offsetSet('recommend', 'off');
+            $request->offsetSet('recommend', Tag::Tag_Recommend_Off);
         }
 
         if (Tag::create($request->all())){
@@ -105,7 +105,7 @@ class TagController extends Controller
 
         $request->offsetSet('alias', urlencode($request->alias));
         if(!$request->recommend){
-            $request->offsetSet('recommend', 'off');
+            $request->offsetSet('recommend', Tag::Tag_Recommend_Off);
         }
 
         $tag = Tag::findOrFail($id);

@@ -45,6 +45,7 @@ class News extends Model
         'tag_id',
         'tag',
         'category',
+        'introduction',
     ];
 
     /*//文章所属分类
@@ -79,10 +80,10 @@ class News extends Model
 
     public static function getRecommendNews(){
         $recommend = News::where([
-                ['status', '=', 'on'],
-                ['recommend', '=', 'on'],
+                ['status', '=', News::Status_Normal],
+                ['recommend', '=', News::Recommend_ON],
             ])
-            ->select(['title', 'id'])
+            ->select(['title', 'cover_img', 'id'])
             ->get()
             ->toArray();
         return $recommend;

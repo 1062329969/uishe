@@ -401,15 +401,16 @@ $(".header-plate-box li").mouseleave(function(){$(this).find(".top-nav-more").hi
 			var plate_id = fav.attr("data-plate-id");
 			var id       = fav.attr("data-id");
 
-			$.post('/?m=Fav&a=check&ajax=1', {"plate_id": plate_id, "id": id}, function (rs) {
+			$.get('/user/dofav/check',{"id":id}, function (rs) {
+			    console.log(rs)
 				if (rs.status == 1) {
 					var text    = "已收藏";
 					var title   = "取消收藏";
-					$(".fav-" + plate_id + "-" + id).addClass("on").attr("title", title);
+					$(".fav-" + id).addClass("on").attr("title", title);
 				} else {
 					var text    = "收藏";
 					var title   = "加入收藏";
-					$(".fav-" + plate_id + "-" + id).removeClass("on").attr("title", title);
+					$(".fav-" + id).removeClass("on").attr("title", title);
 				}
 				if (fav.hasClass("fav-word")) {
 					fav.find(".fav-title").text(text);
@@ -421,15 +422,15 @@ $(".header-plate-box li").mouseleave(function(){$(this).find(".top-nav-more").hi
 	
 	
     /*添加或取消收藏标志*/
-    function fav(id,plate_id)
+    function fav(id)
     {
-          if($(".fav-"+plate_id+"-"+id).hasClass("fav-word")){
-              var fav = $(".fav-"+plate_id+"-"+id);
+          if($(".fav-"+id).hasClass("fav-word")){
+              var fav = $(".fav-"+id);
           }else{
               var fav = '';
           }
 
-        if($(".fav-"+plate_id+"-"+id).hasClass("on"))
+        if($(".fav-"+id).hasClass("on"))
         {
             var text	=	"收藏";
             var title 	=	"加入收藏";
@@ -440,25 +441,21 @@ $(".header-plate-box li").mouseleave(function(){$(this).find(".top-nav-more").hi
             var action  =	"add";
         }
 
-        $.post('/?m=Fav&a='+action+'&ajax=1',{"plate_id":plate_id,"id":id},function(rs){
+        $.get('/user/dofav/'+action,{"id":id},function(rs){
+            if(rs.msg == 'Unauthenticated'){
+                window.location.href='/login?r='+window.location.href
+            }
             if(rs.status == 1)
             {
-                if(fav)
-                {
+                if(fav){
                     fav.find(".fav-title").text(text);
                 }
-
                 if(action == "add")
                 {
-                    $(".fav-"+plate_id+"-"+id).addClass("on").attr("title",title);
-
+                    $(".fav-"+id).addClass("on").attr("title",title);
                 }else if(action == "del"){
-
-                    $(".fav-"+plate_id+"-"+id).removeClass("on").attr("title",title);
+                    $(".fav-"+id).removeClass("on").attr("title",title);
                 }
-            
-			}else if(rs.status == -1){
-				popup("login@isclose:1");
 			}
         },'json');
     }

@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    //
+    const Tag_Recommend_On = 'on';
+    const Tag_Recommend_Off = 'off';
+
     protected $table = 'tag';
     protected $primaryKey = 'id';
     public $timestamps = false;
@@ -15,7 +17,7 @@ class Tag extends Model
 
     public static function getRecommendTags(){
         $recommend = Tag::where([
-                ['recommend', '=', 'on'],
+                ['recommend', '=', Tag::Tag_Recommend_On],
             ])
             ->select(['name', 'id'])
             ->get()

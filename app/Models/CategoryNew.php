@@ -9,4 +9,5 @@ class CategoryNew extends Model
     //
     protected $table = 'category_new';
     protected $primaryKey = 'id';
+    public $timestamps = false;
 }

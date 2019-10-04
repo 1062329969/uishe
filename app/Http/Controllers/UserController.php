@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DownLog;
+use App\Models\News;
+use App\Models\UsersCollect;
 use App\Models\WpOrders;
 use App\Models\Posts;
 use App\Models\User;
@@ -40,7 +42,7 @@ class UserController extends Controller
         $user_avatar = Usermeta::getUserAvatar( $user->ID );
         //获取用户下载记录
         $downlog = DownLog::getDownLog(0, $user->ID, '', 4, 0);
-        return view('user.index', [
+        return view('home.user.index', [
             'posts_count' => $posts_count,
             'user_credit' => $user_credit,
             'user_collect' => $user_collect,
@@ -68,5 +70,35 @@ class UserController extends Controller
     public function loginout(){
         Auth::logout();
         redirect('/');
+    }
+
+    public function checkvip(){
+        dd(Auth::user('users'));
+    }
+
+    public function dofav(Request $request, $do){
+        $id = $request->id;
+        if($do == 'add'){
+            $new = News::find($id);
+            UsersCollect::insert([
+                'user_id' => Auth::user('users')->user_id,
+                'collect_id' => $id,
+                'title' =>$new['title'],
+                'img' =>$new['cover_img'],
+            ]);
+        }elseif($do == 'del'){
+            UsersCollect::where([
+                ['user_id', '=', Auth::user('users')->user_id],
+                ['collect_id', '=', $id],
+            ])->delete();
+        }elseif($do == 'check'){
+            $uc = UsersCollect::where([
+                ['user_id', '=', Auth::user('users')->user_id],
+                ['collect_id', '=', $id],
+            ])->first();
+            if($uc){
+                return response()->json(1, '收藏成功');
+            }
+        }
     }
 }

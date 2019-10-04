@@ -64,6 +64,10 @@ class Authenticate
                 return $this->auth->shouldUse($guard);
             }
         }
+        if(request()->ajax()){
+            echo json_encode(['code' => 500, 'msg' => 'Unauthenticated']);
+            die;
+        }
 
         throw new AuthenticationException('Unauthenticated.', $guards);
     }

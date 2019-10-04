@@ -98,7 +98,8 @@ class NewsController extends Controller
             'down_price',
             'comment_status',
             'recommend',
-            'down_url'
+            'down_url',
+            'introduction'
         ]);
         $data['admin_id'] = Auth::id();
         $data['status'] = News::Status_Normal;
@@ -184,7 +185,6 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, $id)
     {
-//        dd($request->toArray());
         DB::beginTransaction();
         $tag_id = $request->tags;
         $tag_new = [];
@@ -215,10 +215,11 @@ class NewsController extends Controller
             'down_price',
             'comment_status',
             'recommend',
-            'down_url'
+            'down_url',
+            'introduction'
         ]);
-        $data['comment_status'] = $request->comment_status;
-        $data['recommend'] = $request->recommend;
+        $data['comment_status'] = $request->comment_status ?? News::Comment_Status_Off;
+        $data['recommend'] = $request->recommend ?? News::Recommend_Off;
         $data['tag_id'] = json_encode($tag_id);
         $data['tag'] = json_encode($request->tags_name, JSON_UNESCAPED_UNICODE);
         $data['category'] = Category::where('id', $request->category_id)->value('name');
@@ -235,15 +236,10 @@ class NewsController extends Controller
                     return redirect(route('admin.news'))->withErrors(['status'=>'更新失败']);
                 }
             }
-            $category_new_bool = CategoryNew::insert([
-                'cat_new_id' => $news->id,
+            $category_new_bool = CategoryNew::where(['cat_new_id' => $news->id])->update([
                 'cat_id' => $request->category_id,
                 'category' => $data['category'],
             ]);
-            if(!$category_new_bool){
-                DB::rollBack();
-                return redirect(route('admin.news'))->withErrors(['status'=>'更新失败']);
-            }
 
             DB::commit();
             return redirect(route('admin.news'))->with(['status'=>'更新成功']);

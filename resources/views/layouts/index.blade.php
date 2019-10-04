@@ -51,7 +51,7 @@
         @endif
         <div class="plate-subject-box oh">
             @foreach($v['content'] as $con_k => $con_v)
-                <a target="_blank" href="{{ url('/'.$con_v['id']) }}" alt="{{ $con_v['title'] }}" title="{{ $con_v['title'] }}">
+                <a target="_blank" href="{{ url('/'.$con_v['id'].'.html') }}" alt="{{ $con_v['title'] }}" title="{{ $con_v['title'] }}">
                     <div class="plate-subject pr ">
                         <img src="{{ $con_v['thumb'] }}" width="280px" />
                         <div class="jianbian-mask"></div>

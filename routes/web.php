@@ -30,16 +30,21 @@ Route::get('/{category}', function(Request $request, $category) {
 })->where('category', implode('|', $category)); // 正则表达式 | 或
 Route::get('/huiyuan', 'HomeController@huiyuan');
 Route::get('/{id}.html', 'NewsController@item')->where('id', '[0-9]+');
+Route::get('/tag/{tag}', 'NewsController@tag');
+Route::get('/getNewsList', 'NewsController@getNewsList');
 Route::any('/login', 'HomeController@login')->name('login');
 Route::any('/reg', 'HomeController@reg')->name('reg');
 
 
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:users'])->group(function () {
+
+    Route::get('/user/dofav/{action}', 'UserController@dofav');
 
     //用户
     Route::get('/user/index', 'UserController@index')->name('user');
+    Route::get('/user/checkvip', 'UserController@checkvip')->name('checkvip');
     Route::get('/user/collect', 'UserController@collect')->name('collect');
     Route::get('/user/order', 'UserController@orders')->name('order');
     Route::get('/loginout', 'UserController@loginout')->name('loginout');
