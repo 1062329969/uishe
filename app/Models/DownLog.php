@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DownLog extends Model
 {
     //
-    protected $table = 'wp_chenxing_down_log';
+    protected $table = 'users_down_log';
     protected $primaryKey = 'id';
 
     public static function getDownLog($pid = 0, $uid = 0, $cont = '', $limit = 0, $offset = 0){
@@ -22,12 +22,8 @@ class DownLog extends Model
         if($cont == 'cont'){
             $check = $query->count();
         }else{
-            if( !$limit && !$offset){
-                $query->orderBy('id', 'DESC');
-            }else{
-                $query->orderBy('id', 'DESC')->offset($offset)->limit($limit);
-            }
-            $check = $query->get()->toArray();
+            $query->orderBy('id', 'DESC');
+            $check = $query->simplePaginate(2);
         }
         return $check;
     }

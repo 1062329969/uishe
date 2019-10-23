@@ -242,13 +242,13 @@ class QianyiController extends Controller
 
         DB::transaction();
         $user_data = [
-            'login' => $user['login'],
-            'pass' => $user['pass'],
+            'name' => $user['login'],
+            'password' => $user['pass'],
             'nicename' => $user['nicename'],
             'email' => $user['email'],
             'url' => $user['url'],
+            'created_at' => $user['registered'],
             'registered' => $user['registered'],
-            'status' => $user['status'],
             'display_name' => $user['display_name'],
             'nickname' => $user['nickname'],
             'last_login_time' => $user['last_login_time'],

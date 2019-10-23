@@ -7,6 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    const User_Status_Normal = 'normal';
+    const User_Status_Lock = 'lock';
+
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $rememberTokenName = '';

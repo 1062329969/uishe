@@ -3,7 +3,7 @@
 <div class="main oh">
     <style>
         .main{width:100%;padding-bottom:50px;}
-        .myvip{width:900px;margin:auto;}
+        .myvip{width:900px;height:270px;margin:auto;}
         .current-vip-title{height:18px;line-height: 18px;color:#3a3a3a;}
         .vip-type{width:220px;height:190px;float:left;margin-right:20px;margin-top:24px;box-shadow:0 0 4px rgba(0,0,0,0.2);border-radius:4px;border:1px solid #ececec\9;padding-bottom: 25px;}
         .vip-title{height:51px;line-height: 51px;text-align: center;color:#3f3f3f;}
@@ -176,11 +176,7 @@
 
 </div>
 
-
-<link rel="stylesheet" type="text/css" href="//ss.51miz.com/css/bottom.v3.2.css">
-<link rel="stylesheet" type="text/css" href="//ss.51miz.com/kanjia/css/layout-image-animation.css"> <!--bottom start-->
 <!--bottom end-->
-
 <script>
     $(".show-right").hover(function(){
         $(this).find(".download-right-box").show();

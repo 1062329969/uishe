@@ -48,16 +48,21 @@ class HomeController extends Controller
     public function login(Request $request) {
 
         if ($request->dologin) {
-
-            $user = WpUsers::where('user_login', $request->user_login)->first();
             $wp_hasher=new PasswordHash(8, TRUE);
-            $checkPassword=$wp_hasher->CheckPassword($request->user_pass, $user['user_pass']);
+            $user = User::where('name', $request->username)->first();
 
+            $checkPassword=$wp_hasher->CheckPassword($request->password, $user['password']);
+
+            $user->last_login_time = Carbon::now()->toDateTimeString();
+            $user->save();
             if ($checkPassword) {
+                if($user->status == 'lock'){
+                    return redirect('/login')->withErrors(['用户已被锁定请联系站长']);
+                }
                 Auth::login($user);
-                return redirect('/user/index');
+                return redirect(route('user'));
             }else{
-                echo '登录失败';
+                return redirect('/login')->withErrors(['用户名密码错误']);
             }
         } else {
             return view('home.login');
@@ -65,7 +70,6 @@ class HomeController extends Controller
     }
 
     public function reg(Request $request) {
-
         if ($request->doreg) {
 
             $validator = Validator::make($request->all(), [
@@ -86,11 +90,12 @@ class HomeController extends Controller
                  'email' => $request->email,
                  'password' => $password,
                  'created_at' => Carbon::now()->toDateTimeString(),
+                 'registered' => Carbon::now()->toDateTimeString(),
             ]);
             if($user_id){
                 $user = User::find($user_id);
                 Auth::guard('users')->login($user);
-                return redirect(url('/user/index'));
+                return redirect(route('user'));
             }
             return redirect('/login?type=reg')->withErrors(['注册失败']);
         } else {

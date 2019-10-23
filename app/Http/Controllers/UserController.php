@@ -33,20 +33,15 @@ class UserController extends Controller
     {
         $user = Auth::user();
         //获取帖子数
-        $posts_count  = Posts::countUserPosts( $user->ID );
-        //获取用户和积分消费
-        $user_credit = Usermeta::getUserCredit( $user->ID );
+        $posts_count  = Posts::countUserPosts( $user->id );
         //获取用户收藏
-        $user_collect = Usermeta::getUserCollect( $user->ID, 'count');
+        $user_collect = Usermeta::getUserCollect( $user->id, 'count');
         //获取用户收藏
-        $user_avatar = Usermeta::getUserAvatar( $user->ID );
+        $user_avatar = Usermeta::getUserAvatar( $user->id );
         //获取用户下载记录
-        $downlog = DownLog::getDownLog(0, $user->ID, '', 4, 0);
         return view('home.user.index', [
             'posts_count' => $posts_count,
-            'user_credit' => $user_credit,
             'user_collect' => $user_collect,
-            'downlog' => $downlog,
             'user_avatar' => $user_avatar,
         ]);
     }
@@ -54,15 +49,24 @@ class UserController extends Controller
     public function collect(){
         $user = Auth::user();
         $user_collect = Usermeta::getUserCollect( 52233, false, 2);
-        return view('user.collect', [
+//        $user_collect = Usermeta::getUserCollect( $user->id, false, 2);
+        return view('home.user.collect', [
             'user_collect' => $user_collect,
+        ]);
+    }
+    public function downlog(){
+        $user = Auth::user();
+        $downlog = DownLog::getDownLog(0, 52233, '');
+//        $downlog = DownLog::getDownLog(0, $user->id, '', 4, 0);
+        return view('home.user.downlog', [
+            'downlog' => $downlog,
         ]);
     }
 
     public function orders(){
         $user = Auth::user();
         $user_order = WpOrders::getUserOrder( 1 );
-        return view('user.order', [
+        return view('home.user.downlog', [
             'user_order' => $user_order,
         ]);
     }
@@ -81,19 +85,19 @@ class UserController extends Controller
         if($do == 'add'){
             $new = News::find($id);
             UsersCollect::insert([
-                'user_id' => Auth::user('users')->user_id,
+                'user_id' => Auth::user('users')->id,
                 'collect_id' => $id,
                 'title' =>$new['title'],
                 'img' =>$new['cover_img'],
             ]);
         }elseif($do == 'del'){
             UsersCollect::where([
-                ['user_id', '=', Auth::user('users')->user_id],
+                ['user_id', '=', Auth::user('users')->id],
                 ['collect_id', '=', $id],
             ])->delete();
         }elseif($do == 'check'){
             $uc = UsersCollect::where([
-                ['user_id', '=', Auth::user('users')->user_id],
+                ['user_id', '=', Auth::user('users')->id],
                 ['collect_id', '=', $id],
             ])->first();
             if($uc){

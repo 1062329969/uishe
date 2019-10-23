@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
 @include('home.user.common',['message'=>'我是错误信息'])
 
