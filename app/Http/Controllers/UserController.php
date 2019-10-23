@@ -33,16 +33,16 @@ class UserController extends Controller
     {
         $user = Auth::user();
         //获取帖子数
-        $posts_count  = Posts::countUserPosts( $user->id );
+        /*$posts_count  = Posts::countUserPosts( $user->id );
         //获取用户收藏
         $user_collect = Usermeta::getUserCollect( $user->id, 'count');
         //获取用户收藏
-        $user_avatar = Usermeta::getUserAvatar( $user->id );
+        $user_avatar = Usermeta::getUserAvatar( $user->id );*/
         //获取用户下载记录
         return view('home.user.index', [
-            'posts_count' => $posts_count,
+            /*'posts_count' => $posts_count,
             'user_collect' => $user_collect,
-            'user_avatar' => $user_avatar,
+            'user_avatar' => $user_avatar,*/
         ]);
     }
 

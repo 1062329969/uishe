@@ -59,7 +59,7 @@ class HomeController extends Controller
                 if($user->status == 'lock'){
                     return redirect('/login')->withErrors(['用户已被锁定请联系站长']);
                 }
-                Auth::login($user);
+                Auth::guard('users')->login($user);
                 return redirect(route('user'));
             }else{
                 return redirect('/login')->withErrors(['用户名密码错误']);
@@ -91,6 +91,7 @@ class HomeController extends Controller
                  'password' => $password,
                  'created_at' => Carbon::now()->toDateTimeString(),
                  'registered' => Carbon::now()->toDateTimeString(),
+                 'avatar_url' => env('Web_Avatar_Url')
             ]);
             if($user_id){
                 $user = User::find($user_id);

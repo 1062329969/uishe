@@ -87,9 +87,7 @@
                                 </a>
                             </div>
                             <!--<div class="user-menu-exit">-->
-                            <a rel="nofollow" href="https://www.51miz.com/index.php?m=login&amp;a=logout&amp;backurl=http%3A%2F%2Fwww.51miz.com%2Findex.php%3Fm%3Dhome%26a%3Dmyvip" class="block user-menu-exit fn14">
-                                退出
-                            </a>
+                            <a rel="nofollow" href="{{ route('loginout') }}" class="block user-menu-exit fn14">退出</a>
                             <!--</div>-->
                         </div>
                     </div>

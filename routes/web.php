@@ -48,7 +48,7 @@ Route::middleware(['auth:users'])->group(function () {
     Route::get('/user/collect', 'UserController@collect')->name('collect');
     Route::get('/user/order', 'UserController@orders')->name('order');
     Route::get('/user/downlog', 'UserController@downlog')->name('downlog');
-    Route::get('/loginout', 'UserController@loginout')->name('loginout');
+    Route::get('/user/loginout', 'UserController@loginout')->name('loginout');
 });
 
 
