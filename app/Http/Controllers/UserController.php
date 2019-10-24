@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DownLog;
 use App\Models\News;
 use App\Models\UsersCollect;
+use App\Models\VipOption;
 use App\Models\WpOrders;
 use App\Models\Posts;
 use App\Models\User;
@@ -79,6 +80,13 @@ class UserController extends Controller
     public function checkvip(){
         dd(Auth::user('users'));
     }
+
+    public function buyvip(){
+        $user = Auth::user();
+        $vip_option = VipOption::where('status', VipOption::Option_Status_On)->get();
+        return view('home.user.buyvip', ['vip_option' => $vip_option]);
+    }
+
 
     public function dofav(Request $request, $do){
         $id = $request->id;

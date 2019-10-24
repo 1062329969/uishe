@@ -24,6 +24,7 @@
         .vipsmart{width:900px;height:42px;line-height:42px;margin: auto;text-align: center;color:#6e6e6e;}
         .getvip{width:140px;height:38px;line-height:38px;border-radius: 19px;background:url('//ss.51miz.com/V3/images/VIP_btn.png') 0 -78px no-repeat;background-size:249px 316px;margin:11px auto 0;color:#fff;}
         .getvip:hover{background-position: 0 -116px;}
+        .buyvip_button{background: #33DA8D;color: #fff;display: block;width: 20%;height: 50px;text-align: center;line-height: 50px;border-radius: 25px;margin: 10px auto;width: 50%;}
     </style>
     <style>
         .homenav{width:100%;height:190px;background-color:#8d54e9;background:linear-gradient(90deg, #8d54e9 0%, #3f6fe0 100%);margin-bottom:90px;}
@@ -85,7 +86,7 @@
                 </div>
             </div>
             <div class="myinfo pa">
-                <a href="{{ route('user') }}" class="iblock @if(\Request::route()->getName() == 'user') on @endif">我的VIP</a>
+                <a href="{{ route('user') }}" class="iblock @if(in_array(\Request::route()->getName(), ['user', 'buyvip'])) on @endif">我的VIP</a>
                 <a href="{{ route('downlog') }}" class="iblock @if(\Request::route()->getName() == 'downlog') on @endif">我的下载</a>
                 <a href="{{ route('collect') }}" class="iblock @if(\Request::route()->getName() == 'collect') on @endif">我的收藏</a>
             </div>

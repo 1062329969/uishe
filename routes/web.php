@@ -44,11 +44,15 @@ Route::middleware(['auth:users'])->group(function () {
 
     //用户
     Route::get('/user/index', 'UserController@index')->name('user');
+    Route::get('/user/buyvip', 'UserController@buyvip')->name('buyvip');
     Route::get('/user/checkvip', 'UserController@checkvip')->name('checkvip');
     Route::get('/user/collect', 'UserController@collect')->name('collect');
     Route::get('/user/order', 'UserController@orders')->name('order');
     Route::get('/user/downlog', 'UserController@downlog')->name('downlog');
     Route::get('/user/loginout', 'UserController@loginout')->name('loginout');
+
+
+    Route::get('/order/set_order', 'UserController@set_order')->name('set_order');
 });
 
 
