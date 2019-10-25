@@ -16,6 +16,9 @@ class Orders extends Model
     const Order_Pay_Type_Alipay = 'pay_alipay';
     const Order_Pay_Type_Wxpay = 'pay_wxpay';
 
+    const Currency_Type_RMB = 'rmb';
+    const Currency_Type_Credit = 'credit';
+
     public $incrementing = false;
     protected $hidden = ['updated_at', 'deleted_at'];
 
