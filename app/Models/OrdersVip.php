@@ -28,7 +28,7 @@ class OrdersVip extends Model
         if($res){
             $res = Orders::where('id', $order->id)->update(['actual_total' => $actual_total]);
             if($res){
-                return true
+                return true;
             }else{
                 return false;
             }

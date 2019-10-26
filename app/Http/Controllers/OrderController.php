@@ -44,8 +44,10 @@ class OrderController extends Controller
             case Orders::Order_Type_Vip:
                 $res = OrdersVip::create($order, $vip, $currency_type);
                 if($res){
+
                     DB::commit();
                 }else{
+                    return redirect(route('buyvip'))->withErrors(['status'=>'创建订单失败，请联系站长']);
                     DB::rollBack();
                 }
                 break;
