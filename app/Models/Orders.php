@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Orders extends Model
 {
     //
     protected $table = 'orders';
     protected $primaryKey = 'id';
-
+    protected $fillable = ['id', 'order_no', 'pay_user_id', 'order_type', 'pay_type', 'order_name', 'total', 'formId', 'platform', 'mobile', 'contact', 'remark', 'coupon', 'membercard_id'];
     const Order_Type_Vip = 'vip';
 
     const Order_Pay_Type_Credit = 'pay_credit';
@@ -19,12 +20,9 @@ class Orders extends Model
     const Currency_Type_RMB = 'rmb';
     const Currency_Type_Credit = 'credit';
 
-    public $incrementing = false;
-    protected $hidden = ['updated_at', 'deleted_at'];
-
     public $code;
 
-    public static function create($user_id, $order_type, $pay_type, $name, $platform, $price, $pay_array, $wxapp_formid=NULL, $mobile = null, $contact = null, $remark = null, $coupon = null, $membercard_id = 0)
+    public static function createOrder($user_id, $order_type, $pay_type, $name, $platform, $price, $pay_array, $wxapp_formid=NULL, $mobile = null, $contact = null, $remark = null, $coupon = null, $membercard_id = 0)
     {
         $id_prefix = '';
         switch ($order_type) {
@@ -34,12 +32,11 @@ class Orders extends Model
         }
 
         $order = new Orders();
-
-        $order->id = Order::getOrderId($id_prefix);
+        $order->order_no = self::getOrderId($id_prefix);
         $order->pay_user_id = $user_id;
         $order->order_type = $order_type;
         $order->pay_type = $pay_type;
-        $order->name = $name;
+        $order->order_name = $name;
         $order->total = $price;
         $order->formId = $wxapp_formid;
         $order->platform = $platform;
@@ -49,15 +46,15 @@ class Orders extends Model
         $order->coupon = $coupon;
         $order->membercard_id = $membercard_id;
         $order->save();
-
         if ($pay_array) {
             foreach ($pay_array as $val) {
+//                dump($val['pay_type'], $order->id, $val['order_type'], $val['membercard_id'] ?? NULL, self::getOrderId($id_prefix . 'OP'));die;
                 $order_pay = new Orders_pay();
                 $order_pay->pay_type = $val['pay_type'];
                 $order_pay->order_id = $order->id;
                 $order_pay->order_type = $val['order_type'];
                 $order_pay->membercard_id = $val['membercard_id'] ?? NULL;
-                $order_pay->orders_pay_code = Order::getOrderId($id_prefix . 'OP');
+                $order_pay->orders_pay_code = self::getOrderId($id_prefix . 'OP');
                 $order_pay->save();
                 $order->code[$order_pay->pay_type] = $order_pay->orders_pay_code;
             }

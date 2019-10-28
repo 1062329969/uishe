@@ -23,7 +23,7 @@ class OrderController extends Controller
                 $order_name = '购买Vip';
                 $vip = VipOption::where([
                         ['status', '=', VipOption::Option_Status_On],
-                        ['level', '=', $request->level],
+                        ['level', '=', $request->vip_type],
                         ['currency_type', '=', $currency_type],
                     ])
                     ->first();
@@ -38,14 +38,14 @@ class OrderController extends Controller
                 break;
         }
         DB::beginTransaction();
-        $order = Orders::create($user->id, $request->order_type, $request->pay_type, $order_name, $request->platform, $price, $pay_arr);
+        $order = Orders::createOrder($user->id, $request->order_type, $request->pay_type, $order_name, $request->platform, $price, $pay_arr);
 
         switch ($request->order_type){
             case Orders::Order_Type_Vip:
                 $res = OrdersVip::create($order, $vip, $currency_type);
                 if($res){
-
                     DB::commit();
+                    return redirect(route('alipay_getpay', ['order_no' => $order->order_no]));
                 }else{
                     return redirect(route('buyvip'))->withErrors(['status'=>'创建订单失败，请联系站长']);
                     DB::rollBack();

@@ -11,7 +11,8 @@
         "laravel/tinker": "~1.0",
         "rodenastyle/stream-parser": "^1.2",
         "spatie/laravel-permission": "^2.37",
-        "stevenyangecho/laravel-u-editor": "1.4"
+        "stevenyangecho/laravel-u-editor": "1.4",
+        "yansongda/laravel-pay": "^2.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

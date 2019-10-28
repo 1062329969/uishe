@@ -52,8 +52,12 @@ Route::middleware(['auth:users'])->group(function () {
     Route::get('/user/loginout', 'UserController@loginout')->name('loginout');
 
 
-    Route::get('/order/set_order', 'UserController@set_order')->name('set_order');
+    Route::post('/order/set_order', 'OrderController@set_order')->name('set_order');
 });
+
+Route::any('/alipay/getpay/{order_no}', 'AlipayController@getpay')->name('alipay_getpay');
+Route::any('/alipay/notify_url', 'AlipayController@notify_url')->name('alipay_notify');
+Route::any('/alipay/return_url', 'AlipayController@return_url')->name('alipay_return');
 
 
 //文件上传接口，前后台共用

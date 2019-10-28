@@ -1,7 +1,12 @@
 @extends('layouts.user')
 @section('content')
     <?php $auth_user = Auth::user(); ?>
+    @foreach($errors->all() as $error)
+        <p style="color: red;padding-bottom: 10px;">注：{{$error}}</p>
+        @break
+    @endforeach
     <form method="post" action="{{ route('set_order') }}" class="myvip" id="buy_vip_form" style="height: auto">
+        {{ csrf_field() }}
         @if( $auth_user->user_type == 3 )
             <a href="{{ route('buyvip') }}" target="_blank" class="buyvip_button">
                 尊贵的荣耀终身会员，您无需继续开通或续费
@@ -13,10 +18,13 @@
                 <div class="vip-type pr" vip-data="{{ $item['level'] }}">
                     <div class="vip-title fn18 center">{{ $item['name'] }}</div>
                     <div class="endtime fn14 center">
-                        活动价：<span style="color:red">{{ $item['actual_total'] }}积分/365天</span>
+                        活动价：
+                        <span style="color:red">{{ $item['actual_total'] }}
+                           @if($item['currency_type'] == \App\Models\Orders::Currency_Type_Credit) 积分 @else 元 @endif /365天
+                        </span>
                     </div>
                     <div class="endtime fn14 center">
-                        原价：<del style="color:red">{{ $item['total'] }} 积分</del>
+                        原价：<del style="color:red">{{ $item['total'] }} @if($item['currency_type'] == \App\Models\Orders::Currency_Type_Credit) 积分 @else 元 @endif</del>
                     </div>
                 </div>
                 @endforeach
