@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Models\Orders;
 use App\Models\OrdersVip;
+use App\Models\User;
 use App\Models\VipOption;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,30 +22,23 @@ class OrderController extends Controller
         switch ($request->order_type){
             case Orders::Order_Type_Vip:
                 $order_name = '购买Vip';
-                $vip = VipOption::where([
-                        ['status', '=', VipOption::Option_Status_On],
-                        ['level', '=', $request->vip_type],
-                        ['currency_type', '=', $currency_type],
-                    ])
-                    ->first();
-                if(!$vip){
-                    return redirect(route('buyvip'))->withErrors(['status'=>'未找到会员等级']);
-                }
-                $price = $vip['actual_total'];
-                $pay_arr = [ [
-                    'pay_type' =>$request->pay_type,
-                    'order_type' =>Orders::Order_Type_Vip,
-                ] ];
+                $check = OrdersVip::checkVipOrder($request, $currency_type, $user);
+                $price = $check['price'];
+                $pay_arr = $check['pay_arr'];
+                $vip = $check['vip'];
+                $remark = $check['remark'];
                 break;
         }
         DB::beginTransaction();
-        $order = Orders::createOrder($user->id, $request->order_type, $request->pay_type, $order_name, $request->platform, $price, $pay_arr);
+        $order = Orders::createOrder($user->id, $request->order_type, $request->pay_type, $order_name, $request->platform, $price, $pay_arr, $remark);
 
         switch ($request->order_type){
             case Orders::Order_Type_Vip:
                 $res = OrdersVip::create($order, $vip, $currency_type);
                 if($res){
                     DB::commit();
+                    $user = User::find($user->id);
+                    Auth::guard('users')->login($user);
                     return redirect(route('alipay_getpay', ['order_no' => $order->order_no]));
                 }else{
                     return redirect(route('buyvip'))->withErrors(['status'=>'创建订单失败，请联系站长']);

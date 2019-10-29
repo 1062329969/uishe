@@ -74,7 +74,7 @@ class UserController extends Controller
 
     public function loginout(){
         Auth::logout();
-        redirect('/');
+        redirect(route('login'));
     }
 
     public function checkvip(){

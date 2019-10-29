@@ -22,7 +22,7 @@ class Orders extends Model
 
     public $code;
 
-    public static function createOrder($user_id, $order_type, $pay_type, $name, $platform, $price, $pay_array, $wxapp_formid=NULL, $mobile = null, $contact = null, $remark = null, $coupon = null, $membercard_id = 0)
+    public static function createOrder($user_id, $order_type, $pay_type, $name, $platform, $price, $pay_array, $remark = null, $wxapp_formid=NULL, $mobile = null, $contact = null, $coupon = null, $membercard_id = 0)
     {
         $id_prefix = '';
         switch ($order_type) {

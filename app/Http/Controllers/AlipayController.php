@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+use App\Models\Orders_pay;
 use App\Models\OrdersVip;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use Yansongda\Pay\Pay;
@@ -44,7 +46,7 @@ class AlipayController extends Controller
     }
 
     public function notify_url(){
-        $data = Pay::alipay($this->config)->verify(); // 是的，验签就这么简单！
+        $data = Pay::alipay(config('pay.alipay'))->verify(); // 是的，验签就这么简单！
         $alipay_data = $data->all();
         $res = $this->alipay_vip_callback($alipay_data);
         if($res){
@@ -54,13 +56,14 @@ class AlipayController extends Controller
         }
     }
     public function return_url(){
-        $alipay = Pay::alipay($this->config);
+        $alipay = Pay::alipay(config('pay.alipay'));
 
         try{
-            $data = $alipay->verify(); // 是的，验签就这么简单！
-            Log::debug('Alipay notify', $data->all());
-            $alipay_data = $data->all();
-
+//            $data = $alipay->verify(); // 是的，验签就这么简单！
+//            Log::debug('Alipay notify', $data->all());
+//            $alipay_data = $data->all();
+            $alipay_data['out_trade_no'] = 'VIP1910290356161308';
+            $alipay_data['trade_no'] = '11111';
             $res = $this->alipay_vip_callback($alipay_data);
             if($res){
                 return redirect(route('user'))->with(['status'=>'购买成功']);
