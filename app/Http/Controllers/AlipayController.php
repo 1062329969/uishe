@@ -77,7 +77,7 @@ class AlipayController extends Controller
     }
 
     public function alipay_vip_callback($alipay_data){
-        DB::beginTransaction()
+        DB::beginTransaction();
         Orders_pay::where([
             ['orders_pay_code', '=', $alipay_data['out_trade_no'] ],
             ['order_type', '=', Orders::Order_Type_Vip],
