@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DownLog;
 use App\Models\News;
+use App\Models\Usercredit;
 use App\Models\UsersCollect;
 use App\Models\VipOption;
 use App\Models\WpOrders;
@@ -49,7 +50,7 @@ class UserController extends Controller
 
     public function collect(){
         $user = Auth::user();
-        $user_collect = Usermeta::getUserCollect( 52233, false, 2);
+        $user_collect = UsersCollect::getCollect(0, 52233, '');
 //        $user_collect = Usermeta::getUserCollect( $user->id, false, 2);
         return view('home.user.collect', [
             'user_collect' => $user_collect,
@@ -58,12 +59,27 @@ class UserController extends Controller
     public function downlog(){
         $user = Auth::user();
         $downlog = DownLog::getDownLog(0, 52233, '');
+        foreach ($downlog as &$item){
+            $item['news_info'] = News::where('id', $item['new_id'])->value('cover_img');
+        }
 //        $downlog = DownLog::getDownLog(0, $user->id, '', 4, 0);
         return view('home.user.downlog', [
             'downlog' => $downlog,
         ]);
     }
 
+    public function creditlog(){
+        $user = Auth::user();
+//        dd($user->id);
+        $creditlog = Usercredit::getCredit($user->id, '');
+        foreach ($creditlog as &$item){
+            $item['news_info'] = News::where('id', $item['new_id'])->value('cover_img');
+        }
+//        $downlog = DownLog::getDownLog(0, $user->id, '', 4, 0);
+        return view('home.user.creditlog', [
+            'creditlog' => $creditlog,
+        ]);
+    }
     public function orders(){
         $user = Auth::user();
         $user_order = WpOrders::getUserOrder( 1 );

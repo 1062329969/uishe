@@ -17,7 +17,7 @@ class OrdersVip extends Model
 
     public static function create($order, $vip, $currency_type){
 
-        $actual_total = self::getActualTotal($order, $vip, $currency_type);
+        $actual_price = self::getActualPrice($order, $vip, $currency_type);
         $res = OrdersVip::insert([
             'order_id' => $order->id,
             'user_id' => $order->pay_user_id,
@@ -27,7 +27,7 @@ class OrdersVip extends Model
             'orders_pay_code' => $order->code[Orders::Order_Pay_Type_Alipay]
         ]);
         if($res){
-            $res = Orders::where('id', $order->id)->update(['actual_total' => $actual_total]);
+            $res = Orders::where('id', $order->id)->update(['actual_price' => $actual_price]);
             if($res){
                 return true;
             }else{
@@ -40,7 +40,7 @@ class OrdersVip extends Model
 
     }
 
-    private static function getActualTotal($order, $vip, $currency_type){
+    private static function getActualPrice($order, $vip, $currency_type){
         $user = Auth::user();
         //打折做活动使用
         $now_vip = VipOption::where([
@@ -48,7 +48,7 @@ class OrdersVip extends Model
             ['level', '=', $user->user_type],
             ['currency_type', '=', $currency_type],
         ])->first();
-        $price = $vip['actual_total'] - $now_vip->actual_total;
+        $price = $vip['actual_price'] - $now_vip->actual_price;
         return $price;
     }
 
@@ -74,10 +74,10 @@ class OrdersVip extends Model
                 ['level', '=', $user->user_type],
                 ['currency_type', '=', $currency_type],
             ])->first();
-            $price = $vip['actual_total'] - $now_vip->actual_total;
+            $price = $vip['actual_price'] - $now_vip->actual_price;
             $remark = $now_vip->name.'补差价'.$vip['name'];
         }else{
-            $price = $vip['actual_total'];
+            $price = $vip['actual_price'];
             $remark = '';
         }
 

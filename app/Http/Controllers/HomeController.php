@@ -53,12 +53,12 @@ class HomeController extends Controller
 
             $checkPassword=$wp_hasher->CheckPassword($request->password, $user['password']);
 
-            $user->last_login_time = Carbon::now()->toDateTimeString();
-            $user->save();
             if ($checkPassword) {
                 if($user->status == 'lock'){
                     return redirect('/login')->withErrors(['用户已被锁定请联系站长']);
                 }
+                $user->last_login_time = Carbon::now()->toDateTimeString();
+                $user->save();
                 Auth::guard('users')->login($user);
                 return redirect(route('user'));
             }else{

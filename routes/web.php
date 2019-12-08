@@ -21,6 +21,7 @@ Route::get('/qianyi/tag', 'QianyiController@movetag');
 Route::get('/qianyi/move_comment', 'QianyiController@move_comment');
 Route::get('/qianyi/move_posts', 'QianyiController@move_posts');
 Route::get('/qianyi/move_users', 'QianyiController@move_users');
+Route::get('/qianyi/move_message', 'QianyiController@move_message');
 
 
 
@@ -47,6 +48,7 @@ Route::middleware(['auth:users'])->group(function () {
     Route::get('/user/buyvip', 'UserController@buyvip')->name('buyvip');
     Route::get('/user/checkvip', 'UserController@checkvip')->name('checkvip');
     Route::get('/user/collect', 'UserController@collect')->name('collect');
+    Route::get('/user/creditlog', 'UserController@creditlog')->name('creditlog');
     Route::get('/user/order', 'UserController@orders')->name('order');
     Route::get('/user/downlog', 'UserController@downlog')->name('downlog');
     Route::get('/user/loginout', 'UserController@loginout')->name('loginout');

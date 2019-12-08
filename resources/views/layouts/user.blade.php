@@ -89,6 +89,7 @@
                 <a href="{{ route('user') }}" class="iblock @if(in_array(\Request::route()->getName(), ['user', 'buyvip'])) on @endif">我的VIP</a>
                 <a href="{{ route('downlog') }}" class="iblock @if(\Request::route()->getName() == 'downlog') on @endif">我的下载</a>
                 <a href="{{ route('collect') }}" class="iblock @if(\Request::route()->getName() == 'collect') on @endif">我的收藏</a>
+                <a href="{{ route('creditlog') }}" class="iblock @if(\Request::route()->getName() == 'creditlog') on @endif">我的积分</a>
             </div>
         </div>
     </div>

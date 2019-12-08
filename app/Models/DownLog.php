@@ -23,7 +23,7 @@ class DownLog extends Model
             $check = $query->count();
         }else{
             $query->orderBy('id', 'DESC');
-            $check = $query->simplePaginate(2);
+            $check = $query->simplePaginate(9);
         }
         return $check;
     }

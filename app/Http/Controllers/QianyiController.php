@@ -22,6 +22,7 @@ use App\Models\UsersWeibo;
 use App\Models\WpComments;
 use App\Models\WpMessage;
 use App\Models\WpVip;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -218,9 +219,9 @@ class QianyiController extends Controller
     }
 
     public function move_users(){
-        set_time_limit(360);
+        set_time_limit(0);
 
-        $user = DB::table('wp_users')->get()->toArray();
+        $user = DB::table('wp_users')->where('ID', 50840)->get()->toArray();
         foreach ($user as $value){
             $this->optionUserData((array)$value);
         }
@@ -239,19 +240,20 @@ class QianyiController extends Controller
             $vip['startTime'] = NULL;
             $vip['endTime'] = NULL;
         }
-
-        DB::transaction();
+//dd($user['user_registered']);
+        DB::beginTransaction();
         $user_data = [
-            'name' => $user['login'],
-            'password' => $user['pass'],
-            'nicename' => $user['nicename'],
-            'email' => $user['email'],
-            'url' => $user['url'],
-            'created_at' => $user['registered'],
-            'registered' => $user['registered'],
+            'id' => $user['ID'],
+            'name' => $user['user_login'],
+            'password' => $user['user_pass'],
+            'nicename' => $user['user_nicename'],
+            'email' => $user['user_email'],
+            'url' => $user['user_url'],
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'registered' => Carbon::parse($user['user_registered'])->toDateTimeString(),
             'display_name' => $user['display_name'],
-            'nickname' => $user['nickname'],
-            'last_login_time' => $user['last_login_time'],
+            'nickname' => $user['nickname'] ?? '',
+            'last_login_time' => $user['last_login_time'] ?? '',
             'avatar_url' => $user_meta['simple_local_avatar'] ?? '',
             'credit' => $user_meta['chenxing_credit'] ?? 0,
             'user_type' => $vip['user_type'],
@@ -261,12 +263,13 @@ class QianyiController extends Controller
 
         $insert = User::insert($user_data);
         if (!$insert) {
+            echo 'insert';
             DB::rollBack();
         }
 
         if (isset($user_meta['chenxing_collect'])){
             $user_collect = [];
-            foreach (explode(',', $user_meta) as $item) {
+            foreach (explode(',', $user_meta['chenxing_collect']) as $item) {
                 $news = News::find($item);
                 if ($news) {
                     $user_collect[] = [
@@ -280,6 +283,7 @@ class QianyiController extends Controller
 
             $collect_insert = UsersCollect::insert($user_collect);
             if (!$collect_insert) {
+                echo 'collect_insert';
                 DB::rollBack();
             }
         }
@@ -289,11 +293,12 @@ class QianyiController extends Controller
                 'openid' => $user_meta['chenxing_qq_openid'],
                 'access_token' => $user_meta['chenxing_qq_access_token'],
                 'user_id' => $user['ID'],
-                'created_at' => $user_meta['chenxing_daily_sign'],
+                'created_at' => $user_meta['chenxing_daily_sign'] ?? NULL,
             ];
 
             $qq_res = UsersQQ::insert($qq_openid_data);
-            if (!$qq_res){
+            if (!$qq_res) {
+                echo 'qq_res';
                 DB::rollBack();
             }
         }
@@ -303,15 +308,18 @@ class QianyiController extends Controller
                 'openid' => $user_meta['chenxing_weibo_openid'],
                 'access_token' => $user_meta['chenxing_weibo_access_token'],
                 'user_id' => $user['ID'],
-                'created_at' => $user_meta['chenxing_daily_sign'],
+                'created_at' => $user_meta['chenxing_daily_sign'] ?? NULL,
             ];
 
             $weibo_res = UsersWeibo::insert($weibo_openid_data);
-            if (!$weibo_res){
+            if (!$weibo_res) {
+                echo 'weibo_res';
                 DB::rollBack();
             }
         }
 
+        DB::commit();
+        echo $user['ID'].'<br>';
     }
 
 
@@ -319,21 +327,21 @@ class QianyiController extends Controller
 
         set_time_limit(360);
 
-        $user = DB::table('wp_users')->get()->toArray();
+        $user = WpMessage::select(['user_id'])->groupBy('user_id')->get()->toArray();
         foreach ($user as $value){
-
-            $users = (array)$value;
-            $message = WpMessage::where('user_id', $users['ID'])->get();
+            DB::beginTransaction();
+            $user_id = $value['user_id'];
+            $message = WpMessage::where('user_id', $user_id)->get();
 
             if($message){
                 $message = $message->toArray();
 
                 foreach ($message as $item) {
                     $new_message[] = [
-                        'id' => $item['msg_id'],
                         'user_id' => $item['user_id'],
                         'created_at' => $item['msg_date'],
                         'content' => $item['msg_title'],
+                        'from' => Usercredit::Credit_From_Null
                     ];
                 }
                 $mssage_res = Usercredit::insert($new_message);
@@ -341,7 +349,7 @@ class QianyiController extends Controller
                     DB::rollBack();
                 }
             }
-
+            DB::commit();
         }
 
     }

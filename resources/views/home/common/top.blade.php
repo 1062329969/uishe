@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
 <link href="{{ asset('css/top.v4.11.css') }}" rel="stylesheet" type="text/css">
 <div class="top top-fixed" id="top">
     <div class="top-content" id="top-content">
@@ -50,7 +49,7 @@
         <div class="top-item-right fr">
 
                 @auth('users')
-                <?php $auth_user = Auth::user(); ?>
+                <?php $auth_user = Auth::guard('users')->user();?>
                 <div class="face-img pr fr">
                     <a rel="nofollow" href="{{ route('user') }}">
                         <img src="{{ $auth_user->avatar_url }}" class="block"> </a>
@@ -79,10 +78,10 @@
                                 <a rel="nofollow" target="_blank" href="{{ route('user') }}" class="block fn14">
                                     个人主页
                                 </a>
-                                <a rel="nofollow" target="_blank" href="https://www.51miz.com/index.php?m=Home&amp;a=myaction&amp;action=download" class="block fn14">
+                                <a rel="nofollow" target="_blank" href="{{ route('downlog') }}" class="block fn14">
                                     我的下载
                                 </a>
-                                <a rel="nofollow" target="_blank" href="https://www.51miz.com/index.php?m=Home&amp;a=vipFav" class="block fn14">
+                                <a rel="nofollow" target="_blank" href="{{ route('collect') }}" class="block fn14">
                                     我的收藏
                                 </a>
                             </div>

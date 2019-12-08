@@ -37,7 +37,7 @@ class Orders extends Model
         $order->order_type = $order_type;
         $order->pay_type = $pay_type;
         $order->order_name = $name;
-        $order->total = $price;
+        $order->price = $price;
         $order->formId = $wxapp_formid;
         $order->platform = $platform;
         $order->mobile = $mobile;

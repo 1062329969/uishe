@@ -62,7 +62,7 @@ class AlipayController extends Controller
 //            $data = $alipay->verify(); // 是的，验签就这么简单！
 //            Log::debug('Alipay notify', $data->all());
 //            $alipay_data = $data->all();
-            $alipay_data['out_trade_no'] = 'VIP1910290356161308';
+            $alipay_data['out_trade_no'] = 'VIP1911260554111378';
             $alipay_data['trade_no'] = '11111';
             $res = $this->alipay_vip_callback($alipay_data);
             if($res){
@@ -84,7 +84,10 @@ class AlipayController extends Controller
         Orders_pay::where([
             ['orders_pay_code', '=', $alipay_data['out_trade_no'] ],
             ['order_type', '=', Orders::Order_Type_Vip],
-        ])->update([ 'trade_no'=>$alipay_data['trade_no'] ]);
+        ])->update([
+            'trade_no' => $alipay_data['trade_no'],
+            'updated_at' => Carbon::now()->toDateTimeString()
+        ]);
 
         $orders = Orders::where('order_no', $alipay_data['out_trade_no'])->first();
         $orders->pay_at = Carbon::now()->toDateTimeString();
