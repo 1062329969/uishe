@@ -136,4 +136,10 @@ class OrdersVip extends Model
         }
     }
 
+    //与标签多对多关联
+    public function vips()
+    {
+        return $this->hasOne('App\Models\VipOption','id','vip_id');
+    }
+
 }

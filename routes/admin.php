@@ -228,3 +228,18 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     });
 
 });
+
+//消息管理
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:system.orders']], function () {
+    //消息管理
+    Route::group(['middleware' => 'permission:system.orders'], function () {
+        Route::get('orders', 'OrderController@index')->name('admin.orders');
+        Route::get('orders/data', 'OrderController@data')->name('admin.orders.data');
+        Route::get('orders/{id}/show', 'OrderController@show')->name('admin.orders.show');
+        Route::get('orders/{id}/edit', 'OrderController@edit')->name('admin.orders.edit')->middleware('permission:admin.orders.edit');
+        Route::delete('orders/destroy', 'OrderController@destroy')->name('admin.orders.destroy')->middleware('permission:admin.orders.destroy');
+
+    });
+
+
+});

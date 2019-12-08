@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Orders extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     //
     protected $table = 'orders';
     protected $primaryKey = 'id';
@@ -67,4 +70,13 @@ class Orders extends Model
         $orderSn = $Prefix . date('ymdHis',time()) . (float)sprintf('%.0f',microtime()) . rand(100,999);
         return $orderSn;
     }
+
+
+    //与标签多对多关联
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag','tag_new','tag_new_id','tag_id');
+    }
+
+
 }
