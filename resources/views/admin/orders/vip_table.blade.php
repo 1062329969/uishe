@@ -1,4 +1,4 @@
-@foreach($orders['vip_info'] as $vip_info)
+@foreach($orders->order_vip as $vip_info)
     <table class="layui-table">
         <colgroup>
             <col width="100">
@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <td>会员名称</td>
-            <td>  {{$vip_info->vips->name}}</td>
+            <td>{{$vip_info->vip_name}}</td>
         </tr>
         </tbody>
     </table>

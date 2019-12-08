@@ -25,7 +25,7 @@ class Orders extends Model
 
     public $code;
 
-    public static function createOrder($user_id, $order_type, $pay_type, $name, $platform, $price, $pay_array, $remark = null, $wxapp_formid=NULL, $mobile = null, $contact = null, $coupon = null, $membercard_id = 0)
+    public static function createOrder($user_id, $order_type, $pay_type, $name, $platform, $price, $pay_array, $remark = null, $wxapp_formid = NULL, $mobile = null, $contact = null, $coupon = null, $membercard_id = 0)
     {
         $id_prefix = '';
         switch ($order_type) {
@@ -65,17 +65,17 @@ class Orders extends Model
         return $order;
     }
 
-    public static function getOrderId($Prefix =null){
+    public static function getOrderId($Prefix = null)
+    {
 
-        $orderSn = $Prefix . date('ymdHis',time()) . (float)sprintf('%.0f',microtime()) . rand(100,999);
+        $orderSn = $Prefix . date('ymdHis', time()) . (float)sprintf('%.0f', microtime()) . rand(100, 999);
         return $orderSn;
     }
 
 
-    //与标签多对多关联
-    public function tags()
+    public function order_vip()
     {
-        return $this->belongsToMany('App\Models\Tag','tag_new','tag_new_id','tag_id');
+        return $this->hasMany('App\Models\OrdersVip', 'order_id', 'id');
     }
 
 
