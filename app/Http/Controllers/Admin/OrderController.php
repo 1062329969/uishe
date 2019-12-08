@@ -16,15 +16,16 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin.orders.index',compact('categorys'));
+        $order_type = Orders::order_type;
+        return view('admin.orders.index',compact('order_type'));
     }
 
     public function data(Request $request)
     {
 
         $model = Orders::query();
-        if ($request->get('category_id')){
-            $model = $model->where('category_id',$request->get('category_id'));
+        if ($request->get('order_type')){
+            $model = $model->where('order_type',$request->get('order_type'));
         }
         if ($request->get('order_no')){
             $model = $model->where('order_no','like','%'.$request->get('order_no').'%');

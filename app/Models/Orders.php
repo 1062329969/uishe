@@ -22,6 +22,7 @@ class Orders extends Model
 
     const Currency_Type_RMB = 'rmb';
     const Currency_Type_Credit = 'credit';
+    const order_type = ['vip' => '开通会员'];
 
     public $code;
 
@@ -70,6 +71,11 @@ class Orders extends Model
 
         $orderSn = $Prefix . date('ymdHis', time()) . (float)sprintf('%.0f', microtime()) . rand(100, 999);
         return $orderSn;
+    }
+
+    public static function get_order_type()
+    {
+        return self::order_type;
     }
 
 
