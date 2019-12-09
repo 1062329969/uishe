@@ -39,12 +39,8 @@ class NewsController extends Controller
         $new_query->where('status', 'normal');
         $cat_new_id = [];
         if (isset($request['category'])) {
-            $category_id = Category::where('alias', $request['category'])->value('id');
-            $category_list = Category::where([
-                    ['parent_id', '=', $category_id]
-                ])
-                ->pluck('name');
-            $cat_new_id = CategoryNew::where('cat_id', $category_id)->pluck('cat_new_id')->toArray();
+            $category_info = Category::where('alias', $request['category'])->with('relation_cat')->first();
+            $cat_new_id = $category_info->relation_cat->pluck('cat_new_id');
             $new_query->whereIn('id', $cat_new_id);
         }
         $tag_new_id = [];

@@ -30,6 +30,12 @@ class Category extends Model
         return $this->belongsToMany('App\Models\News','category_new','id','category_id');
     }
 
+    //子分类
+    public function relation_cat()
+    {
+        return $this->hasMany('App\Models\CategoryNew','cat_id','id');
+    }
+
     /*//分类下所有的文章
     public function news()
     {
