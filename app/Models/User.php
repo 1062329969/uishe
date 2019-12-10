@@ -31,4 +31,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function user_weibo()
+    {
+        return $this->hasOne('App\Models\UsersWeibo', 'user_id', 'id');
+    }
+
 }

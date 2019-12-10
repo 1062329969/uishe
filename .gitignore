@@ -14,7 +14,7 @@
 
 /storage/api-docs
 /storage/*.key
-#/vendor
+/vendor
 /.idea
 /.vscode
 /.vagrant

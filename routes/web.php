@@ -10,9 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
-use \Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
+
 $category = DB::table('category')->pluck('alias')->toArray();
 //dd($list);
 //迁移工具
@@ -24,9 +27,8 @@ Route::get('/qianyi/move_users', 'QianyiController@move_users');
 Route::get('/qianyi/move_message', 'QianyiController@move_message');
 
 
-
 Route::get('/', 'HomeController@index');
-Route::get('/{category}', function(Request $request, $category) {
+Route::get('/{category}', function (Request $request, $category) {
     return (new NewsController())->category($request, $category);
 })->where('category', implode('|', $category)); // 正则表达式 | 或
 Route::get('/huiyuan', 'HomeController@huiyuan');
@@ -35,8 +37,11 @@ Route::get('/tag/{tag}', 'NewsController@tag');
 Route::get('/getNewsList', 'NewsController@getNewsList');
 Route::any('/login', 'HomeController@login')->name('login');
 Route::any('/reg', 'HomeController@reg')->name('reg');
-
-
+Route::any('/socialite_login/{socialite}', function (Request $request, $category) {
+    return (new HomeController())->socialite_login($request, $category);
+})->name('socialite_login');
+Route::any('/login/qq_back', 'HomeController@qq_back')->name('qq_back');
+Route::any('/login/weibo_back', 'HomeController@weibo_back')->name('weibo_back');
 
 
 Route::middleware(['auth:users'])->group(function () {
