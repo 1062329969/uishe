@@ -329,9 +329,10 @@
                 <div class="other_login" style="padding-top:25px">
                     <div class="disanfang">—— 使用第三方登录 ——</div>
                     <div class="other_login_action">
-                        <a class="qq_btn">
-                            <i class="fa fa-qq"></i>QQ 登录</a>
-                        <a class="weibo_btn">微博登录</a>
+                        <a class="qq_btn" href="/socialite_login/qq">
+                            QQ 登录
+                        </a>
+                        <a class="weibo_btn" href="/socialite_login/weibo">微博登录</a>
                     </div>
                 </div>
             @endif
