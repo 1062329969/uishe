@@ -108,15 +108,22 @@ class HomeController extends Controller
         }
     }
 
-    public function socialite_login(Request $request)
+    public function socialite_login(Request $request,$socialite)
     {
-        return Socialite::driver('qq')->redirect();
+        return Socialite::driver($socialite)->redirect();
 
     }
 
     public function qq_back(Request $request)
     {
         $user = Socialite::driver('qq')->user();
+        dump($user);
+        dd($request);
+    }
+
+    public function weibo_back(Request $request)
+    {
+        $user = Socialite::driver('weibo')->user();
         dump($user);
         dd($request);
     }
