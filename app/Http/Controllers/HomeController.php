@@ -142,7 +142,7 @@ class HomeController extends Controller
         } else { // 注册新用户
             DB::beginTransaction();
 
-            if ($user_info = User::create(['name' => $user->name])) {
+            if ($user_info = User::create(['name' => $user->name,'avatar_url'=>$user->avatar])) {
                 if ($res = $user_info->user_weibo()->create(["openid" => $user->id, 'access_token' => $user->token])) {
                     DB::commit();
                     Auth::guard('users')->login($user_info);
@@ -154,7 +154,6 @@ class HomeController extends Controller
             } else {
                 return redirect('/login')->withErrors(['系统有误']);
             }
-
 
 //            $user_info = new User(['name' => $user->name]);
 //            $user_info->name = $user->name;
