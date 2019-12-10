@@ -90,6 +90,7 @@
                 <a href="{{ route('downlog') }}" class="iblock @if(\Request::route()->getName() == 'downlog') on @endif">我的下载</a>
                 <a href="{{ route('collect') }}" class="iblock @if(\Request::route()->getName() == 'collect') on @endif">我的收藏</a>
                 <a href="{{ route('creditlog') }}" class="iblock @if(\Request::route()->getName() == 'creditlog') on @endif">我的积分</a>
+                <a href="{{ route('selfinfo') }}" class="iblock @if(\Request::route()->getName() == 'selfinfo') on @endif">我的积分</a>
             </div>
         </div>
     </div>

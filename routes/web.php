@@ -49,6 +49,9 @@ Route::middleware(['auth:users'])->group(function () {
     Route::get('/user/checkvip', 'UserController@checkvip')->name('checkvip');
     Route::get('/user/collect', 'UserController@collect')->name('collect');
     Route::get('/user/creditlog', 'UserController@creditlog')->name('creditlog');
+    Route::get('/user/selfinfo', 'UserController@selfinfo')->name('selfinfo');
+    Route::post('/user/saveself', 'UserController@saveself')->name('saveself');
+
     Route::get('/user/order', 'UserController@orders')->name('order');
     Route::get('/user/downlog', 'UserController@downlog')->name('downlog');
     Route::get('/user/loginout', 'UserController@loginout')->name('loginout');

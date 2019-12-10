@@ -88,6 +88,29 @@ class UserController extends Controller
         ]);
     }
 
+    public function selfinfo(Request $request){
+        $tab = $request->tab ?? 'edit_info';
+
+        $user = Auth::user();
+//        dd($user->id);
+        $selfinfo = User::find($user->id);
+        return view('home.user.selfinfo', [
+            'selfinfo' => $selfinfo,
+            'tab' => $tab
+        ]);
+    }
+
+    public function saveself(Request $request){
+        if($request->tab == 'edit_info'){
+            $this->validate($request,[
+                'name'  => 'required|string',
+                'alias'  => 'required|string',
+                'sort'  => 'required|numeric',
+                'parent_id' => 'required|numeric'
+            ]);
+        }
+    }
+
     public function loginout(){
         Auth::logout();
         redirect(route('login'));
