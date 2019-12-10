@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Libs\PasswordHash;
 use App\Models\User;
+use App\Models\UsersWeibo;
 use App\Models\WebOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Overtrue\LaravelSocialite\Socialite;
 use Overtrue\Socialite\SocialiteManager;
 use Validator;
@@ -108,7 +110,7 @@ class HomeController extends Controller
         }
     }
 
-    public function socialite_login(Request $request,$socialite)
+    public function socialite_login(Request $request, $socialite)
     {
         return Socialite::driver($socialite)->redirect();
 
@@ -124,7 +126,58 @@ class HomeController extends Controller
     public function weibo_back(Request $request)
     {
         $user = Socialite::driver('weibo')->user();
-        dump($user);
-        dd($request);
+
+        $weibo_info = UsersWeibo::where(['access_token' => $user->token, 'openid' => $user->id])->first();
+//        $weibo_info = array();
+        if (!empty($weibo_info)) { // 保存登录session
+            $user = User::find($weibo_info['user_id']);
+            if ($user->status == 'lock') {
+                return redirect('/login')->withErrors(['用户已被锁定请联系站长']);
+            }
+            $user->last_login_time = Carbon::now()->toDateTimeString();
+            $user->save();
+            Auth::guard('users')->login($user);
+            return redirect(route('user'));
+
+        } else { // 注册新用户
+            DB::beginTransaction();
+
+            if ($user_info = User::create(['name' => $user->name])) {
+                if ($res = $user_info->user_weibo()->create(["openid" => $user->id, 'access_token' => $user->token])) {
+                    DB::commit();
+                    Auth::guard('users')->login($user_info);
+                    return redirect(route('user'));
+                } else {
+                    DB::rollBack();
+                    return redirect('/login')->withErrors(['系统有误']);
+                }
+            } else {
+                return redirect('/login')->withErrors(['系统有误']);
+            }
+
+
+//            $user_info = new User(['name' => $user->name]);
+//            $user_info->name = $user->name;
+//            $user_res = $user_info->save();
+//
+//            if ($user_res) {
+//                $id = $user_info->id;
+//                $weibo_info = new UsersWeibo();
+//                $weibo_info->openid = $user->id;
+//                $weibo_info->user_id = $id;
+//                $weibo_info->access_token = $user->token;
+//                $res = $weibo_info->save();
+//                if($res){
+//                    DB::commit(); return redirect(route('user'));
+//                }else{
+//                    DB::rollBack();
+//                    return redirect('/login')->withErrors(['系统有误']);
+//                }
+//            }else{
+//                return redirect('/login')->withErrors(['系统有误']);
+//            }
+
+        }
+//        dd($request);
     }
 }
