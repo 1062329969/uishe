@@ -35,6 +35,8 @@ Route::get('/tag/{tag}', 'NewsController@tag');
 Route::get('/getNewsList', 'NewsController@getNewsList');
 Route::any('/login', 'HomeController@login')->name('login');
 Route::any('/reg', 'HomeController@reg')->name('reg');
+Route::any('/socialite_login', 'HomeController@socialite_login')->name('socialite_login');
+Route::any('/login/qq_back', 'HomeController@qq_back')->name('qq_back');
 
 
 
