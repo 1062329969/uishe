@@ -8,6 +8,7 @@ use App\Models\WebOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Overtrue\LaravelSocialite\Socialite;
 use Overtrue\Socialite\SocialiteManager;
 use Validator;
 
@@ -109,25 +110,14 @@ class HomeController extends Controller
 
     public function socialite_login(Request $request)
     {
-
-        $config = config('socialite');
-
-        $socialite = new SocialiteManager($config);
-
-        $response = $socialite->driver('qq')->redirect();
-
-        echo $response;// or $response->send();
+        return Socialite::driver('qq')->redirect();
 
     }
 
     public function qq_back(Request $request)
     {
-        $config = config('socialite');
-        $socialite = new SocialiteManager($config);
-
-        $user = $socialite->driver('qq')->user();
+        $user = Socialite::driver('qq')->user();
         dump($user);
         dd($request);
-
     }
 }
