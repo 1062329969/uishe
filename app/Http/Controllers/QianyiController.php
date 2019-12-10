@@ -9,7 +9,6 @@ use App\Models\News;
 use App\Models\Postmeta;
 use App\Models\Posts;
 use App\Models\Tag;
-use App\Libs\PasswordHash;
 use App\Models\TagNew;
 use App\Models\TermRelationships;
 use App\Models\Terms;
@@ -23,14 +22,12 @@ use App\Models\WpComments;
 use App\Models\WpMessage;
 use App\Models\WpVip;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Rodenastyle\StreamParser\StreamParser;
 
 class QianyiController extends Controller
 {
-    public function category(){
+    public function category()
+    {
         $category = Termtaxonomy::where([
             ['parent', '=', '0'],
             ['taxonomy', '=', 'category'],
@@ -38,7 +35,7 @@ class QianyiController extends Controller
 
         $new_category = $this->get_category($category);
 //懒得写递归
-        foreach ($new_category as $k => $v){
+        foreach ($new_category as $k => $v) {
 
             $category_child = Termtaxonomy::where([
                 ['parent', '=', $v['id']],
@@ -53,7 +50,8 @@ class QianyiController extends Controller
         Category::insert($new_category);
     }
 
-    public function get_category($category){
+    public function get_category($category)
+    {
         $category_id_arr = array_column($category, 'term_id');
 
         $terms = Terms::whereIn('term_id', $category_id_arr)->get()->toArray();
@@ -61,7 +59,7 @@ class QianyiController extends Controller
         $terms = array_column($terms, NULL, 'term_id');
 
         $new_category = [];
-        foreach ($category as $k => $v){
+        foreach ($category as $k => $v) {
             $new_category[] = [
                 'id' => $v['term_id'],
                 'name' => $terms[$v['term_id']]['name'],
@@ -73,7 +71,8 @@ class QianyiController extends Controller
         return $new_category;
     }
 
-    public function movetag(){
+    public function movetag()
+    {
         $tag = Termtaxonomy::where([
             ['parent', '=', '0'],
             ['taxonomy', '=', 'post_tag'],
@@ -83,7 +82,8 @@ class QianyiController extends Controller
         tag::insert($new_tag);
     }
 
-    public function get_tag($tag){
+    public function get_tag($tag)
+    {
         $tag_id_arr = array_column($tag, 'term_id');
 
         $terms = Terms::whereIn('term_id', $tag_id_arr)->get()->toArray();
@@ -91,7 +91,7 @@ class QianyiController extends Controller
         $terms = array_column($terms, NULL, 'term_id');
 
         $new_tag = [];
-        foreach ($tag as $k => $v){
+        foreach ($tag as $k => $v) {
             $new_tag[] = [
                 'id' => $v['term_id'],
                 'name' => $terms[$v['term_id']]['name'],
@@ -103,10 +103,11 @@ class QianyiController extends Controller
         return $new_tag;
     }
 
-    public function move_comment(){
+    public function move_comment()
+    {
         $comments = WpComments::where('comment_approved', 1)->get()->toArray();
         $new_comments = [];
-        foreach($comments as $item) {
+        foreach ($comments as $item) {
             $new_comments[] = [
                 'created_at' => $item['comment_date'],
                 'new_id' => $item['comment_post_ID'],
@@ -122,18 +123,26 @@ class QianyiController extends Controller
         Comments::insert($new_comments);
     }
 
-    public function move_posts(){
-        set_time_limit(360);
+    public function move_posts()
+    {
+        set_time_limit(0);
 
         $post_main = Posts::where([
             ['post_status', '=', 'publish'],
+            ['ID', '<', 35],
         ])->limit(1000)->orderBy('ID', 'desc')->get()->toArray();
-        foreach ($post_main as $value){
+        foreach ($post_main as $value) {
             $this->get_posts($value['ID']);
         }
     }
 
-    public function get_posts($post_id){
+    public function get_posts($post_id)
+    {
+
+        $count = News::where('id', $post_id)->count();
+        if ($count) {
+            return false;
+        }
 
         $taxonomy_id = TermRelationships::where('object_id', $post_id)->pluck('term_taxonomy_id');
 
@@ -142,50 +151,50 @@ class QianyiController extends Controller
         $taxonomy = Termtaxonomy::whereIn('term_id', $taxonomy_id)->get()->toArray();
         $terms = Terms::whereIn('term_id', $taxonomy_id)->get()->toArray();
         $terms = array_column($terms, NULL, 'term_id');
-        
+
         $post_meta = Postmeta::where('post_id', $post_id)->get()->toArray();
 
         $post_main = Posts::where([
             ['ID', '=', $post_id],
             ['post_status', '=', 'publish'],
         ])->first();
-        if($post_main){
+        if ($post_main) {
             $post_main->toArray();
-        }else{
+        } else {
             return false;
         }
 
         $tag_new = [];
         $category_new = [];
-        foreach ($taxonomy as $item){
+        foreach ($taxonomy as $item) {
             if ($item['taxonomy'] == 'post_tag') {
                 $tag_new[] = [
                     'tag_new_id' => $post_id,
                     'tag_id' => $item['term_id'],
-                    'tag' => $terms[ $item['term_id'] ]['name']
+                    'tag' => $terms[$item['term_id']]['name']
                 ];
             }
             if ($item['taxonomy'] == 'category') {
                 $category_new = [
                     'cat_new_id' => $post_id,
                     'cat_id' => $item['term_id'],
-                    'category' => $terms[ $item['term_id'] ]['name']
+                    'category' => $terms[$item['term_id']]['name']
                 ];
             }
         }
 
         $post_meta = array_column($post_meta, 'meta_value', 'meta_key');
 //        dd($post_meta);
-        if (!isset($post_meta['_post_downtype'])){
+        if (!isset($post_meta['_post_downtype'])) {
             $post_meta['_post_downtype'] = 0;
         }
-        if(isset($post_meta['cx-post-imgurl'])){
+        if (isset($post_meta['cx-post-imgurl'])) {
             $cover_img = json_decode($post_meta['cx-post-imgurl'], true);
             $cover_img = reset($cover_img);
-        }else{
+        } else {
             $cover_img = '';
         }
-        if( !isset($category_new['cat_id']) || empty($category_new['cat_id']) ){
+        if (!isset($category_new['cat_id']) || empty($category_new['cat_id'])) {
             return false;
         }
         $new = [
@@ -218,24 +227,26 @@ class QianyiController extends Controller
 
     }
 
-    public function move_users(){
+    public function move_users()
+    {
         set_time_limit(0);
 
         $user = DB::table('wp_users')->where('ID', 50840)->get()->toArray();
-        foreach ($user as $value){
+        foreach ($user as $value) {
             $this->optionUserData((array)$value);
         }
 
     }
 
-    public function optionUserData($user){
+    public function optionUserData($user)
+    {
 
         $user_meta = DB::table('wp_usermeta')->where('user_id', $user['ID'])->get()->toArray();
 
         $user_meta = array_column($user_meta, 'meta_value', 'meta_key');
 
         $vip = WpVip::where('user_id', $user['ID'])->first();
-        if(!$vip){
+        if (!$vip) {
             $vip['user_type'] = 0;
             $vip['startTime'] = NULL;
             $vip['endTime'] = NULL;
@@ -267,7 +278,7 @@ class QianyiController extends Controller
             DB::rollBack();
         }
 
-        if (isset($user_meta['chenxing_collect'])){
+        if (isset($user_meta['chenxing_collect'])) {
             $user_collect = [];
             foreach (explode(',', $user_meta['chenxing_collect']) as $item) {
                 $news = News::find($item);
@@ -319,21 +330,22 @@ class QianyiController extends Controller
         }
 
         DB::commit();
-        echo $user['ID'].'<br>';
+        echo $user['ID'] . '<br>';
     }
 
 
-    public function move_message(){
+    public function move_message()
+    {
 
         set_time_limit(360);
 
         $user = WpMessage::select(['user_id'])->groupBy('user_id')->get()->toArray();
-        foreach ($user as $value){
+        foreach ($user as $value) {
             DB::beginTransaction();
             $user_id = $value['user_id'];
             $message = WpMessage::where('user_id', $user_id)->get();
 
-            if($message){
+            if ($message) {
                 $message = $message->toArray();
 
                 foreach ($message as $item) {
@@ -345,7 +357,7 @@ class QianyiController extends Controller
                     ];
                 }
                 $mssage_res = Usercredit::insert($new_message);
-                if (!$mssage_res){
+                if (!$mssage_res) {
                     DB::rollBack();
                 }
             }
@@ -353,10 +365,6 @@ class QianyiController extends Controller
         }
 
     }
-
-
-
-
 
 
 }
