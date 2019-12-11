@@ -43,33 +43,51 @@ class NewsController extends Controller
         $new_query->where('status', 'normal');
         $cat_new_id = [];
         if (isset($request['category'])) {
-            $category_info = Category::where('alias', $request['category'])->with('relation_cat')->first();
-            $cat_new_id = $category_info->relation_cat->pluck('cat_new_id');
-            if (!empty($cat_new_id->toArray())) {
-                $new_query->whereIn('id', $cat_new_id);
-            }
+            $category_request = $request['category'];
+            $category_id = Category::where('alias', $request['category'])->value('id');
+//            $category_info = Category::where('alias', $request['category'])->with('relation_cat')->first();
+//            $cat_new_id = $category_info->relation_cat->pluck('cat_new_id');
+//            if (!empty($cat_new_id->toArray())) {
+//                $new_query->whereIn('id', $cat_new_id);
+//            }
+
+            $category_list = Category::where([
+//                ['parent_id', '=', $category_info['id']]
+                ['parent_id', '=', $category_id]
+            ])->pluck('name');
+
+            $new_query->whereHas('category', function ($query) use ($category_request) {
+                $query->where('alias',$category_request);
+            });
+
         }
         $tag_new_id = [];
         if (isset($request['tag'])) {
-            $tag_id = Tag::where('name', $request['tag'])->value('id');
-            $tag_new_id = TagNew::where('tag_id', $tag_id)->pluck('tag_new_id')->toArray();
-            $new_query->whereIn('id', $tag_new_id);
+            $tag_request = $request['tag'];
+//            $tag_id = Tag::where('name', $request['tag'])->value('id');
+//            $tag_new_id = TagNew::where('tag_id', $tag_id)->pluck('tag_new_id')->toArray();
+//            $new_query->whereIn('id', $tag_new_id);
+
+
+            $new_query->whereHas('tags', function ($query) use ($tag_request) {
+                $query->where('name',$tag_request);
+            });
+
         }
 
         if (isset($request['search'])) {
             $new_query->where('title', 'like', '%' . $request['search'] . '%');
         }
 
-        $new_query->select(['id', 'cover_img', 'title']);
+       $new_query->select(['id', 'cover_img', 'title','tag']);
         if (isset($request['orderby']) && in_array($request['orderby'], ['created_at', 'comment_count', 'views', 'like'])) {
             $new_query->orderBy($request['orderby'], 'desc');
         }
 
-        $data = $new_query->orderBy('id', 'desc')->simplePaginate(20);
-        $tag = $new_query->select('tag')->get();
+        $data = $new_query->orderBy('id', 'desc')->paginate(20);
         $tag_list = [];
-        foreach ($tag as $key => $item) {
-            $tag_list = array_merge($tag_list, json_decode($item->tag, JSON_UNESCAPED_UNICODE));
+        foreach ($data as $key => $item) {
+            $tag_list = array_merge($tag_list, json_decode($item->tag));
         }
 
         $recommend_tag = Tag::where('recommend', Tag::Tag_Recommend_On)->pluck('name');
@@ -111,5 +129,15 @@ class NewsController extends Controller
             'recommend_tag' => $recommend_tag
         ]);
 //        return view('templet');
+    }
+
+    public function test()
+    {
+        $roles = 'material';
+        $list = News::whereHas('category', function ($query) use ($roles) {
+            $query->where('alias',$roles);
+        })->get();
+
+        dd($list);
     }
 }
