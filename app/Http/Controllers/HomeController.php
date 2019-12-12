@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Libs\PasswordHash;
 use App\Models\User;
+use App\Models\UsersQQ;
 use App\Models\UsersWeibo;
 use App\Models\WebOption;
 use Illuminate\Http\Request;
@@ -119,8 +120,34 @@ class HomeController extends Controller
     public function qq_back(Request $request)
     {
         $user = Socialite::driver('qq')->user();
-        dump($user);
-        dd($request);
+        $qq_info = UsersQQ::where(['access_token' => $user->token, 'openid' => $user->id])->first();
+        if (!empty($qq_info)) { // 保存登录session
+            $user = User::find($qq_info['user_id']);
+            if ($user->status == 'lock') {
+                return redirect('/login')->withErrors(['用户已被锁定请联系站长']);
+            }
+            $user->last_login_time = Carbon::now()->toDateTimeString();
+            $user->save();
+            Auth::guard('users')->login($user);
+            return redirect(route('user'));
+        } else { // 注册新用户
+            DB::beginTransaction();
+
+            if ($user_info = User::create(['name' => $user->name,'avatar_url'=>$user->avatar])) {
+                if ($res = $user_info->user_qq()->create(["openid" => $user->id, 'access_token' => $user->token])) {
+                    DB::commit();
+                    Auth::guard('users')->login($user_info);
+                    return redirect(route('user'));
+                } else {
+                    DB::rollBack();
+                    return redirect('/login')->withErrors(['系统有误']);
+                }
+            } else {
+                return redirect('/login')->withErrors(['系统有误']);
+            }
+
+
+        }
     }
 
     public function weibo_back(Request $request)
@@ -128,7 +155,6 @@ class HomeController extends Controller
         $user = Socialite::driver('weibo')->user();
 
         $weibo_info = UsersWeibo::where(['access_token' => $user->token, 'openid' => $user->id])->first();
-//        $weibo_info = array();
         if (!empty($weibo_info)) { // 保存登录session
             $user = User::find($weibo_info['user_id']);
             if ($user->status == 'lock') {
@@ -155,28 +181,7 @@ class HomeController extends Controller
                 return redirect('/login')->withErrors(['系统有误']);
             }
 
-//            $user_info = new User(['name' => $user->name]);
-//            $user_info->name = $user->name;
-//            $user_res = $user_info->save();
-//
-//            if ($user_res) {
-//                $id = $user_info->id;
-//                $weibo_info = new UsersWeibo();
-//                $weibo_info->openid = $user->id;
-//                $weibo_info->user_id = $id;
-//                $weibo_info->access_token = $user->token;
-//                $res = $weibo_info->save();
-//                if($res){
-//                    DB::commit(); return redirect(route('user'));
-//                }else{
-//                    DB::rollBack();
-//                    return redirect('/login')->withErrors(['系统有误']);
-//                }
-//            }else{
-//                return redirect('/login')->withErrors(['系统有误']);
-//            }
 
         }
-//        dd($request);
     }
 }

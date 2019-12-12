@@ -35,5 +35,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\UsersWeibo', 'user_id', 'id');
     }
+    public function user_qq()
+    {
+        return $this->hasOne('App\Models\UsersQQ', 'user_id', 'id');
+    }
 
 }
