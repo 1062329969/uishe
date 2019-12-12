@@ -113,7 +113,7 @@ class UserController extends Controller
 
     public function loginout(){
         Auth::logout();
-        redirect(route('login'));
+       return  redirect(route('login'));
     }
 
     public function checkvip(){
