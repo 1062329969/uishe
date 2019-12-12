@@ -5,8 +5,8 @@ return [
         'client_secret' => 'your-app-secret',
         'redirect' => 'http://localhost/socialite/callback.php',
     ], 'qq' => [
-        'client_id' => '101832349',
-        'client_secret' => 'ce7138a50a789e6bc369911ca807b6fc',
+        'client_id' => '101837244',
+        'client_secret' => '11e10acc32adc496dbec6494374c8f50',
         'redirect' => 'http://uishe.06606.cn/login/qq_back',
     ], 'weibo' => [
         'client_id' => '473143190',
