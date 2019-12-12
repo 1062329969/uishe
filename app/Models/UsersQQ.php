@@ -9,4 +9,9 @@ class UsersQQ extends Model
     //
     protected $table = 'users_qq';
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'openid',
+        'access_token'
+    ];
 }
