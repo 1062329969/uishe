@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="user-menu-idbox fr">
                                     <span class="block user-menu-name fn14">{{ $auth_user->avatar_url }}</span>
-                                    <span class="block user-menu-id fn12">ID:10576527</span>
+                                    <span class="block user-menu-id fn12">ID:{{ $auth_user->id }}</span>
                                 </div>
                             </div>
                             @if($auth_user->user_type == 0)<!--vip type start-->
