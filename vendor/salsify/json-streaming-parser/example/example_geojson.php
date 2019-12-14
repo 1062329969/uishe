@@ -1,10 +1,12 @@
 <?php
 
-require_once dirname(__FILE__) . '/../vendor/autoload.php';
+declare(strict_types=1);
 
-$testfile = dirname(__FILE__) . '/../tests/data/example.geojson';
+require_once __DIR__.'/../vendor/autoload.php';
 
-$listener = new \JsonStreamingParser\Listener\GeoJsonListener(function ($item) {
+$testfile = __DIR__.'/../tests/data/example.geojson';
+
+$listener = new \JsonStreamingParser\Listener\GeoJsonListener(function ($item): void {
     var_dump($item);
 });
 $stream = fopen($testfile, 'r');

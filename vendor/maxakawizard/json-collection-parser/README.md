@@ -13,7 +13,7 @@
 Event-based parser for large JSON collections (consumes small amount of memory).
 Built on top of [JSON Streaming Parser](https://github.com/salsify/jsonstreamingparser)
 
-This package is compliant with [PSR-4](http://www.php-fig.org/psr/4/), [PSR-1](http://www.php-fig.org/psr/1/), and [PSR-2](http://www.php-fig.org/psr/2/).
+This package is compliant with [PSR-4](https://www.php-fig.org/psr/psr-4/) and [PSR-12](https://www.php-fig.org/psr/psr-12/).
 If you notice compliance oversights, please send a patch via pull request.
 
 ## Installation
@@ -23,7 +23,9 @@ composer require maxakawizard/json-collection-parser:~1.0
 ```
 
 ## Input data format
-Collection must be an array of objects.
+Data must be in one of following formats:
+
+### Array of objects (valid JSON)
 ```javascript
 [
     {
@@ -38,7 +40,17 @@ Collection must be an array of objects.
         "photos": [
             "1.jpg",
             "2.jpg"
-        ]
+        ],
+        "agents": [
+            {
+                "name": "Joe",
+                "email": "joe@realestate.email"
+            },
+            {
+                "name": "Sally",
+                "email": "sally@realestate.email"
+            }
+         ]
     },
     {
         "id": 729,
@@ -53,8 +65,68 @@ Collection must be an array of objects.
 ]
 ```
 
+### Sequence of object literals:
+```text
+{
+    "id": 78,
+    "dealType": "sale",
+    "propertyType": "townhouse"
+}
+{
+    "id": 729,
+    "dealType": "rent_long",
+    "propertyType": "villa"
+}
+{
+    "id": 5165,
+    "dealType": "rent_short",
+    "propertyType": "villa"
+}
+```
+
+### Sequence of object and array literals:
+```text
+[[{
+    "id": 78,
+    "dealType": "sale",
+    "propertyType": "townhouse"
+}]]
+{
+    "id": 729,
+    "dealType": "rent_long",
+    "propertyType": "villa"
+}
+[{
+    "id": 5165,
+    "dealType": "rent_short",
+    "propertyType": "villa"
+}]
+```
+
+### Sequence of object and array literals (some of objects in subarrays, comma-separated):
+```text
+[
+{
+    "id": 78,
+    "dealType": "sale",
+    "propertyType": "townhouse"
+},
+{
+    "id": 729,
+    "dealType": "rent_long",
+    "propertyType": "villa"
+}
+]
+{
+    "id": 5165,
+    "dealType": "rent_short",
+    "propertyType": "villa"
+}
+```
+
 ## Usage
-Function as callback:
+
+### Function as callback:
 ```php
 function processItem(array $item)
 {
@@ -66,7 +138,17 @@ $parser = new \JsonCollectionParser\Parser();
 $parser->parse('/path/to/file.json', 'processItem');
 ```
 
-Static method as callback:
+### Closure as callback:
+```php
+$items = [];
+
+$parser = new \JsonCollectionParser\Parser();
+$parser->parse('/path/to/file.json', function (array $item) use (&$items) {
+    $items[] = $item;
+});
+```
+
+### Static method as callback:
 ```php
 class ItemProcessor {
     public static function process(array $item)
@@ -80,7 +162,7 @@ $parser = new \JsonCollectionParser\Parser();
 $parser->parse('/path/to/file.json', ['ItemProcessor', 'process']);
 ```
 
-Instance method as callback:
+### Instance method as callback:
 ```php
 class ItemProcessor {
     public function process(array $item)
@@ -95,7 +177,7 @@ $processor = new \ItemProcessor();
 $parser->parse('/path/to/file.json', [$processor, 'process']);
 ```
 
-Receive items as objects:
+### Receive items as objects:
 ```php
 function processItem(\stdClass $item)
 {
@@ -108,7 +190,7 @@ $parser = new \JsonCollectionParser\Parser();
 $parser->parseAsObjects('/path/to/file.json', 'processItem');
 ```
 
-Pass stream as parser input:
+### Pass stream as parser input:
 ```php
 $stream = fopen('/path/to/file.json', 'r');
 

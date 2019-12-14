@@ -1,8 +1,10 @@
 <?php
 
-require_once dirname(__FILE__) . '/../vendor/autoload.php';
+declare(strict_types=1);
 
-$testfile = dirname(__FILE__) . '/../tests/data/example.json';
+require_once __DIR__.'/../vendor/autoload.php';
+
+$testfile = __DIR__.'/../tests/data/example.json';
 
 $listener = new \JsonStreamingParser\Listener\InMemoryListener();
 $stream = fopen($testfile, 'r');

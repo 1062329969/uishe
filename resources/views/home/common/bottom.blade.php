@@ -20,6 +20,21 @@
 <script type="text/javascript" src="{{ asset('js/global.V3.32.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.bxslider.min.v1.3.js') }}"></script>
 <script>
+    $(function () {
+        //信息提示
+        @if(session('status'))
+            layer.msg("{{session('status')}}",{icon:6});
+        @endif
+
+        //错误提示
+        @if(count($errors)>0)
+            @foreach($errors->all() as $error)
+                layer.msg("{{$error}}",{icon:5});
+                @break
+            @endforeach
+        @endif
+
+    })
     /*轮播banner*/
     $('#banner .banner-box').bxSlider({
         mode: 'fade',

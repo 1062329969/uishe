@@ -12,15 +12,15 @@ use Monolog\Logger as BaseLogger;
 use Psr\Log\LoggerInterface;
 
 /**
- * @method bool emergency($message, array $context = array())
- * @method bool alert($message, array $context = array())
- * @method bool critical($message, array $context = array())
- * @method bool error($message, array $context = array())
- * @method bool warning($message, array $context = array())
- * @method bool notice($message, array $context = array())
- * @method bool info($message, array $context = array())
- * @method bool debug($message, array $context = array())
- * @method bool log($message, array $context = array())
+ * @method void emergency($message, array $context = array())
+ * @method void alert($message, array $context = array())
+ * @method void critical($message, array $context = array())
+ * @method void error($message, array $context = array())
+ * @method void warning($message, array $context = array())
+ * @method void notice($message, array $context = array())
+ * @method void info($message, array $context = array())
+ * @method void debug($message, array $context = array())
+ * @method void log($message, array $context = array())
  */
 class Logger
 {
@@ -67,29 +67,16 @@ class Logger
      * @param array  $args
      *
      * @throws Exception
-     *
-     * @return bool
      */
-    public function __call($method, $args): bool
+    public function __call($method, $args): void
     {
-        $ret = call_user_func_array([$this->getLogger(), $method], $args);
-
-        // Monolog v2 always returns null
-        if (BaseLogger::API >= 2 && null === $ret) {
-            return true;
-        }
-
-        return $ret;
+        call_user_func_array([$this->getLogger(), $method], $args);
     }
 
     /**
      * Set logger.
      *
      * @author yansongda <me@yansongda.cn>
-     *
-     * @param LoggerInterface $logger
-     *
-     * @return Logger
      */
     public function setLogger(LoggerInterface $logger): Logger
     {
@@ -104,8 +91,6 @@ class Logger
      * @author yansongda <me@yansongda.cn>
      *
      * @throws Exception
-     *
-     * @return LoggerInterface
      */
     public function getLogger(): LoggerInterface
     {
@@ -122,8 +107,6 @@ class Logger
      * @author yansongda <me@yansongda.cn>
      *
      * @throws Exception
-     *
-     * @return BaseLogger
      */
     public function createLogger(): BaseLogger
     {
@@ -143,8 +126,6 @@ class Logger
      *
      * @author yansongda <me@yansongda.cn>
      *
-     * @param \Monolog\Formatter\FormatterInterface $formatter
-     *
      * @return $this
      */
     public function setFormatter(FormatterInterface $formatter): self
@@ -158,8 +139,6 @@ class Logger
      * getFormatter.
      *
      * @author yansongda <me@yansongda.cn>
-     *
-     * @return \Monolog\Formatter\FormatterInterface
      */
     public function getFormatter(): FormatterInterface
     {
@@ -174,8 +153,6 @@ class Logger
      * createFormatter.
      *
      * @author yansongda <me@yansongda.cn>
-     *
-     * @return \Monolog\Formatter\LineFormatter
      */
     public function createFormatter(): LineFormatter
     {
@@ -192,8 +169,6 @@ class Logger
      *
      * @author yansongda <me@yansongda.cn>
      *
-     * @param \Monolog\Handler\AbstractHandler $handler
-     *
      * @return $this
      */
     public function setHandler(AbstractHandler $handler): self
@@ -209,8 +184,6 @@ class Logger
      * @author yansongda <me@yansongda.cn>
      *
      * @throws \Exception
-     *
-     * @return AbstractHandler
      */
     public function getHandler(): AbstractHandler
     {
@@ -246,8 +219,6 @@ class Logger
      *
      * @author yansongda <me@yansongda.cn>
      *
-     * @param array $config
-     *
      * @return $this
      */
     public function setConfig(array $config): self
@@ -255,5 +226,15 @@ class Logger
         $this->config = array_merge($this->config, $config);
 
         return $this;
+    }
+
+    /**
+     * getConfig.
+     *
+     * @author yansongda <me@yansongda.cn>
+     */
+    public function getConfig(): array
+    {
+        return $this->config;
     }
 }

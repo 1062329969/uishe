@@ -11,16 +11,17 @@
         @if($tab == 'edit_info')
             <div id="edit_info">
                 <form id="edit_info" method="post" action="{{ route('saveself', ['tab' => $tab]) }}">
+                    {{ csrf_field() }}
                     <div class="form-group height_72">
                         <label for="display_name" class="edit_info_label">昵称：</label>
                         <div class="edit_info_form_item">
-                            <input type="text" class="form-control" name="display_name" value="">
+                            <input type="text" class="form-control" name="display_name" value="{{ Auth::user()->display_name }}">
                         </div>
                     </div>
                     <div class="form-group height_72">
                         <label for="display_name" class="edit_info_label">邮箱：</label>
                         <div class="edit_info_form_item">
-                            <input type="text" class="form-control" name="email" value="">
+                            <input type="text" class="form-control" name="email" value="{{ Auth::user()->email }}">
                         </div>
                     </div>
                     <div class="form-group height_72">
@@ -76,11 +77,6 @@
 
         .tag_on{background: #fff;border: 2px #f1f1f1 solid;border-bottom: 0; }
     </style>
-    <script>
-        $(function () {
 
-
-        })
-    </script>
 @endsection
 

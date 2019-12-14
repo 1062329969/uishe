@@ -11,6 +11,7 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <link href="{{ asset('css/global.V3.6.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/index/index.v4.15.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('static/home/layui/layui.all.js') }}"></script>
 </head>
 
 <body>

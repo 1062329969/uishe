@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+## 1.6.1 (2019-11-15)
+* Fix issue with nested arrays of objects 
+
+## 1.6.0 (2019-10-12)
+* Add support for more input formats (documents flow)
+* Make code compliant with PSR-12
+
 ## 1.5.0 (2019-02-03)
 * Add support for streams
 * Add `parseAsObjects` method
