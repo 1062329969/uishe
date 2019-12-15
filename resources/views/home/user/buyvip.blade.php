@@ -1,10 +1,6 @@
 @extends('layouts.user')
 @section('content')
     <?php $auth_user = Auth::user(); ?>
-    @foreach($errors->all() as $error)
-        <p style="color: red;padding-bottom: 10px;">注：{{$error}}</p>
-        @break
-    @endforeach
     <form method="post" action="{{ route('set_order') }}" class="myvip" id="buy_vip_form" style="height: auto">
         {{ csrf_field() }}
         @if( $auth_user->user_type == 3 )
