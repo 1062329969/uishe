@@ -163,6 +163,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Stevenyangecho\UEditor\UEditorServiceProvider::class,
         Overtrue\LaravelSocialite\ServiceProvider::class,
+        SunnyShift\Uploader\UploaderServiceProvider::class,
     ],
 
     /*

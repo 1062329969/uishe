@@ -184,4 +184,17 @@ class HomeController extends Controller
 
         }
     }
+
+    public function test()
+    {
+        $index_menu = WebOption::getIndexMenu();
+        $index_banner = WebOption::getBanner();
+        $index_option = WebOption::getOption('index', true);
+        ksort($index_option['op_value']);
+        return view('test', [
+            'index_menu' => $index_menu,
+            'index_banner' => $index_banner,
+            'index_option' => $index_option['op_value'],
+        ]);
+    }
 }

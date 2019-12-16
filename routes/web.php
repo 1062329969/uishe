@@ -42,6 +42,7 @@ Route::any('/socialite_login/{socialite}', function (Request $request, $category
 })->name('socialite_login');
 Route::any('/login/qq_back', 'HomeController@qq_back')->name('qq_back');
 Route::any('/login/weibo_back', 'HomeController@weibo_back')->name('weibo_back');
+Route::any('/test', 'HomeController@test')->name('test');
 
 
 Route::middleware(['auth:users'])->group(function () {
@@ -72,3 +73,7 @@ Route::any('/alipay/return_url', 'AlipayController@return_url')->name('alipay_re
 
 //文件上传接口，前后台共用
 Route::post('uploadImg', 'PublicController@uploadImg')->name('uploadImg');
+Route::get('upload', 'PublicController@upload')->name('upload');
+Route::post('upload/upload_file', 'PublicController@upload_file')->name('upload_file');
+
+\Overtrue\LaravelUploader\LaravelUploader::routes();
