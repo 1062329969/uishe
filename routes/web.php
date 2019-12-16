@@ -26,6 +26,10 @@ Route::get('/qianyi/move_posts', 'QianyiController@move_posts');
 Route::get('/qianyi/move_users', 'QianyiController@move_users');
 Route::get('/qianyi/move_message', 'QianyiController@move_message');
 
+Route::get('/cron/daily', 'CronController@daily');      // 每天执行一次
+Route::get('/cron/hourly', 'CronController@hourly');    // 每小时执行一次
+Route::get('/cron/halfDay', 'CronController@halfDay');    // 每半天执行一次
+Route::get('/cron/minutely', 'CronController@minutely');    // 每分钟执行一次
 
 Route::get('/', 'HomeController@index');
 Route::get('/{category}', function (Request $request, $category) {
