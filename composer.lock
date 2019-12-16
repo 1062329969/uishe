@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "704e5d6cb7384d00cc5bdffc53a937a6",
+    "content-hash": "bb70b460bb516c0beb7b2335e9af16b8",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -421,6 +421,58 @@
                 "trusted proxy"
             ],
             "time": "2019-09-03T16:45:42+00:00"
+        },
+        {
+            "name": "glooby/pexels",
+            "version": "0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glooby/pexels.git",
+                "reference": "b0f59c1bf817443178b5e8b9a069177b57c9d1f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glooby/pexels/zipball/b0f59c1bf817443178b5e8b9a069177b57c9d1f6",
+                "reference": "b0f59c1bf817443178b5e8b9a069177b57c9d1f6",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Glooby\\Pexels\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emil Kilhage",
+                    "email": "emil.kilhage@glooby.com",
+                    "homepage": "https://www.glooby.se"
+                }
+            ],
+            "description": "Pexels API Client for www.pexels.com",
+            "homepage": "https://www.glooby.se",
+            "keywords": [
+                "api",
+                "glooby",
+                "images",
+                "pexels",
+                "sdk"
+            ],
+            "time": "2019-04-17T08:26:50+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -4491,16 +4543,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.9.3",
+            "version": "1.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea"
+                "reference": "579bb7356d91f9456ccd505f24ca8b667966a0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/007c053ae6f31bba39dfa19a7726f56e9763bbea",
-                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/579bb7356d91f9456ccd505f24ca8b667966a0a7",
+                "reference": "579bb7356d91f9456ccd505f24ca8b667966a0a7",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4541,7 +4593,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2019-08-09T12:45:53+00:00"
+            "time": "2019-12-15T19:12:40+00:00"
         },
         {
             "name": "nunomaduro/collision",
