@@ -7,7 +7,7 @@
  */
 
 if (!function_exists('form_upload_images')) {
-    function form_upload_images()
+    function form_upload_images_bak()
     {
         $str = '<link rel="stylesheet" type="text/css" href="' . URL::asset('css/webuploader.css') . '">
 <script type="text/javascript" src="' . URL::asset('js/webuploader.min.js') . '"></script>
@@ -126,7 +126,6 @@ if (!function_exists('form_upload_images')) {
     {
         if (!$alpha_id) return false;
 
-
         $info = \App\Models\Upload::find($alpha_id);
 
         if (!$info) return false;
@@ -136,11 +135,10 @@ if (!function_exists('form_upload_images')) {
         full_path 包括文件名在内的文件绝对路径	raw_name 不包括扩展名在内的文件名部分	orig_name 上传的文件最初的文件名	client_name 上传的文件在客户端的文件名
         file_ext 文件扩展名包括.	file_size 图像大小，单位是kb	is_image 是否是图像1是,0不是	image_width	image_height	image_type 文件类型，即文件扩展名不包括.
         image_size_str 一个包含width和height的字符串	pid 图片父id	thumb 缩略图标识	crop_mode 裁剪模式,manual手动,auto自动	is_private 是否为内部文件 */
-
-        $new_info['alpha_id'] = $info['alpha_id'];
+        $new_info['id'] = $info['id'];
         $new_info['file_name'] = $info['file_name'];
         $new_info['full_path'] = $info['full_path'];
-        $new_info['client_name'] = $info['client_name'];
+        $new_info['client_name'] = $info['orig_name'];
         $new_info['file_ext'] = ltrim(strtolower($info['file_ext']), '.');
         $new_info['file_size'] = num_kbunit($info['file_size']);
 
@@ -149,6 +147,47 @@ if (!function_exists('form_upload_images')) {
         $new_info['image_height'] = $info['image_height'];
         $new_info['image_size_str'] = $info['image_size_str'];
         return $new_info;
+    }
+
+
+    /**
+     * 跟据关联id取得文件列表
+     *
+     * @param int $rid
+     * @return array
+     */
+    function get_list($rid, $use_model = false)
+    {
+        if ($use_model) {
+            $has_data = \App\Models\Multi_upload::with('upload_relation')->where('rid', $rid)->where('model', $use_model)->get();
+        }
+
+
+        if (!$has_data->toArray()) {
+            return false;
+        }
+        //p($has_data);
+
+        $new_data = array();
+        foreach ($has_data as $item) {
+            $new_info = array();
+
+            $new_info['id'] = $item->upload_relation->id;
+            $new_info['file_name'] = $item->title;
+            $new_info['full_path'] = $item->upload_relation->full_path;
+            $new_info['client_name'] = $item->upload_relation->title;
+            $new_info['file_ext'] = ltrim(strtolower($item->upload_relation->file_ext), '.');
+            $new_info['file_size'] = num_kbunit($item->upload_relation->file_size);
+
+//            $new_info['is_image'] = $item['is_image'];
+//            $new_info['image_width'] = $item['image_width'];
+//            $new_info['image_height'] = $item['image_height'];
+//            $new_info['image_size_str'] = $item['image_size_str'];
+
+            $new_data[] = $new_info;
+        }
+
+        return $new_data;
     }
 
 
@@ -176,6 +215,7 @@ if (!function_exists('form_upload_images')) {
                 $file_info = get_list($item);
             }
         }
+
         $params['input_name'] = $input_name;
         $params['use_model'] = $use_model;
 
@@ -191,9 +231,9 @@ if (!function_exists('form_upload_images')) {
 <div class="webuploadDbtn">删除</div></div>';
                 if ($limit) {
                     $input_str .= '<input type="hidden" name="' . $input_name . '" value="' . $v['full_path'] . '">';
-                    $input_str .= '<input type="hidden" name="' . $input_name . '_id" value="' . $v['alpha_id'] . '">';
+                    $input_str .= '<input type="hidden" name="' . $input_name . '_id" value="' . $v['id'] . '">';
                 } else {
-                    $input_str .= '<input type="hidden" name="' . $input_name . '[' . $v['alpha_id'] . ']" value="' . $v['client_name'] . '">';
+                    $input_str .= '<input type="hidden" name="' . $input_name . '[' . $v['id'] . ']" value="' . $v['client_name'] . '">';
                 }
                 $input_str .= '</div>';
             }
@@ -240,14 +280,14 @@ if (!function_exists('form_upload_images')) {
 
         return show_webUpload($input_name, $use_model, $rid, $params);
     }
-    
+
     function form_upload_attach($input_name, $use_model, $rid, $params = array())
     {
 
         $params['config_flag'] = isset($params['config_flag']) ? $params['config_flag'] : 'attach';
         $params['show_type'] = 'attach';
 
-        return show_webUpload($input_name, $use_model, $rid, $params,1);
+        return show_webUpload($input_name, $use_model, $rid, $params, 1);
     }
 
     function form_upload_image($input_name, $use_model, $rid, $params = array())

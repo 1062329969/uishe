@@ -9,7 +9,6 @@
 @include('home.common.top')
 <script src="/js/MyWebUploader.js"></script>
 <?php
-echo form_upload_image('assets','aaa','')
-
+echo form_upload_image('assets','aaa',['assets_id'=>7])
 ?>
 

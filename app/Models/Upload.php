@@ -58,7 +58,7 @@ class Upload extends Model
 
         $extension = $file->getClientOriginalExtension();
         $fileName = $upload_config['file_name'] . '.' . $extension;
-        $file->move($upload_config['upload_full_path'], $fileName);
+
 
         $upload_info = new Upload();
         $upload_info->model = $params['use_model'];
@@ -67,13 +67,14 @@ class Upload extends Model
         $upload_info->file_path = $upload_config['upload_path'];
         $upload_info->full_path = $upload_config['upload_path'] . '/' . $fileName;
         $upload_info->raw_name = $upload_config['file_name'];
-        $upload_info->orig_name = $upload_config['file_name'] . '.' . $extension;
+        $upload_info->orig_name = rtrim($file->getClientOriginalName(),'.' . $extension);
         $upload_info->client_name = $file->getClientOriginalName();
         $upload_info->file_ext = $extension;
         $upload_info->file_size = $params['size'];
         $res = $upload_info->save();
 
         if ($res) {
+            $file->move($upload_config['upload_full_path'], $fileName);
             return array(
                 'message' => $upload_info,
                 'code' => 0, // 上传结果代码，0表示成功，－1表示失败
