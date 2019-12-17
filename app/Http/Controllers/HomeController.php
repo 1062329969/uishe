@@ -12,7 +12,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Overtrue\LaravelSocialite\Socialite;
-use Overtrue\Socialite\SocialiteManager;
 use Validator;
 
 class HomeController extends Controller
@@ -114,6 +113,32 @@ class HomeController extends Controller
     public function socialite_login(Request $request, $socialite)
     {
         return Socialite::driver($socialite)->redirect();
+    }
+
+    public function socialite_bind(Request $request, $socialite)
+    {
+//        $user = Auth::user();
+        $url = route($socialite.'_bind');
+        return Socialite::driver($socialite)->with(['uid' =>1])->setRedirectUrl($url)->redirect();
+    }
+
+    public function qq_bind()
+    {
+        $user = Socialite::driver('qq')->user();
+        dd($user);
+        $qq_info = UsersQQ::where(['access_token' => $user->token, 'openid' => $user->id])->first();
+        if (!empty($qq_info)){
+            return redirect('/login')->withErrors(['账号已经绑定过']);
+        }else{ // 设置绑定
+            $user_qq = new UsersQQ();
+            $user_qq->openid = $user->id;
+            $user_qq->access_token = $user->token;
+            $user_qq->user_id = $uid;
+        }
+    }
+
+    public function weibo_bind()
+    {
 
     }
 
@@ -133,7 +158,7 @@ class HomeController extends Controller
         } else { // 注册新用户
             DB::beginTransaction();
 
-            if ($user_info = User::create(['name' => $user->name,'avatar_url'=>$user->avatar])) {
+            if ($user_info = User::create(['name' => $user->name, 'avatar_url' => $user->avatar])) {
                 if ($res = $user_info->user_qq()->create(["openid" => $user->id, 'access_token' => $user->token])) {
                     DB::commit();
                     Auth::guard('users')->login($user_info);
@@ -168,7 +193,7 @@ class HomeController extends Controller
         } else { // 注册新用户
             DB::beginTransaction();
 
-            if ($user_info = User::create(['name' => $user->name,'avatar_url'=>$user->avatar])) {
+            if ($user_info = User::create(['name' => $user->name, 'avatar_url' => $user->avatar])) {
                 if ($res = $user_info->user_weibo()->create(["openid" => $user->id, 'access_token' => $user->token])) {
                     DB::commit();
                     Auth::guard('users')->login($user_info);

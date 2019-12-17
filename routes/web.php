@@ -11,8 +11,8 @@
 |
 */
 
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,9 +43,15 @@ Route::any('/login', 'HomeController@login')->name('login');
 Route::any('/reg', 'HomeController@reg')->name('reg');
 Route::any('/socialite_login/{socialite}', function (Request $request, $category) {
     return (new HomeController())->socialite_login($request, $category);
-})->name('socialite_login');
+})->name('socialite_login')->where('category', implode('|', array('weibo', 'qq')));
+Route::any('/socialite_bind/{socialite}', function (Request $request, $category) {
+    return (new HomeController())->socialite_bind($request, $category);
+})->name('socialite_bind')->where('category', implode('|', array('weibo', 'qq')));
 Route::any('/login/qq_back', 'HomeController@qq_back')->name('qq_back');
 Route::any('/login/weibo_back', 'HomeController@weibo_back')->name('weibo_back');
+
+Route::any('/login/qq_bind', 'HomeController@qq_bind')->name('qq_bind');
+Route::any('/login/weibo_bind', 'HomeController@weibo_bind')->name('weibo_bind');
 Route::any('/test', 'HomeController@test')->name('test');
 
 
