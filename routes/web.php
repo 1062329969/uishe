@@ -80,4 +80,3 @@ Route::post('uploadImg', 'PublicController@uploadImg')->name('uploadImg');
 Route::get('upload', 'PublicController@upload')->name('upload');
 Route::post('upload/upload_file', 'PublicController@upload_file')->name('upload_file');
 
-\Overtrue\LaravelUploader\LaravelUploader::routes();

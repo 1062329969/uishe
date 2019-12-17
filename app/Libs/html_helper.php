@@ -116,7 +116,6 @@ if (!function_exists('form_upload_images')) {
     }
 
 
-
     /**
      * 跟据id取得图片信息
      *
@@ -182,7 +181,7 @@ if (!function_exists('form_upload_images')) {
 
         //单文件框固定值
         $params['swf_multi'] = false;
-        $input_str = '<div class="webupload-con" id="'.$input_name.'"><div class="uploader-list">';
+        $input_str = '<div class="webupload-con" id="' . $input_name . '"><div class="uploader-list">';
         if ($file_info)
             foreach ($file_info as $v) {
                 $input_str .= '<div class="item">
@@ -211,20 +210,20 @@ if (!function_exists('form_upload_images')) {
 //        dd($params);
         $str = "<script>
     $(function () {
-        powerWebUpload($('#".$params['input_name']."'),{
-            auto: false,limit:$limit, name: '".$params['input_name']."', allowType:'." . implode(' ', $config_info['allow']) . "',
+        powerWebUpload($('#" . $params['input_name'] . "'),{
+            auto: false,limit:$limit, name: '" . $params['input_name'] . "', allowType:'." . implode(' ', $config_info['allow']) . "',
             accept: {
 //                title: 'Images',
                 extensions: '" . implode(',', $config_info['allow']) . "',
 //                mimeTypes: 'image/*'
             },
             datas: {
-                use_model: '".$params['use_model']."',
-                show_type: '".$params['show_type']."',
+                use_model: '" . $params['use_model'] . "',
+                show_type: '" . $params['show_type'] . "',
 //                is_private: 1,
                 input_name: 'file',
-                  _token:'". csrf_token() ."',
-                config_flag: '".$params['config_flag']."',
+                  _token:'" . csrf_token() . "',
+                config_flag: '" . $params['config_flag'] . "',
             }
         });
     });
@@ -241,8 +240,26 @@ if (!function_exists('form_upload_images')) {
 
         return show_webUpload($input_name, $use_model, $rid, $params);
     }
+    
+    function form_upload_attach($input_name, $use_model, $rid, $params = array())
+    {
+
+        $params['config_flag'] = isset($params['config_flag']) ? $params['config_flag'] : 'attach';
+        $params['show_type'] = 'attach';
+
+        return show_webUpload($input_name, $use_model, $rid, $params,1);
+    }
 
     function form_upload_image($input_name, $use_model, $rid, $params = array())
+    {
+
+        $params['config_flag'] = isset($params['config_flag']) ? $params['config_flag'] : 'img';
+        $params['show_type'] = 'img';
+
+        return show_webUpload($input_name, $use_model, $rid, $params, 1);
+    }
+
+    function form_upload_images($input_name, $use_model, $rid, $params = array())
     {
 
         $params['config_flag'] = isset($params['config_flag']) ? $params['config_flag'] : 'img';
