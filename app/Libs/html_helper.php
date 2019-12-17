@@ -174,7 +174,7 @@ if (!function_exists('form_upload_images')) {
             $new_info['id'] = $item->upload_relation->id;
             $new_info['file_name'] = $item->title;
             $new_info['full_path'] = $item->upload_relation->full_path;
-            $new_info['client_name'] = $item->upload_relation->title;
+            $new_info['client_name'] = $item->upload_relation->orig_name;
             $new_info['file_ext'] = ltrim(strtolower($item->upload_relation->file_ext), '.');
             $new_info['file_size'] = num_kbunit($item->upload_relation->file_size);
 
