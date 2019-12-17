@@ -117,50 +117,49 @@ class HomeController extends Controller
 
     public function socialite_bind(Request $request, $socialite)
     {
-//        $user = Auth::user();
-        $url = route($socialite . '_bind');
-        dd($url);
-        return Socialite::driver($socialite)->with(['uid' => 1])->setRedirectUrl($url)->redirect();
+        $user = Auth::user();
+        $url = route($socialite . '_bind').'?uid='.$user->id;
+        return Socialite::driver($socialite)->with(['aaa'=>'bbbb'])->setRedirectUrl($url)->redirect();
     }
 
-    public function qq_bind()
+    public function qq_bind(Request $request)
     {
-        $user_info = Auth::user();
+        $uid = $request->uid;
         $user = Socialite::driver('qq')->user();
         $qq_info = UsersQQ::where(['access_token' => $user->token, 'openid' => $user->id])->first();
         if (!empty($qq_info)) {
-            return redirect('/login')->withErrors(['账号已经绑定过']);
+            return redirect(route('user'))->withErrors(['账号已经被绑定']);
         } else { // 设置绑定
             $user_qq = new UsersQQ();
             $user_qq->openid = $user->id;
             $user_qq->access_token = $user->token;
-            $user_qq->user_id = $user_info->id;
+            $user_qq->user_id = $uid;
             $res = $user_qq->save();
             if ($res) {
-                redirect('/user');
+               return  redirect(route('user'));
             } else {
-                return redirect('/user')->withErrors(['账户绑定失败']);
+                return redirect(route('user'))->withErrors(['账户绑定失败']);
             }
         }
     }
 
-    public function weibo_bind()
+    public function weibo_bind(Request $request)
     {
-        $user_info = Auth::user();
+        $uid = $request->uid;
         $user = Socialite::driver('weibo')->user();
         $qq_info = UsersWeibo::where(['access_token' => $user->token, 'openid' => $user->id])->first();
         if (!empty($qq_info)) {
-            return redirect('/login')->withErrors(['账号已经绑定过']);
+            return redirect(route('user'))->withErrors(['账号已经被绑定']);
         } else { // 设置绑定
             $user_weibo = new UsersWeibo();
             $user_weibo->openid = $user->id;
             $user_weibo->access_token = $user->token;
-            $user_weibo->user_id = $user_info->id;
+            $user_weibo->user_id = $uid;
             $res = $user_weibo->save();
             if ($res) {
-                redirect('/user');
+                return redirect(route('user'));
             } else {
-                return redirect('/user')->withErrors(['账户绑定失败']);
+                return redirect(route('user'))->withErrors(['账户绑定失败']);
             }
         }
     }
