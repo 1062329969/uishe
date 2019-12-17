@@ -271,9 +271,9 @@ function show_file_info(id) {
                 if (options.limit) {
                     // $hiddenInput.append('<input type="text" id="hiddenInput' + $(item)[0].id + file.id + '" class="hiddenInput" value="' + response.message + '" />');
                     $hiddenInput.append('<input type="hidden" name="' + options.name + '" value="' + response.file_info.full_path + '" />');
-                    $hiddenInput.append('<input type="hidden" name="' + options.name + '_id" value="' + response.file_info.alpha_id + '" />');
+                    $hiddenInput.append('<input type="hidden" name="' + options.name + '_id" value="' + response.file_info.id + '" />');
                 } else {
-                    $hiddenInput.append('<input type="text" id="hiddenInput' + $(item)[0].id + file.id + '" class="hiddenInput" name="' + options.name + '[' + response.file_info.alpha_id + ']" value="' + response.file_info.client_name + '" />')
+                    $hiddenInput.append('<input type="text" id="hiddenInput' + $(item)[0].id + file.id + '" class="hiddenInput" name="' + options.name + '[' + response.file_info.id + ']" value="' + response.file_info.client_name + '" />')
                 }
             }
 

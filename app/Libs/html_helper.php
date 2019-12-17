@@ -162,16 +162,15 @@ if (!function_exists('form_upload_images')) {
             $has_data = \App\Models\Multi_upload::with('upload_relation')->where('rid', $rid)->where('model', $use_model)->get();
         }
 
-
         if (!$has_data->toArray()) {
             return false;
         }
         //p($has_data);
 
         $new_data = array();
+
         foreach ($has_data as $item) {
             $new_info = array();
-
             $new_info['id'] = $item->upload_relation->id;
             $new_info['file_name'] = $item->title;
             $new_info['full_path'] = $item->upload_relation->full_path;
@@ -212,7 +211,7 @@ if (!function_exists('form_upload_images')) {
                     $file_info = array($file_info);
             } else {
                 //多文件
-                $file_info = get_list($item);
+                $file_info = get_list($item,$use_model);
             }
         }
 

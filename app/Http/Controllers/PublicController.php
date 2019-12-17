@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Multi_upload;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,9 @@ class PublicController extends Controller
 
     public function upload(Request $request)
     {
-        return StrategyResolver::resolveFromRequest($request, $request->get('strategy', 'default'))->upload();
+        $request_data = $request->all();
+        Multi_upload::save_info($request_data['assets'],'1','news');
+        dd($request_data);
     }
 
     public function upload_file1(Request $request)
