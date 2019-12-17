@@ -118,28 +118,51 @@ class HomeController extends Controller
     public function socialite_bind(Request $request, $socialite)
     {
 //        $user = Auth::user();
-        $url = route($socialite.'_bind');
-        return Socialite::driver($socialite)->with(['uid' =>1])->setRedirectUrl($url)->redirect();
+        $url = route($socialite . '_bind');
+        dd($url);
+        return Socialite::driver($socialite)->with(['uid' => 1])->setRedirectUrl($url)->redirect();
     }
 
     public function qq_bind()
     {
+        $user_info = Auth::user();
         $user = Socialite::driver('qq')->user();
-        dd($user);
         $qq_info = UsersQQ::where(['access_token' => $user->token, 'openid' => $user->id])->first();
-        if (!empty($qq_info)){
+        if (!empty($qq_info)) {
             return redirect('/login')->withErrors(['账号已经绑定过']);
-        }else{ // 设置绑定
+        } else { // 设置绑定
             $user_qq = new UsersQQ();
             $user_qq->openid = $user->id;
             $user_qq->access_token = $user->token;
-            $user_qq->user_id = $uid;
+            $user_qq->user_id = $user_info->id;
+            $res = $user_qq->save();
+            if ($res) {
+                redirect('/user');
+            } else {
+                return redirect('/user')->withErrors(['账户绑定失败']);
+            }
         }
     }
 
     public function weibo_bind()
     {
-
+        $user_info = Auth::user();
+        $user = Socialite::driver('weibo')->user();
+        $qq_info = UsersWeibo::where(['access_token' => $user->token, 'openid' => $user->id])->first();
+        if (!empty($qq_info)) {
+            return redirect('/login')->withErrors(['账号已经绑定过']);
+        } else { // 设置绑定
+            $user_weibo = new UsersWeibo();
+            $user_weibo->openid = $user->id;
+            $user_weibo->access_token = $user->token;
+            $user_weibo->user_id = $user_info->id;
+            $res = $user_weibo->save();
+            if ($res) {
+                redirect('/user');
+            } else {
+                return redirect('/user')->withErrors(['账户绑定失败']);
+            }
+        }
     }
 
     public function qq_back(Request $request)
