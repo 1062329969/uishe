@@ -25,7 +25,7 @@ return [
                     'b' => array(800, 800),
             ), */
         ),
-        'attachs' => array(
+        'attach' => array(
             'path' => '/storage/upload/attachs/',
             'allow' => array(
                 'doc',
