@@ -12,7 +12,7 @@
     @csrf
     <?php
 //    echo form_upload_images('assets', 'aaa', ['assets_id' => 7])
-    echo form_upload_images('assets', 'news', 1)
+    echo form_upload_attaches('assets', 'attach', 1)
     ?>
     <input type="submit" name="btn" value="提交">
 </form>

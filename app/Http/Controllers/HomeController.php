@@ -12,7 +12,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Overtrue\LaravelSocialite\Socialite;
-use Overtrue\Socialite\SocialiteManager;
 use Validator;
 
 class HomeController extends Controller
@@ -45,6 +44,10 @@ class HomeController extends Controller
         ]);
     }
 
+    public function test()
+    {
+        return view('test');
+    }
     public function templet()
     {
         return view('home.templet');
@@ -111,90 +114,4 @@ class HomeController extends Controller
         }
     }
 
-    public function socialite_login(Request $request, $socialite)
-    {
-        return Socialite::driver($socialite)->redirect();
-
-    }
-
-    public function qq_back(Request $request)
-    {
-        $user = Socialite::driver('qq')->user();
-        $qq_info = UsersQQ::where(['access_token' => $user->token, 'openid' => $user->id])->first();
-        if (!empty($qq_info)) { // 保存登录session
-            $user = User::find($qq_info['user_id']);
-            if ($user->status == 'lock') {
-                return redirect('/login')->withErrors(['用户已被锁定请联系站长']);
-            }
-            $user->last_login_time = Carbon::now()->toDateTimeString();
-            $user->save();
-            Auth::guard('users')->login($user);
-            return redirect(route('user'));
-        } else { // 注册新用户
-            DB::beginTransaction();
-
-            if ($user_info = User::create(['name' => $user->name,'avatar_url'=>$user->avatar])) {
-                if ($res = $user_info->user_qq()->create(["openid" => $user->id, 'access_token' => $user->token])) {
-                    DB::commit();
-                    Auth::guard('users')->login($user_info);
-                    return redirect(route('user'));
-                } else {
-                    DB::rollBack();
-                    return redirect('/login')->withErrors(['系统有误']);
-                }
-            } else {
-                return redirect('/login')->withErrors(['系统有误']);
-            }
-
-
-        }
-    }
-
-    public function weibo_back(Request $request)
-    {
-        $user = Socialite::driver('weibo')->user();
-
-        $weibo_info = UsersWeibo::where(['access_token' => $user->token, 'openid' => $user->id])->first();
-        if (!empty($weibo_info)) { // 保存登录session
-            $user = User::find($weibo_info['user_id']);
-            if ($user->status == 'lock') {
-                return redirect('/login')->withErrors(['用户已被锁定请联系站长']);
-            }
-            $user->last_login_time = Carbon::now()->toDateTimeString();
-            $user->save();
-            Auth::guard('users')->login($user);
-            return redirect(route('user'));
-
-        } else { // 注册新用户
-            DB::beginTransaction();
-
-            if ($user_info = User::create(['name' => $user->name,'avatar_url'=>$user->avatar])) {
-                if ($res = $user_info->user_weibo()->create(["openid" => $user->id, 'access_token' => $user->token])) {
-                    DB::commit();
-                    Auth::guard('users')->login($user_info);
-                    return redirect(route('user'));
-                } else {
-                    DB::rollBack();
-                    return redirect('/login')->withErrors(['系统有误']);
-                }
-            } else {
-                return redirect('/login')->withErrors(['系统有误']);
-            }
-
-
-        }
-    }
-
-    public function test()
-    {
-        $index_menu = WebOption::getIndexMenu();
-        $index_banner = WebOption::getBanner();
-        $index_option = WebOption::getOption('index', true);
-        ksort($index_option['op_value']);
-        return view('test', [
-            'index_menu' => $index_menu,
-            'index_banner' => $index_banner,
-            'index_option' => $index_option['op_value'],
-        ]);
-    }
 }

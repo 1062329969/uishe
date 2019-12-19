@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.1.3",
+        "barryvdh/laravel-ide-helper": "^2.6",
         "fideloper/proxy": "~4.0",
         "fx/translation": "^1.0",
         "glooby/pexels": "^0.1.4",

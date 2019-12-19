@@ -140,7 +140,7 @@ if (!function_exists('form_upload_images')) {
         $new_info['full_path'] = $info['full_path'];
         $new_info['client_name'] = $info['orig_name'];
         $new_info['file_ext'] = ltrim(strtolower($info['file_ext']), '.');
-        $new_info['file_size'] = num_kbunit($info['file_size']);
+        $new_info['file_size'] = num_kbunit($info['file_size'] / 1024);
 
         $new_info['is_image'] = $info['is_image'];
         $new_info['image_width'] = $info['image_width'];
@@ -174,9 +174,9 @@ if (!function_exists('form_upload_images')) {
             $new_info['id'] = $item->upload_relation->id;
             $new_info['file_name'] = $item->title;
             $new_info['full_path'] = $item->upload_relation->full_path;
-            $new_info['client_name'] = $item->upload_relation->title;
+            $new_info['client_name'] = $item->upload_relation->orig_name;
             $new_info['file_ext'] = ltrim(strtolower($item->upload_relation->file_ext), '.');
-            $new_info['file_size'] = num_kbunit($item->upload_relation->file_size);
+            $new_info['file_size'] = num_kbunit($item->upload_relation->file_size / 1024);
 
 //            $new_info['is_image'] = $item['is_image'];
 //            $new_info['image_width'] = $item['image_width'];
@@ -211,7 +211,7 @@ if (!function_exists('form_upload_images')) {
                     $file_info = array($file_info);
             } else {
                 //多文件
-                $file_info = get_list($item,$use_model);
+                $file_info = get_list($item, $use_model);
             }
         }
 
@@ -220,33 +220,66 @@ if (!function_exists('form_upload_images')) {
 
         //单文件框固定值
         $params['swf_multi'] = false;
-        $input_str = '<div class="webupload-con" id="' . $input_name . '"><div class="uploader-list">';
-        if ($file_info)
-            foreach ($file_info as $v) {
-                $input_str .= '<div class="item">
-<span onclick="" class="webuploadinfo">' . $v['client_name'] . '.' . $v['file_ext'] . '</span>
-<div class="webuploadinfodiv"><span class="webuploadsize">' . $v['file_size'] . '</span>
-<span class="webuploadstate">已上传</span>
-<div class="webuploadDbtn">删除</div></div>';
-                if ($limit) {
-                    $input_str .= '<input type="hidden" name="' . $input_name . '" value="' . $v['full_path'] . '">';
-                    $input_str .= '<input type="hidden" name="' . $input_name . '_id" value="' . $v['id'] . '">';
-                } else {
-                    $input_str .= '<input type="hidden" name="' . $input_name . '[' . $v['id'] . ']" value="' . $v['client_name'] . '">';
-                }
-                $input_str .= '</div>';
-            }
-        $input_str .= '</div></div>';
+
+        $input_str = flag_html($params, $file_info, $limit);
+
         $input_str .= webUpload_script($params, $limit);
 
         return $input_str;
     }
 
+    function flag_html($params, $file_info, $limit)
+    {
+        $config_flag = $params['config_flag'];
+        $input_name = $params['input_name'];
+        $input_str = '';
+        if ($config_flag == 'img') {
+            $input_str = '<div class="webupload-con" id="' . $input_name . '"><div class="uploader-list">';
+            if ($file_info)
+                foreach ($file_info as $v) {
+                    $input_str .= '<div class="item image_list">
+<div>
+<img src="' . $v['full_path'] . '" alt="">
+</div>
+<div class="webuploadinfodiv">
+<div class="webuploadDbtn">删除</div>
+</div>';
+                    if ($limit) {
+                        $input_str .= '<input type="hidden" name="' . $input_name . '" value="' . $v['full_path'] . '">';
+                        $input_str .= '<input type="hidden" name="' . $input_name . '_id" value="' . $v['id'] . '">';
+                    } else {
+                        $input_str .= '<input type="hidden" name="' . $input_name . '[' . $v['id'] . ']" value="' . $v['client_name'] . '">';
+                    }
+                    $input_str .= '</div>';
+                }
+            $input_str .= '</div></div>';
+        } else {
+            $input_str = '<div class="webupload-con" id="' . $input_name . '"><div class="uploader-list">';
+            if ($file_info)
+                foreach ($file_info as $v) {
+                    $input_str .= '<div class="item">
+<span onclick="show_file(\'' . $input_name . '\')" class="webuploadinfo">' . $v['client_name'] . '.' . $v['file_ext'] . '</span>
+<div class="webuploadinfodiv"><span class="webuploadsize">' . $v['file_size'] . '</span>
+<span class="webuploadstate">已上传</span>
+<div class="webuploadDbtn">删除</div></div>';
+                    if ($limit) {
+                        $input_str .= '<input type="hidden" name="' . $input_name . '" value="' . $v['full_path'] . '">';
+                        $input_str .= '<input type="hidden" name="' . $input_name . '_id" value="' . $v['id'] . '">';
+                    } else {
+                        $input_str .= '<input type="hidden" name="' . $input_name . '[' . $v['id'] . ']" value="' . $v['client_name'] . '">';
+                    }
+                    $input_str .= '</div>';
+                }
+            $input_str .= '</div></div>';
+        }
+
+        return $input_str;
+
+    }
+
     function webUpload_script($params, $limit = 0)
     {
         $config_info = config('webuploader.upload')[$params['config_flag']];
-//        dump($config_info);
-//        dd($params);
         $str = "<script>
     $(function () {
         powerWebUpload($('#" . $params['input_name'] . "'),{

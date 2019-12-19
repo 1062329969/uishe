@@ -15,7 +15,7 @@ class PublicController extends Controller
     public function upload(Request $request)
     {
         $request_data = $request->all();
-        Multi_upload::save_info($request_data['assets'],'1','news');
+        Multi_upload::save_info($request_data['assets'],'1','attach');
         dd($request_data);
     }
 
