@@ -320,5 +320,21 @@ if (!function_exists('getId')) {
             return false;
         }
     }
+
+    if (!function_exists('saveImageFromHttp')) {
+        function saveImageFromHttp($imgFromUrl, $newFileName) {
+            //如果$imgFromUrl地址为空，直接退出即可
+            if ($imgFromUrl == "") {return false;}
+            ob_start();//打开输出
+            readfile($imgFromUrl);//输出图片文件
+            $img = ob_get_contents();//得到浏览器输出
+            ob_end_clean();//清除输出并关闭
+            //$size = strlen($img);//得到图片大小
+            $fp2 = @fopen($newFileName, "a");
+            fwrite($fp2, $img);//向当前目录写入图片文件，并重新命名
+            fclose($fp2);
+            return $newFileName;//返回新的文件名
+        }
+    }
 }
 
