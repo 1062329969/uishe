@@ -11,6 +11,7 @@ use App\Models\CategoryNew;
 use App\Models\News;
 use App\Models\Tag;
 use App\Models\TagNew;
+use QL\QueryList;
 use ShaoZeMing\LaravelTranslate\Facade\Translate;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
@@ -21,16 +22,21 @@ class CronController extends Controller
     var $pexels_path_zip;
     var $pexels_path_uisheauto;
 
+
     public function __construct()
     {
         set_time_limit(3600);   // 最大执行时间 3600 一小时。
         $this->pexels_path = storage_path('collection'. DIRECTORY_SEPARATOR. 'pexels' . DIRECTORY_SEPARATOR . date('Ymd').DIRECTORY_SEPARATOR);//资源路径
         $this->pexels_path_zip = storage_path('collection'. DIRECTORY_SEPARATOR. 'pexels' . DIRECTORY_SEPARATOR . date('Ymd').'_zip'.DIRECTORY_SEPARATOR);//资源路径
         $this->pexels_path_uisheauto = storage_path('collection'. DIRECTORY_SEPARATOR. 'uisheauto' . DIRECTORY_SEPARATOR . date('Ymd').DIRECTORY_SEPARATOR);
+
+
+
     }
 
     public function daily(){
-        $this->getPexels();
+//        $this->getPexels();
+        $this->getOursketch();
     }
 
     public function getPexels(){
@@ -187,6 +193,29 @@ class CronController extends Controller
             return $zip_path;
         }else{
             return false;
+        }
+    }
+
+    public function getOursketch(){
+        $url = 'https://oursketch.com/resource?category=ui&page=1';
+        $cache_path = storage_path('collection'. DIRECTORY_SEPARATOR. 'oursketch_tmp');
+        $ql = QueryList::get($url, null, [
+            'cache' => $cache_path,
+        ]);
+
+        $rules = [
+            // 采集文章标题
+            'cover_img' => ['div.cover>a>img.lazyloaded','data-src'],
+            // 采集文章作者
+            'title' => ['.list-info>a','title'],
+            // 采集文章内容
+            'down_url' => ['.download','href']
+        ];
+
+        $range = '.resource-list>li';
+        $all = $ql->rules($rules)->range($range)->query()->getData();
+        foreach ($all as $item){
+            dump($item);
         }
     }
 }
