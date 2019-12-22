@@ -1,0 +1,729 @@
+a:3:{i:0;s:34430:"<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <link rel="short icon" href="/images/favicon.png">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+    <title>UI - Sketch 素材库</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <meta name="keywords" content="Sketch 素材">
+    <meta name="description" content="一个专注于 Sketch 分享交流的互动平台，更多 Sketch 相关资源汇聚地。让每一位 Sketch 使用者都能轻松掌握 Sketch。">
+</head>
+<body>
+    
+        <header class="header">
+            <div class="container">
+                <a href="/" class="logo">
+                    <img src="/images/logo.svg">
+                </a>
+                
+                <nav class="navigation">
+                    <ul>
+                    
+                        
+	
+		<li>
+			<a class="current" href="/resource">素材</a>
+		</li>
+	
+
+                    
+                        
+	
+		<li>
+			<a href="/plugin">插件</a>
+		</li>
+	
+
+                    
+                        
+	
+		<li>
+			<a href="/tool">工具</a>
+		</li>
+	
+
+                    
+                        
+	
+		<li>
+			<a href="/video">视频</a>
+		</li>
+	
+
+                    
+                    </ul>
+                </nav>
+                <div class="search">
+                    <form action="/search">
+                        <select name="t">
+                            <option value="resource" selected>素材</option>
+                            <option value="plugin">插件</option>
+                            <option value="tool">工具</option>
+                            <option value="video">视频</option>
+                        </select>
+                        <input type="text" name="q"">
+                        <button></button>
+                    </form>
+                </div>
+            </div>
+        </header>
+        
+            <div class="ticker-bar">
+                <div class="container">
+                    <div id="t" class="ticker">
+                        
+                            <a id="1" target="_blank" href="//weibo.com/3926680950/Igsv39oBq" class="update">Sketch 60 版本于 2019-11-12 发布，查看新版本特性</a>
+                        
+                            <a id="2" target="_blank" href="//weibo.com/3926680950" class="info">关注 Sketch 资源库 随时掌握 Sketch 相关动态，私信 &#34;字体包&#34; 还可获得全站资源配套字体包</a>
+                        
+                    </div>
+                    <div class="ticker-banner">
+                        <a target="_blank" href="" class="banner"><img id="" class="lazyload" src="/images/default.svg" data-src=""></a>
+                    </div>
+                </div>
+            </div>
+        
+    
+    
+    <main class="container">
+        <div class="list-banner">
+    <a target="_blank" href="//ibaotu.com/tupian/shiliangtubiao/6-0-0-0-0-1-c0-1.html?spm=epinv" class="banner"><img id="57" class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/ibaotu-icon-5@2x.jpg"></a>
+    <a target="_blank" href="//aliyun.com/jianzhan/website?userCode=em3wcqtm" class="banner"><img id="97" class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/aliyun.jpg"></a>
+    <a target="_blank" href="//cn.eagle.cool/?utm_medium=banner&amp;utm_source=sketchim&amp;utm_campaign=sketchim-inner" class="banner"><img id="75" class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/eagle.png"></a>
+    <a target="_blank" href="//ibaotu.com/taobao/?spm=huabiao" class="banner"><img id="59" class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/ibaotu-b2b@2x.jpg"></a>
+</div>
+        <div class="filter-bar">
+            <a href="/resource">全部</a>
+            
+				<a href="/resource?category=ui" class="current">UI</a>
+			
+				<a href="/resource?category=icon">图标</a>
+			
+				<a href="/resource?category=wireframe">线框</a>
+			
+				<a href="/resource?category=web">网页</a>
+			
+				<a href="/resource?category=button">按钮</a>
+			
+				<a href="/resource?category=desktop">桌面</a>
+			
+				<a href="/resource?category=real">实物</a>
+			
+				<a href="/resource?category=form">表单</a>
+			
+				<a href="/resource?category=logo">标志</a>
+			
+				<a href="/resource?category=illustration">插画</a>
+			
+        </div>
+        <ul class="sort-type">
+			<li class="current">
+				<a href="/resource?category=ui" class="new">最新</a>
+			</li>
+			<li>
+				<a href="/resource?category=ui&amp;sort=hot" class="hot">热门</a>
+			</li>
+            <li>
+				<a href="/resource?category=ui&amp;sort=like" class="sort-like">点赞</a>
+			</li>
+		</ul>
+        <ul class="list resource-list">
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1995" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/fshn-fashion-e-commerce-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							
+							<a id="1995" href="//cdn.oursketch.com/FSHN Fashion E-Commerce App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1995" title="FSHN 时尚电商应用界面" class="list-title">FSHN 时尚电商应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/setyono-dwi" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/setyono-dwi.png?imageView2/2/w/48/q/100">Setyono Dwi</a>
+							<span class="list-time" title="2019-10-30 18:11">2个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1990" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/team-management-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							
+							<a id="1990" href="//cdn.oursketch.com/Team Management App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1990" title="团队管理应用界面" class="list-title">团队管理应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/marta-karbowska" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/marta-karbowska.jpg?imageView2/2/w/48/q/100">Marta Karbowska</a>
+							<span class="list-time" title="2019-09-05 11:09">3个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1989" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/bmi-calculator-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							
+							<a id="1989" href="//cdn.oursketch.com/BMI Calculator App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1989" title="BMI 计算器应用界面" class="list-title">BMI 计算器应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/aryo-pamungkas" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/aryo-pamungkas.jpg?imageView2/2/w/48/q/100">Aryo Pamungkas</a>
+							<span class="list-time" title="2019-09-04 15:22">3个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1988" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/mobile-banking-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							
+							<a id="1988" href="//cdn.oursketch.com/Mobile Banking App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1988" title="移动银行应用界面" class="list-title">移动银行应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/mateusz-jurkiewicz" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/mateusz-jurkiewicz.jpg?imageView2/2/w/48/q/100">Mateusz Jurkiewicz</a>
+							<span class="list-time" title="2019-09-03 16:46">3个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1987" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/finance-dashboard-concept-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							
+							<a id="1987" href="//cdn.oursketch.com/Finance Dashboard Concept UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1987" title="金融仪表板概念设计界面" class="list-title">金融仪表板概念设计界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/liviu-ang" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/liviu-ang.jpg?imageView2/2/w/48/q/100">Liviu Ang</a>
+							<span class="list-time" title="2019-09-02 17:43">3个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1985" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/time-tracking-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1UTKeqeRKPMA6AqPFfhhReQ" title="百度网盘" class="netdisk"></a>
+							<a id="1985" href="//cdn.oursketch.com/Time Tracking App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1985" title="时间追踪应用界面" class="list-title">时间追踪应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/kamil-tomaszek" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/kamil-tomaszek.jpg?imageView2/2/w/48/q/100">Kamil Tomaszek</a>
+							<span class="list-time" title="2019-08-06 17:52">4个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1984" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/libra-facebook-cryptocurrency-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1rqAkB-pJog4jX_eEB6pbTg" title="百度网盘" class="netdisk"></a>
+							<a id="1984" href="//cdn.oursketch.com/Libra Facebook Cryptocurrency App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1984" title="Libra Facebook 加密货币应用界面" class="list-title">Libra Facebook 加密货币应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/prateek-saini" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/prateek-saini.jpg?imageView2/2/w/48/q/100">Prateek Saini</a>
+							<span class="list-time" title="2019-07-08 16:13">5个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1976" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/ios-simple-calendar-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1vVr12fuff8uNf5VeGMYvMQ" title="百度网盘" class="netdisk"></a>
+							<a id="1976" href="//cdn.oursketch.com/iOS Simple Calendar App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1976" title="iOS 简约日历应用界面" class="list-title">iOS 简约日历应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/vitaly-silkin" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/vitaly-silkin.jpg?imageView2/2/w/48/q/100">Vitaly Silkin</a>
+							<span class="list-time" title="2019-05-15 18:41">7个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1975" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/easy-park-ui-kit-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1YADvj6hFCYXhm_H33mWJAA" title="百度网盘" class="netdisk"></a>
+							<a id="1975" href="//cdn.oursketch.com/Easy Park UI Kit.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1975" title="Easy Park 界面包" class="list-title">Easy Park 界面包</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/pria-kusumawardana" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/pria-kusumawardana.png?imageView2/2/w/48/q/100">Pria Kusumawardana</a>
+							<span class="list-time" title="2019-05-15 17:49">7个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1963" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/apartments-search-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1mX7QnVdcqjC-m3hRzNYvgw" title="百度网盘" class="netdisk"></a>
+							<a id="1963" href="//cdn.oursketch.com/Apartments Search App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1963" title="公寓搜索结果界面" class="list-title">公寓搜索结果界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/d5im" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/d5im.png?imageView2/2/w/48/q/100">D5im</a>
+							<span class="list-time" title="2019-04-01 16:13">8个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1956" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/roomate-house-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1yXIfrBFFn5E5Fdas9JFZMw" title="百度网盘" class="netdisk"></a>
+							<a id="1956" href="//cdn.oursketch.com/Roomate House App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1956" title="Roomate 房产应用界面" class="list-title">Roomate 房产应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/uicube" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/uicube.png?imageView2/2/w/48/q/100">uicube</a>
+							<span class="list-time" title="2019-03-19 21:23">9个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1954" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/globe-travel-app-ui-kit-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1RzjDRNsTQXtkxmy91DwFYQ" title="百度网盘" class="netdisk"></a>
+							<a id="1954" href="//cdn.oursketch.com/Globe Travel App UI Kit.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1954" title="Globe 旅行应用界面包" class="list-title">Globe 旅行应用界面包</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/bogdan-pitiriciu" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/bogdan-pitiriciu.jpg?imageView2/2/w/48/q/100">Bogdan Pitiriciu</a>
+							<span class="list-time" title="2019-03-13 23:29">9个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1953" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/eggplore-simple-map-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1EDqWM2UxQ_pSE_G10YTLzA" title="百度网盘" class="netdisk"></a>
+							<a id="1953" href="//cdn.oursketch.com/Eggplore Simple Map App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1953" title="Eggplore 简约地图应用界面" class="list-title">Eggplore 简约地图应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/eggvenger" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/eggvenger.png?imageView2/2/w/48/q/100">Eggvenger</a>
+							<span class="list-time" title="2019-03-12 16:09">9个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1952" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/eggplore-ar-navigation-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1Wv2EifU9NvsxWMxyMNUVAw" title="百度网盘" class="netdisk"></a>
+							<a id="1952" href="//cdn.oursketch.com/Eggplore AR Navigation App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1952" title="Eggplore AR 导航应用界面" class="list-title">Eggplore AR 导航应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/eggvenger" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/eggvenger.png?imageView2/2/w/48/q/100">Eggvenger</a>
+							<span class="list-time" title="2019-03-12 15:42">9个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1951" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/zingo-social-app-ui-kit-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1rK5ch8qHwUo3qrbxSv4aLg" title="百度网盘" class="netdisk"></a>
+							<a id="1951" href="//cdn.oursketch.com/Zingo Social App UI Kit.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1951" title="Zingo 社交应用界面包" class="list-title">Zingo 社交应用界面包</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/hoangpts" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/hoangpts.jpg?imageView2/2/w/48/q/100">Hoangpts</a>
+							<span class="list-time" title="2019-03-12 15:00">9个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1948" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/calzie-smart-calendar-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1yOu8cFN0hx0rKXsX5U1xdA" title="百度网盘" class="netdisk"></a>
+							<a id="1948" href="//cdn.oursketch.com/Calzie Smart Calendar App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1948" title="Calzie 智能日历应用界面" class="list-title">Calzie 智能日历应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/nitya-gupta" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/nitya-gupta.jpg?imageView2/2/w/48/q/100">Nitya Gupta</a>
+							<span class="list-time" title="2019-03-06 17:55">9个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1947" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/vola-cars-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/11x_g4U-Dyn8Zcvwsd-FlqA" title="百度网盘" class="netdisk"></a>
+							<a id="1947" href="//cdn.oursketch.com/Vola Cars App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1947" title="Vola Cars 汽车类应用界面" class="list-title">Vola Cars 汽车类应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/alternatedesign" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/alternatedesign.png?imageView2/2/w/48/q/100">alternatedesign</a>
+							<span class="list-time" title="2019-03-05 22:22">9个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1943" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/wezgo-bicycle-sharing-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1WwP8ShjPH87yOoW_d3_Xiw" title="百度网盘" class="netdisk"></a>
+							<a id="1943" href="//cdn.oursketch.com/wezgo Bicycle Sharing App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1943" title="wezgo 共享单车应用界面" class="list-title">wezgo 共享单车应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/rian-hamidjoyo" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/rian-hamidjoyo.jpg?imageView2/2/w/48/q/100">Rian Hamidjoyo</a>
+							<span class="list-time" title="2019-03-01 15:52">9个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1938" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/airport-app-concept-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/13_4478bcFwKX8d0yrNQLcg" title="百度网盘" class="netdisk"></a>
+							<a id="1938" href="//cdn.oursketch.com/Airport App Concept.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1938" title="机场应用概念设计" class="list-title">机场应用概念设计</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/kirill-shapoval" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/kirill-shapoval.jpg?imageView2/2/w/48/q/100">Kirill Shapoval</a>
+							<span class="list-time" title="2019-02-22 17:14">10个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1937" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/truks-e-commerce-app-ui-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/16R1tfPD9-ZryzfL5ajuvtA" title="百度网盘" class="netdisk"></a>
+							<a id="1937" href="//cdn.oursketch.com/Truks E-Commerce App UI.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1937" title="Truks 电商应用界面" class="list-title">Truks 电商应用界面</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/dylan-mullins" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/dylan-mullins.jpg?imageView2/2/w/48/q/100">Dylan Mullins</a>
+							<span class="list-time" title="2019-02-22 16:36">10个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1928" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/amazon-app-fresh-ui-design-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1S5t9y1ea3OkTxSlEifV3xw" title="百度网盘" class="netdisk"></a>
+							<a id="1928" href="//cdn.oursketch.com/Amazon App Fresh UI Design.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1928" title="Amazon 应用清新界面设计" class="list-title">Amazon 应用清新界面设计</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/lorenzo-perniciaro" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/lorenzo-perniciaro.jpg?imageView2/2/w/48/q/100">Lorenzo Perniciaro</a>
+							<span class="list-time" title="2019-01-16 16:00">11个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1927" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/soundcloud-ios-app-redesign-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1nWM3q_Unb1WwtnVHo6QICQ" title="百度网盘" class="netdisk"></a>
+							<a id="1927" href="//cdn.oursketch.com/SoundCloud iOS App Redesign.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1927" title="SoundCloud iOS 应用再设计" class="list-title">SoundCloud iOS 应用再设计</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/lorenzo-perniciaro" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/lorenzo-perniciaro.jpg?imageView2/2/w/48/q/100">Lorenzo Perniciaro</a>
+							<span class="list-time" title="2019-01-16 15:35">11个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1926" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/triveo-travel-booking-app-concept-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1u1QGYY2yYeR5jHK2uSt2uQ" title="百度网盘" class="netdisk"></a>
+							<a id="1926" href="//cdn.oursketch.com/triveo Travel Booking App Concept.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1926" title="triveo 旅行预定应用概念设计" class="list-title">triveo 旅行预定应用概念设计</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/shadhin-arafat" class="list-user"><img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/shadhin-arafat.jpg?imageView2/2/w/48/q/100">Shadhin Arafat</a>
+							<span class="list-time" title="2019-01-16 15:20">11个月前</span>
+						</div>
+					</div>
+				</li>
+			
+				<li>
+					<div class="cover">
+						<a href="/resource/1912" target="_blank">
+							<img class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/minty-music-app-ui-kit-thumb.jpg?imageView2/2/w/560/q/100">
+						</a>
+						<div class="cover-items resource">
+							<a target="_blank" href="//pan.baidu.com/s/1vVqSr-lcBlYZ9NT6SlmpsQ" title="百度网盘" class="netdisk"></a>
+							<a id="1912" href="//cdn.oursketch.com/Minty Music App UI Kit.sketch" title="本地下载" class="download"></a>
+						</div>
+					</div>
+					<div class="list-info">
+						<a target="_blank" href="/resource/1912" title="Minty 音乐应用界面包" class="list-title">Minty 音乐应用界面包</a>
+						<div class="list-item">
+							<a target="_blank" href="/author/aurora" class="list-user"><span class="list-user-no-avatar">A</span>Aurora</a>
+							<span class="list-time" title="2018-11-16 17:43">1年前</span>
+						</div>
+					</div>
+				</li>
+			
+		</ul>
+        
+    
+        <div class="pagination">
+            
+            
+                
+                    
+                        <a class="current" href="/resource?category=ui&amp;page=1">1</a>
+                    
+                
+            
+                
+                    
+                        
+                            <a href="/resource?category=ui&amp;page=2">2</a>
+                        
+                    
+                
+            
+                
+                    
+                        
+                            <a href="/resource?category=ui&amp;page=3">3</a>
+                        
+                    
+                
+            
+                
+                    
+                        
+                            <a href="/resource?category=ui&amp;page=4">4</a>
+                        
+                    
+                
+            
+                
+                    
+                        
+                            <a href="/resource?category=ui&amp;page=5">5</a>
+                        
+                    
+                
+            
+                
+                    
+                        
+                            <a class="none">...</a>
+                        
+                    
+                
+            
+                
+                    
+                        
+                            <a href="/resource?category=ui&amp;page=25">25</a>
+                        
+                    
+                
+            
+                
+                    
+                        
+                            <a href="/resource?category=ui&amp;page=26">26</a>
+                        
+                    
+                
+            
+            
+                <a href="/resource?category=ui&amp;page=2">></a>
+            
+        </div>
+    
+
+        <div class="simple-banner flex-banner">
+    <a target="_blank" href="//ibaotu.com/taobao/2-0-0-0-0-1.html?format_type=0&amp;spm=sketchdb&amp;utm_source=BD&amp;utm_medium=sketch%E5%BA%95%E9%83%A8&amp;utm_camp" class="banner"><img id="107" class="lazyload" src="/images/default.svg" data-src="//cdn.oursketch.com/baotu_bottom_bar_1911.jpg"></a>
+</div>
+    </main>
+
+    
+        <footer class="footer">
+            <div class="container">
+                <div class="link">
+                    <div class="link-item">
+                       <h1>联系</h1>
+                        <a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=307720908&site=qq&menu=yes">意见反馈</a>
+                    </div>
+                    <div class="link-item">
+                       <h1>服务</h1>
+                        <a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=307720908&site=qq&menu=yes">商务合作</a>
+                        <a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=307720908&site=qq&menu=yes">资源收录</a>
+                        <a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=307720908&site=qq&menu=yes">友链互换</a>
+                    </div>
+                    
+                </div>
+                <div class="group">
+                    <h1>QQ 群</h1>
+                    <select id="groups">
+                        
+                        <option value="3">交流 3 群 575219053</option>
+                        
+                        <option value="2">交流 2 群 47826675</option>
+                        
+                        <option value="1">交流 1 群 16598759</option>
+                        
+                    </select>
+                    <p>入群需回答验证问题 Sketch 是什么？遇群满员请添加其它分群</p>
+                </div>
+                <div class="copyright">
+                    <a>Copyright &copy; 2015-2019 OurSketch. All rights reserved.</a>
+                    <a target="_blank" href="//www.miibeian.gov.cn">粤ICP备18069271号-2</a>
+                </div>
+            </div>
+        </footer>
+    
+    
+        
+            <script src="/js/lazysizes.js"></script>
+            <script src="/js/axios.js"></script>
+            
+            
+                <script src="/js/ticker.js"></script>
+            
+            <script src="/js/common.js"></script>
+            
+                <script>new Scroll('t', 56, 7);</script>
+            
+            
+        
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?70a1d60c3498fd09334af15ab61ef4d8";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    
+</body>
+</html>";i:1;a:0:{}i:2;N;}
