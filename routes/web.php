@@ -75,6 +75,7 @@ Route::middleware(['auth:users'])->group(function () {
     Route::get('/user/downlog', 'UserController@downlog')->name('downlog');
     Route::get('/user/loginout', 'UserController@loginout')->name('loginout');
 
+    Route::get('/user/fav_check', 'UserController@dofav_check');
 
     Route::post('/order/set_order', 'OrderController@set_order')->name('set_order');
 });

@@ -1,10 +1,29 @@
 <link href="{{ asset('css/top_simple.v3.9.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/element/element-view.v3.7.css') }}" rel="stylesheet" type="text/css">
 @include('home.common.top')
+<style>
+    .png_tags{
+        border: 1px solid #a060f5;
+        padding: 5px 10px;
+        border-radius: 10px;
+        color: #fff;
+        background: #9862f4;
+        background: -webkit-linear-gradient(left top, #7371ef , #a55ef6); /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(bottom right, #7371ef , #a55ef6); /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(bottom right, #7371ef , #a55ef6); /* Firefox 3.6 - 15 */
+        background: linear-gradient(to bottom right, #7371ef , #a55ef6); /* 标准的语法 */
+    }
+</style>
 <div class="main"> <!--location start-->
     <div class="location-box oh">
-        <div class="location fn12"><span>当前位置：</span> <a href="https://www.51miz.com/sucai/">设计素材</a> <span>/</span><a
-                    href="https://www.51miz.com/yishuzi/">艺术字</a> <span>/</span><span>当前作品</span></div>
+        <div class="location fn12">
+            <span>当前位置：</span>
+            <a href="https://www.51miz.com/sucai/">设计素材</a>
+            <span>/</span>
+            <a href="https://www.51miz.com/yishuzi/">艺术字</a>
+            <span>/</span>
+            <span>当前作品</span>
+        </div>
     </div><!--location end-->
     <div class="main-content"> <!--detail start--> <!--[if lte IE 8]>
         <style>
@@ -67,9 +86,8 @@
                 </script>
                 <div class="tags fn14">
                     <p style="display: inline;">
-                        <span>标签:</span>
                         @foreach(json_decode($new['tag'], true) as $new_tag)
-                            <a href="{{ url('/tag/'.$new_tag)}}">{{ $new_tag }}</a>
+                            <a style="color: #fff;" class="png_tags" href="{{ url('/tag/'.$new_tag)}}">{{ $new_tag }}</a>
                         @endforeach
                     </p>
                 </div>
@@ -202,6 +220,5 @@ $(".bx-next,.bx-nexts").click(function () {
 });
 
 </script>
-
 </body>
 </html>
