@@ -205,17 +205,46 @@ class CronController extends Controller
 
         $rules = [
             // 采集文章标题
-            'cover_img' => ['div.cover>a>img.lazyloaded','data-src'],
+            'cover_img' => ['.cover a img','data-src'],
             // 采集文章作者
             'title' => ['.list-info>a','title'],
             // 采集文章内容
-            'down_url' => ['.download','href']
+            'down_url' => ['.download','href'],
+            'detail_url' => ['.list-info>a','href']
         ];
 
         $range = '.resource-list>li';
         $all = $ql->rules($rules)->range($range)->query()->getData();
-        foreach ($all as $item){
-            dump($item);
+        $ql->destruct();
+
+        /*$rules_detail = [
+            'content' => ['.content img', 'data-src']
+        ];*/
+//        $ql = QueryList::rules($rules_detail);
+        $ql = new QueryList();
+        foreach ($all as $item) {
+            $detail_url = 'https://oursketch.com' . $item['detail_url'];
+            $detail_url = $ql->get($detail_url)->find('.content img')->attr('data-src');
+            $ql->destruct();
+
+            $news_id = News::insertGetId([
+                'admin_id' => 1,
+                'title' => $title,
+                'content' => '<img class="alignnone size-medium" src="'. $content_img .'" width="'. $item['width'] .'" height="'. $item['height'] .'" />',
+                'status' => News::Status_Normal,
+                'comment_status' => News::Comment_Status_On,
+                'cover_img' => $cover_img,
+                'down_type' => News::Down_Type_Login,
+                'down_level' => 0,
+                'down_price' => 0,
+                'down_url' => $zip_path,
+                'category_id' => $category->id,
+                'category' => $category->alias,
+                'tag_id' => json_encode($tag_id),
+                'tag' => json_encode($tag_zh, JSON_UNESCAPED_UNICODE),
+            ]);
+
+            dd($detail_url);
         }
     }
 }
