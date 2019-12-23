@@ -35,6 +35,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/{category}', function (Request $request, $category) {
     return (new NewsController())->category($request, $category);
 })->where('category', implode('|', $category)); // 正则表达式 | 或
+Route::get('/t', 'HomeController@t');
 Route::get('/huiyuan', 'HomeController@huiyuan');
 Route::get('/{id}.html', 'NewsController@item')->where('id', '[0-9]+');
 Route::get('/tag/{tag}', 'NewsController@tag');
