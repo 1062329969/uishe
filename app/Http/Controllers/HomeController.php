@@ -114,4 +114,46 @@ class HomeController extends Controller
         }
     }
 
+    public function t()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://cdn.oursketch.com/FSHN%20Fashion%20E-Commerce%20App%20UI.sketch",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_HTTPHEADER => array(
+                "authority: cdn.oursketch.com,method: GET,path: /Eggplore%20Simple%20Map%20App%20UI.sketch,scheme: https",
+                "Postman-Token: 11208879-c82c-4648-93f7-6c3f008aaa98",
+                "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+                "accept-encoding: gzip, deflate, br",
+                "accept-language: zh-CN,zh;q=0.9",
+                "cache-control: no-cache,no-cache",
+                "cookie: Hm_lvt_70a1d60c3498fd09334af15ab61ef4d8=1576941384; Hm_lpvt_70a1d60c3498fd09334af15ab61ef4d8=1577023784",
+                "pragma: no-cache",
+                "referer: https://oursketch.com/resource?category=ui",
+                "sec-fetch-mode: navigate",
+                "sec-fetch-site: same-site",
+                "sec-fetch-user: ?1",
+                "upgrade-insecure-requests: 1",
+                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
+    }
 }
