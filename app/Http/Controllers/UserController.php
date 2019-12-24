@@ -151,8 +151,12 @@ class UserController extends Controller
                 ['collect_id', '=', $id],
             ])->delete();
         }elseif($do == 'check'){
+            $user = Auth::user('users');
+            if(!$user){
+                return response()->json(['status' => 0]);
+            }
             $uc = UsersCollect::where([
-                ['user_id', '=', Auth::user('users')->id],
+                ['user_id', '=', $user->id],
                 ['collect_id', '=', $id],
             ])->first();
         }

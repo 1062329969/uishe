@@ -3,6 +3,15 @@
 @include('home.common.top')
 <style>
     .png_tags{
+        padding: 5px 10px;
+        border-radius: 10px;
+        color: #fff;
+        background: -webkit-linear-gradient(left top, #fff , #848484); /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(bottom right, #fff , #848484); /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(bottom right, #fff , #848484); /* Firefox 3.6 - 15 */
+        background: linear-gradient(to bottom right, #fff , #848484); /* 标准的语法 */
+    }
+    .png_tags_on{
         border: 1px solid #a060f5;
         padding: 5px 10px;
         border-radius: 10px;
@@ -12,6 +21,35 @@
         background: -o-linear-gradient(bottom right, #7371ef , #a55ef6); /* Opera 11.1 - 12.0 */
         background: -moz-linear-gradient(bottom right, #7371ef , #a55ef6); /* Firefox 3.6 - 15 */
         background: linear-gradient(to bottom right, #7371ef , #a55ef6); /* 标准的语法 */
+    }
+    .r_tag{
+        display: inline-block;
+        text-align: center;
+        margin-top: 5px;
+        min-width: 66px;
+    }
+    .tags_recommend_div,.tags_thematic_div{
+        padding: 10px;
+        min-height: auto;
+    }
+    .tags_recommend_p,.tags_thematic_p{
+        background: #eaeaea;
+        height: 50px;
+        line-height: 50px;
+        padding-left: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #969696;
+    }
+    .thematic_itme{
+        overflow: hidden;
+    }
+    .thematic_itme a{
+        display: block;
+        float: left;
+        width: 230px;
+        height: 115px;
+        margin: 6px;
     }
 </style>
 <div class="main"> <!--location start-->
@@ -87,20 +125,47 @@
                 <div class="tags fn14">
                     <p style="display: inline;">
                         @foreach(json_decode($new['tag'], true) as $new_tag)
-                            <a style="color: #fff;" class="png_tags" href="{{ url('/tag/'.$new_tag)}}">{{ $new_tag }}</a>
+                            <a style="color: #fff;" class="png_tags_on" href="{{ url('/tag/'.$new_tag)}}">{{ $new_tag }}</a>
                         @endforeach
                     </p>
                 </div>
             </div>
+
+            <div class="info-box fr pr" style="margin-top: 20px;">
+                <div class="tags fn14 show-box tags_recommend_div">
+                    <p class="tags_recommend_p" >热门搜索</p>
+                    <p style="display: inline;">
+                        @foreach($tags_recommend as $r_tag)
+                            <a style="color: #fff;width: auto;" class="@if(in_array( $r_tag['name'] , json_decode($new['tag'], true))) png_tags_on @else png_tags @endif r_tag" href="{{ url('/tag/'.$r_tag['name'])}}">{{ $r_tag['name'] }}</a>
+                        @endforeach
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-box fr pr" style="margin-top: 20px;">
+                <div class="tags fn14 show-box tags_thematic_div">
+                    <p class="tags_thematic_p" >相关专题</p>
+                    <p class="thematic_itme">
+                        @foreach($thematic as $thematic_item)
+                            <a class="" href="{{ $thematic_item['url']  }}">
+                                <img src="{{ $thematic_item['cover_img'] }}">
+                            </a>
+                        @endforeach
+                    </p>
+                </div>
+            </div>
+
         </div> <!--detail end--> <!--interest start-->
         <div class="interest oh">
             <div class="interesting fl  fn16">您可能感兴趣</div>
             <!--<a href="/shejisucai/" class="block seemore fn14 fr"> <span class="iblock seemore-icon fr css3-background-size"></span> <span class="iblock fr">查看更多</span> </a>-->
         </div> <!--interest end--><!--[if lte IE 8]>
-        <style>.element-box {
-            border: 1px solid #eee;
-        }</style> <![endif]-->
-        <link href="//ss.51miz.com/css/element/element-list.v3.5.css" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            .element-box {
+                border: 1px solid #eee;
+            }
+        </style> <![endif]-->
+        <link href="{{ asset('css/element/element-list.v3.5.css') }}" rel="stylesheet" type="text/css">
         <div class="flex-images pr">
             @foreach($news_recommend as $nr)
                 <div class="element-box item" style="display: block;">
@@ -132,7 +197,6 @@
                 @foreach($recommend_tag as $rt)
                     <a target="_blank" class="block fn14 fl rel-a" href="{{ url('/tag/'.$rt) }}">{{ $rt }}</a>
                 @endforeach
-
             </div>
         </div>
     </div>

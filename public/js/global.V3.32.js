@@ -414,7 +414,7 @@ $(".header-plate-box li").mouseleave(function(){$(this).find(".top-nav-more").hi
 			var plate_id = fav.attr("data-plate-id");
 			var id       = fav.attr("data-id");
 
-			$.get('/user/dofav/check',{"id":id}, function (rs) {
+			$.get('/user/fav_check',{"id":id}, function (rs) {
 			    console.log(rs)
 				if (rs.status == 1) {
 					var text    = "已收藏";

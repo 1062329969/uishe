@@ -15,6 +15,7 @@ use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\UserController;
 
 $category = DB::table('category')->pluck('alias')->toArray();
 //dd($list);
@@ -51,7 +52,6 @@ Route::any('/login/qq_bind', 'HomeController@qq_bind')->name('qq_bind');
 Route::any('/login/weibo_bind', 'HomeController@weibo_bind')->name('weibo_bind');
 Route::any('/test', 'HomeController@test')->name('test');
 
-
 Route::middleware(['auth:users'])->group(function () {
 
     Route::any('/socialite_bind/{socialite}', function (Request $request, $category) {
@@ -75,10 +75,12 @@ Route::middleware(['auth:users'])->group(function () {
     Route::get('/user/downlog', 'UserController@downlog')->name('downlog');
     Route::get('/user/loginout', 'UserController@loginout')->name('loginout');
 
-    Route::get('/user/fav_check', 'UserController@dofav_check');
-
     Route::post('/order/set_order', 'OrderController@set_order')->name('set_order');
 });
+Route::get('/user/fav_check', function (Request $request) {
+    return (new UserController())->dofav($request, 'check');
+});
+
 
 Route::any('/alipay/getpay/{order_no}', 'AlipayController@getpay')->name('alipay_getpay');
 Route::any('/alipay/notify_url', 'AlipayController@notify_url')->name('alipay_notify');

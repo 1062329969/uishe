@@ -7,6 +7,7 @@ use App\Models\Comments;
 use App\Models\News;
 use App\Models\Tag;
 use App\Models\TagNew;
+use App\Models\Thematic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -120,13 +121,17 @@ class NewsController extends Controller
             $comments_recommend = Comments::getRecommendComments();
         }
         $recommend_tag = Tag::where('recommend', Tag::Tag_Recommend_On)->pluck('name');
+
+        // 专题
+        $thematic = Thematic::get();
         return view('home.png', [
             'new' => $new,
             'vip' => $vip,
             'news_recommend' => $news_recommend,
             'tags_recommend' => $tags_recommend,
             'comments_recommend' => $comments_recommend,
-            'recommend_tag' => $recommend_tag
+            'recommend_tag' => $recommend_tag,
+            'thematic' => $thematic
         ]);
 //        return view('templet');
     }
