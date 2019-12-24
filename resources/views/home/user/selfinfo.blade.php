@@ -10,7 +10,7 @@
 
         @if($tab == 'edit_info')
             <div id="edit_info">
-                <form id="edit_info" method="post" action="{{ route('saveself', ['tab' => $tab]) }}">
+                <form id="edit_info_form" method="post" action="{{ route('saveself', ['tab' => $tab]) }}">
                     {{ csrf_field() }}
                     <div class="form-group height_72">
                         <label for="display_name" class="edit_info_label">昵称：</label>
@@ -31,9 +31,36 @@
                         </div>
                     </div>
                 </form>
-                <div id="edit_info_img">
-
+                <link href="{{ asset('static/home/layui/css/layui.css') }}" rel="stylesheet" type="text/css">
+                <div id="edit_info_img" class="layui-upload">
+                    <img id="avatar_url_img" src="{{ Auth::user()->avatar_url }}">
+                    <script>
+                        var upload = layui.upload; //得到 upload 对象
+                        //创建一个上传组件
+                        upload.render({
+                            elem: '#avatar_url_img'
+                            ,url: '{{ route('uploadImg') }}'
+                            ,field: 'file'
+                            ,headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            }
+                            ,done: function(res, index, upload){ //上传后的回调
+                                console.log(res)
+                                console.log(index)
+                                console.log(upload)
+                            }
+                            //,accept: 'file' //允许上传的文件类型
+                            //,size: 50 //最大允许上传的文件大小
+                            //,……
+                        })
+                    </script>
                 </div>
+                {{--<div >
+                    @csrf
+                    <button type="button" class="layui-btn" id="avatar_url_img_b">上传图片</button>
+
+
+                </div>--}}
             </div>
         @endif
         @if($tab == 'bind_account')
@@ -72,8 +99,9 @@
             border-radius: 5px;
         }
 
-        #edit_info{ width: 70% }
-        #edit_info_img{ width: 30% }
+        #edit_info{overflow: hidden; }
+        #edit_info_form{ width: 70% ; float: left}
+        #edit_info_img{float: left;width: 200px;height: 200px;text-align: center;line-height: 233px;background-color: #fff;}
 
         .tag_on{background: #fff;border: 2px #f1f1f1 solid;border-bottom: 0; }
     </style>
