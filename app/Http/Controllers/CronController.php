@@ -29,8 +29,7 @@ class CronController extends Controller
         $this->pexels_path = storage_path('collection'. DIRECTORY_SEPARATOR. 'pexels' . DIRECTORY_SEPARATOR . date('Ymd').DIRECTORY_SEPARATOR);//资源路径
         $this->pexels_path_zip = storage_path('collection'. DIRECTORY_SEPARATOR. 'pexels' . DIRECTORY_SEPARATOR . date('Ymd').'_zip'.DIRECTORY_SEPARATOR);//资源路径
         $this->pexels_path_uisheauto = storage_path('collection'. DIRECTORY_SEPARATOR. 'uisheauto' . DIRECTORY_SEPARATOR . date('Ymd').DIRECTORY_SEPARATOR);
-
-
+        $this->oursketch_path = storage_path('collection'. DIRECTORY_SEPARATOR. 'oursketch' . DIRECTORY_SEPARATOR . date('Ymd').DIRECTORY_SEPARATOR);
 
     }
 
@@ -51,14 +50,12 @@ class CronController extends Controller
 
         $pexels = new Pexels(self::Pexels_Key);
 
-//        $img = $pexels->get_photos(34140);
-//dd(json_decode($img->getBody()));
-        $img = $pexels->search('web');
-//dd(json_encode(json_decode($img->getBody(), true)));
-//        dd(json_decode($img->getBody(), true));
+        $img = $pexels->search('ui');
         $pexels_img = json_decode($img->getBody(), true);
 //        $temp = '{"total_results":257,"page":1,"per_page":15,"photos":[{"id":34140,"width":5472,"height":3648,"url":"https:\/\/www.pexels.com\/photo\/iphone-dark-notebook-pen-34140\/","photographer":"Negative Space","photographer_url":"https:\/\/www.pexels.com\/@negativespace","photographer_id":3738,"src":{"original":"https:\/\/images.pexels.com\/photos\/34140\/pexels-photo.jpg","large2x":"https:\/\/images.pexels.com\/photos\/34140\/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/34140\/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/34140\/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/34140\/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/34140\/pexels-photo.jpg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/34140\/pexels-photo.jpg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/34140\/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":39284,"width":4288,"height":2848,"url":"https:\/\/www.pexels.com\/photo\/apple-laptop-notebook-office-39284\/","photographer":"Pixabay","photographer_url":"https:\/\/www.pexels.com\/@pixabay","photographer_id":2659,"src":{"original":"https:\/\/images.pexels.com\/photos\/39284\/macbook-apple-imac-computer-39284.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/39284\/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/39284\/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/39284\/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/39284\/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/39284\/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/39284\/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/39284\/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":1591060,"width":6016,"height":4000,"url":"https:\/\/www.pexels.com\/photo\/web-text-1591060\/","photographer":"Miguel \u00c1. Padri\u00f1\u00e1n","photographer_url":"https:\/\/www.pexels.com\/@padrinan","photographer_id":2072,"src":{"original":"https:\/\/images.pexels.com\/photos\/1591060\/pexels-photo-1591060.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/1591060\/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/1591060\/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/1591060\/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/1591060\/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/1591060\/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/1591060\/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/1591060\/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":270348,"width":1920,"height":1032,"url":"https:\/\/www.pexels.com\/photo\/abstract-business-code-coder-270348\/","photographer":"Pixabay","photographer_url":"https:\/\/www.pexels.com\/@pixabay","photographer_id":2659,"src":{"original":"https:\/\/images.pexels.com\/photos\/270348\/pexels-photo-270348.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/270348\/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/270348\/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/270348\/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/270348\/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/270348\/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/270348\/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/270348\/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":326501,"width":5184,"height":3456,"url":"https:\/\/www.pexels.com\/photo\/apple-computer-desk-devices-326501\/","photographer":"Tranmautritam","photographer_url":"https:\/\/www.pexels.com\/@tranmautritam","photographer_id":8509,"src":{"original":"https:\/\/images.pexels.com\/photos\/326501\/pexels-photo-326501.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/326501\/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/326501\/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/326501\/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/326501\/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/326501\/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/326501\/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/326501\/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":34225,"width":2312,"height":1542,"url":"https:\/\/www.pexels.com\/photo\/spider-web-34225\/","photographer":"Pixabay","photographer_url":"https:\/\/www.pexels.com\/@pixabay","photographer_id":2659,"src":{"original":"https:\/\/images.pexels.com\/photos\/34225\/spider-web-with-water-beads-network-dewdrop.jpg","large2x":"https:\/\/images.pexels.com\/photos\/34225\/spider-web-with-water-beads-network-dewdrop.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/34225\/spider-web-with-water-beads-network-dewdrop.jpg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/34225\/spider-web-with-water-beads-network-dewdrop.jpg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/34225\/spider-web-with-water-beads-network-dewdrop.jpg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/34225\/spider-web-with-water-beads-network-dewdrop.jpg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/34225\/spider-web-with-water-beads-network-dewdrop.jpg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/34225\/spider-web-with-water-beads-network-dewdrop.jpg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":34600,"width":5472,"height":3648,"url":"https:\/\/www.pexels.com\/photo\/coffee-writing-computer-blogging-34600\/","photographer":"Negative Space","photographer_url":"https:\/\/www.pexels.com\/@negativespace","photographer_id":3738,"src":{"original":"https:\/\/images.pexels.com\/photos\/34600\/pexels-photo.jpg","large2x":"https:\/\/images.pexels.com\/photos\/34600\/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/34600\/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/34600\/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/34600\/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/34600\/pexels-photo.jpg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/34600\/pexels-photo.jpg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/34600\/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":109371,"width":3777,"height":2034,"url":"https:\/\/www.pexels.com\/photo\/computer-keyboard-laptop-screen-109371\/","photographer":"Monoar Rahman","photographer_url":"https:\/\/www.pexels.com\/@monoar-rahman-22660","photographer_id":22660,"src":{"original":"https:\/\/images.pexels.com\/photos\/109371\/pexels-photo-109371.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/109371\/pexels-photo-109371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/109371\/pexels-photo-109371.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/109371\/pexels-photo-109371.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/109371\/pexels-photo-109371.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/109371\/pexels-photo-109371.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/109371\/pexels-photo-109371.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/109371\/pexels-photo-109371.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":160107,"width":5472,"height":3648,"url":"https:\/\/www.pexels.com\/photo\/gray-laptop-computer-showing-html-codes-in-shallow-focus-photography-160107\/","photographer":"Negative Space","photographer_url":"https:\/\/www.pexels.com\/@negativespace","photographer_id":3738,"src":{"original":"https:\/\/images.pexels.com\/photos\/160107\/pexels-photo-160107.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/160107\/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/160107\/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/160107\/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/160107\/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/160107\/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/160107\/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/160107\/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":67112,"width":6016,"height":4000,"url":"https:\/\/www.pexels.com\/photo\/light-smartphone-macbook-mockup-67112\/","photographer":"Caio Resende","photographer_url":"https:\/\/www.pexels.com\/@caio","photographer_id":7780,"src":{"original":"https:\/\/images.pexels.com\/photos\/67112\/pexels-photo-67112.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/67112\/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/67112\/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/67112\/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/67112\/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/67112\/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/67112\/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/67112\/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":7358,"width":3000,"height":2092,"url":"https:\/\/www.pexels.com\/photo\/macbook-laptop-smartphone-apple-7358\/","photographer":"Startup Stock Photos","photographer_url":"https:\/\/www.pexels.com\/@startup-stock-photos","photographer_id":2672,"src":{"original":"https:\/\/images.pexels.com\/photos\/7358\/startup-photos.jpg","large2x":"https:\/\/images.pexels.com\/photos\/7358\/startup-photos.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/7358\/startup-photos.jpg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/7358\/startup-photos.jpg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/7358\/startup-photos.jpg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/7358\/startup-photos.jpg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/7358\/startup-photos.jpg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/7358\/startup-photos.jpg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":270360,"width":3088,"height":2056,"url":"https:\/\/www.pexels.com\/photo\/business-code-coding-computer-270360\/","photographer":"Pixabay","photographer_url":"https:\/\/www.pexels.com\/@pixabay","photographer_id":2659,"src":{"original":"https:\/\/images.pexels.com\/photos\/270360\/pexels-photo-270360.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/270360\/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/270360\/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/270360\/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/270360\/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/270360\/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/270360\/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/270360\/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":251225,"width":5141,"height":3055,"url":"https:\/\/www.pexels.com\/photo\/information-sign-on-shelf-251225\/","photographer":"Tranmautritam","photographer_url":"https:\/\/www.pexels.com\/@tranmautritam","photographer_id":8509,"src":{"original":"https:\/\/images.pexels.com\/photos\/251225\/pexels-photo-251225.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/251225\/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/251225\/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/251225\/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/251225\/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/251225\/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/251225\/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/251225\/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":230544,"width":5342,"height":3561,"url":"https:\/\/www.pexels.com\/photo\/person-using-black-and-white-smartphone-and-holding-blue-card-230544\/","photographer":"PhotoMIX Ltd.","photographer_url":"https:\/\/www.pexels.com\/@wdnet","photographer_id":21063,"src":{"original":"https:\/\/images.pexels.com\/photos\/230544\/pexels-photo-230544.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/230544\/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/230544\/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/230544\/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/230544\/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/230544\/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/230544\/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/230544\/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false},{"id":114907,"width":3840,"height":2160,"url":"https:\/\/www.pexels.com\/photo\/silver-laptop-next-to-coffe-cup-smartphone-and-glasses-114907\/","photographer":"Monoar Rahman","photographer_url":"https:\/\/www.pexels.com\/@monoar-rahman-22660","photographer_id":22660,"src":{"original":"https:\/\/images.pexels.com\/photos\/114907\/pexels-photo-114907.jpeg","large2x":"https:\/\/images.pexels.com\/photos\/114907\/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940","large":"https:\/\/images.pexels.com\/photos\/114907\/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","medium":"https:\/\/images.pexels.com\/photos\/114907\/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&h=350","small":"https:\/\/images.pexels.com\/photos\/114907\/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&h=130","portrait":"https:\/\/images.pexels.com\/photos\/114907\/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800","landscape":"https:\/\/images.pexels.com\/photos\/114907\/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200","tiny":"https:\/\/images.pexels.com\/photos\/114907\/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"},"liked":false}],"next_page":"https:\/\/api.pexels.com\/v1\/search\/?page=2&per_page=15&query=web"}';
         $img_list = json_decode($pexels_img, true)['photos'];
+
+        $category = Category::where('alias', 'img')->first();
 
         foreach ($img_list as $item){
 
@@ -131,9 +128,6 @@ class CronController extends Controller
             }
             rmdir($this->pexels_path. DIRECTORY_SEPARATOR . $item['id']); // 删除不必要的目录
 
-
-            $category = Category::where('alias', 'img')->first();
-
             $tag_list = Tag::whereIn('name', $tag_zh)->get()->keyBy('name')->toArray();
 
             $tag_id = [];
@@ -141,6 +135,7 @@ class CronController extends Controller
             foreach ($tag_zh as $tag_index => $tag_item) {
                 if ( isset($tag_list[$tag_item]) ){
                     $tag_id[] = $tag_item_id = $tag_list[$tag_item]['id'];
+                    Tag::where('id', $tag_item_id)->increment('count');
                 }else{
                     $tag_id[] = $tag_item_id = Tag::insertGetId([
                         'name' => $tag_item,
@@ -165,7 +160,7 @@ class CronController extends Controller
                 'down_type' => News::Down_Type_Login,
                 'down_level' => 0,
                 'down_price' => 0,
-                'down_url' => $zip_path,
+                'down_url' => $zip_path . '|无',
                 'category_id' => $category->id,
                 'category' => $category->alias,
                 'tag_id' => json_encode($tag_id),
@@ -197,6 +192,15 @@ class CronController extends Controller
     }
 
     public function getOursketch(){
+        if (!file_exists($this->oursketch_path)){
+            if(!file_exists($this->oursketch_path . DIRECTORY_SEPARATOR)){ // 创建这个id的文件夹
+                mkdir($this->oursketch_path . DIRECTORY_SEPARATOR, 0777, true);
+                chmod($this->oursketch_path . DIRECTORY_SEPARATOR,0777);
+            }
+        }
+
+        $category = Category::where('alias', 'img')->first();
+
         $url = 'https://oursketch.com/resource?category=ui&page=1';
         $cache_path = storage_path('collection'. DIRECTORY_SEPARATOR. 'oursketch_tmp');
         $ql = QueryList::get($url, null, [
@@ -224,27 +228,70 @@ class CronController extends Controller
         $ql = new QueryList();
         foreach ($all as $item) {
             $detail_url = 'https://oursketch.com' . $item['detail_url'];
-            $detail_url = $ql->get($detail_url)->find('.content img')->attr('data-src');
+            $content_img = $ql->get($detail_url)->find('.content img')->attr('data-src');
+            $tag = $ql->get($detail_url)->rules([
+                'tag' => ['.tag-box a', 'text']
+            ])->query()->getData()->toArray();
             $ql->destruct();
+
+            $tag = array_column($tag, 'tag');
+
+            $down_url_arr = explode('/', $item['down_url']);
+            $old_file_name = end($down_url_arr);
+
+            $file_name = saveWebFile( 'https://cdn.oursketch.com/' . rawurlencode($old_file_name), $this->oursketch_path . $old_file_name, $old_file_name);
+
+
+            $tag_list = Tag::whereIn('name', $tag)->get()->keyBy('name')->toArray();
+
+            $tag_id = [];
+            $tag_new_id = [];
+            foreach ($tag as $tag_index => $tag_item) {
+                if ( isset($tag_list[$tag_item]) ){
+                    $tag_id[] = $tag_item_id = $tag_list[$tag_item]['id'];
+                    Tag::where('id', $tag_item_id)->increment('count');
+                }else{
+                    $tag_id[] = $tag_item_id = Tag::insertGetId([
+                        'name' => $tag_item,
+                        'alias' => $tag_item,
+                        'count' => 1,
+                    ]);
+                }
+
+                $tag_new_id[] = [
+                    'tag_id' => $tag_item_id,
+                    'tag' => $tag_item
+                ];
+            }
 
             $news_id = News::insertGetId([
                 'admin_id' => 1,
-                'title' => $title,
-                'content' => '<img class="alignnone size-medium" src="'. $content_img .'" width="'. $item['width'] .'" height="'. $item['height'] .'" />',
+                'title' => $item['title'],
+                'content' => '<img class="alignnone size-medium" src="'. $content_img .'"  />',
                 'status' => News::Status_Normal,
                 'comment_status' => News::Comment_Status_On,
-                'cover_img' => $cover_img,
+                'cover_img' => $item['cover_img'],
                 'down_type' => News::Down_Type_Login,
                 'down_level' => 0,
                 'down_price' => 0,
-                'down_url' => $zip_path,
+                'down_url' => $file_name . '|无',
                 'category_id' => $category->id,
                 'category' => $category->alias,
                 'tag_id' => json_encode($tag_id),
-                'tag' => json_encode($tag_zh, JSON_UNESCAPED_UNICODE),
+                'tag' => json_encode($tag, JSON_UNESCAPED_UNICODE),
             ]);
 
-            dd($detail_url);
+            CategoryNew::insert([
+                'cat_new_id' => $news_id,
+                'cat_id' => $category->id,
+                'category' => $category->alias
+            ]);
+            foreach ($tag_new_id as $tag_new_item) {
+                $tag_new_item['tag_new_id'] = $news_id;
+            }
+
+            TagNew::insert($tag_new_item);
+die;
         }
     }
 }
