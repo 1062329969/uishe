@@ -32,6 +32,13 @@
         padding: 10px;
         min-height: auto;
     }
+    .tags_recommend_div a:hover{
+        background: #9862f4;
+        background: -webkit-linear-gradient(left top, #7371ef , #a55ef6); /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(bottom right, #7371ef , #a55ef6); /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(bottom right, #7371ef , #a55ef6); /* Firefox 3.6 - 15 */
+        background: linear-gradient(to bottom right, #7371ef , #a55ef6); /* 标准的语法 */
+    }
     .tags_recommend_p,.tags_thematic_p{
         background: #eaeaea;
         height: 50px;
@@ -103,7 +110,7 @@
                 </div>
                 <script src="{{ asset('js/clipboard.min.js') }}"></script>
                 <div class="download">
-                    <a rel="nofollow" data-id="{{ $new['id'] }}" class="download-png block fn18 fl css3-background-size" style="background-image: url('https://ss.51miz.com/images/detail_icon@2x.png');" id="download_news">下载PNG</a>
+                    <a rel="nofollow" data-id="{{ $new['id'] }}" class="download-png block fn18 fl css3-background-size" style="cursor:hand;background-image: url('https://ss.51miz.com/images/detail_icon@2x.png');" id="download_news">下载</a>
                     <a class="show-fav fav-view button iblock color-fff center fl fav-{{ $new['id'] }}" data-id="{{ $new['id'] }}"  onclick="fav({{ $new['id'] }})" href="javascript:;" rel="nofollow" title="加入收藏">
                         <span class="fav-icon iblock css3-background-size" style="background-image: url('https://ss.51miz.com/images/icon-star@2x.png');"></span>
                     </a>
@@ -119,13 +126,21 @@
                                     window.location.href='{{ route('login', ['r' => request()->url()]) }}'
                                 }
                             }
+                        }).done(function(res) {
+                            return $.ajax({
+                                url: '/b.do',
+                                type: 'post',
+                                data: {
+                                    foo: res.bar
+                                }
+                            })
                         })
                     })
                 </script>
                 <div class="tags fn14">
                     <p style="display: inline;">
                         @foreach(json_decode($new['tag'], true) as $new_tag)
-                            <a style="color: #fff;" class="png_tags_on" href="{{ url('/tag/'.$new_tag)}}">{{ $new_tag }}</a>
+                            <a style="color: #fff; display: inline-block;text-align: center;margin-top: 5px;" class="png_tags_on" href="{{ url('/tag/'.$new_tag)}}">{{ $new_tag }}</a>
                         @endforeach
                     </p>
                 </div>

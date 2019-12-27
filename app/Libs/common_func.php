@@ -337,7 +337,7 @@ if (!function_exists('getId')) {
         }
     }
     if (!function_exists('saveWebFile')) {
-        function saveWebFile($FromUrl, $newFileName, $old_file_name) {
+        function saveWebFile($FromUrl, $newFileName, $header) {
             $curl = curl_init();
             curl_setopt_array($curl, array(
                 CURLOPT_URL => $FromUrl,
@@ -348,22 +348,7 @@ if (!function_exists('getId')) {
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_POSTFIELDS => "",
-                CURLOPT_HTTPHEADER => array(
-                    "authority: cdn.oursketch.com,method: GET,path: /" . rawurlencode($old_file_name),
-                    "Postman-Token: 11208879-c82c-4648-93f7-6c3f008aaa98",
-                    "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
-                    "accept-encoding: gzip, deflate, br",
-                    "accept-language: zh-CN,zh;q=0.9",
-                    "cache-control: no-cache,no-cache",
-                    "cookie: Hm_lvt_70a1d60c3498fd09334af15ab61ef4d8=1576941384; Hm_lpvt_70a1d60c3498fd09334af15ab61ef4d8=1577023784",
-                    "pragma: no-cache",
-                    "referer: https://oursketch.com/resource?category=ui",
-                    "sec-fetch-mode: navigate",
-                    "sec-fetch-site: same-site",
-                    "sec-fetch-user: ?1",
-                    "upgrade-insecure-requests: 1",
-                    "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
-                ),
+                CURLOPT_HTTPHEADER => $header
             ));
             $response = curl_exec($curl);
             $err = curl_error($curl);
