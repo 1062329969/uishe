@@ -151,10 +151,12 @@ class UserController extends Controller
                 ['collect_id', '=', $id],
             ])->delete();
         }elseif($do == 'check'){
-            $user = Auth::user('users');
-            if(!$user){
+            $user_id = Auth::guard('users')->id();
+            if(!$user_id){
                 return response()->json(['status' => 0]);
             }
+
+            $user = User::find($user_id);
             $uc = UsersCollect::where([
                 ['user_id', '=', $user->id],
                 ['collect_id', '=', $id],

@@ -109,6 +109,9 @@ class NewsController extends Controller
     public function item(Request $request, $id)
     {
         $new = News::find($id);
+        if(!$new){
+            return redirect('404');
+        }
         $user = Auth::user();
         $vip = true;
         if ($user === NULL || $user->vip == 0) {
