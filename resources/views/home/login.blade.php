@@ -277,10 +277,6 @@
 
         <div class="myvip">
 
-            @foreach($errors->all() as $error)
-                <p style="color: red;padding-bottom: 10px;">注：{{$error}}</p>
-                @break
-            @endforeach
             @if(request()->get('type') != 'reg')
                 <form method="post" action="{{ url('/login') }}">
                     <div class="login-form-item">

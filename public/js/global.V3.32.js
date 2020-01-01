@@ -12,6 +12,19 @@
 
 /*这里放新版本的js---------------------------------------------------------start*/
 
+$(function () {
+    $.ajaxSetup({
+        async : false,
+        global: true,
+        error:function(e){
+            console.log(JSON.parse(e.responseText).message);
+            if(JSON.parse(e.responseText).message == 'Unauthenticated.'){
+                window.location.href='/login?r='+window.location.href
+            }
+        }
+    });
+})
+
 /*优先处理图片布局*/
 $("img.lazyload").lazyload({effect:"show",threshold :100,skip_invisible : false});
 
@@ -401,7 +414,7 @@ $(".header-plate-box li").mouseleave(function(){$(this).find(".top-nav-more").hi
 			var plate_id = fav.attr("data-plate-id");
 			var id       = fav.attr("data-id");
 
-			$.get('/user/dofav/check',{"id":id}, function (rs) {
+			$.get('/user/fav_check',{"id":id}, function (rs) {
 			    console.log(rs)
 				if (rs.status == 1) {
 					var text    = "已收藏";
@@ -442,7 +455,7 @@ $(".header-plate-box li").mouseleave(function(){$(this).find(".top-nav-more").hi
         }
 
         $.get('/user/dofav/'+action,{"id":id},function(rs){
-            if(rs.msg == 'Unauthenticated'){
+            if(rs.message == 'Unauthenticated.'){
                 window.location.href='/login?r='+window.location.href
             }
             if(rs.status == 1)

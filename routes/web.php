@@ -15,6 +15,7 @@ use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\UserController;
 
 $category = DB::table('category')->pluck('alias')->toArray();
 //dd($list);
@@ -35,6 +36,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/{category}', function (Request $request, $category) {
     return (new NewsController())->category($request, $category);
 })->where('category', implode('|', $category)); // 正则表达式 | 或
+Route::get('/t', 'HomeController@t');
 Route::get('/huiyuan', 'HomeController@huiyuan');
 Route::get('/{id}.html', 'NewsController@item')->where('id', '[0-9]+');
 Route::get('/tag/{tag}', 'NewsController@tag');
@@ -50,6 +52,9 @@ Route::any('/login/qq_bind', 'HomeController@qq_bind')->name('qq_bind');
 Route::any('/login/weibo_bind', 'HomeController@weibo_bind')->name('weibo_bind');
 Route::any('/test', 'HomeController@test')->name('test');
 
+
+Route::get('/download/check/{type}/{id}', 'DownloadController@check')->where('name', '[0-9]+')->name('check_download');
+Route::post('/download/news/{id}', 'DownloadController@newsDownload')->where('name', '[0-9]+')->name('down_new');
 
 Route::middleware(['auth:users'])->group(function () {
 
@@ -74,9 +79,12 @@ Route::middleware(['auth:users'])->group(function () {
     Route::get('/user/downlog', 'UserController@downlog')->name('downlog');
     Route::get('/user/loginout', 'UserController@loginout')->name('loginout');
 
-
     Route::post('/order/set_order', 'OrderController@set_order')->name('set_order');
 });
+Route::get('/user/fav_check', function (Request $request) {
+    return (new UserController())->dofav($request, 'check');
+});
+
 
 Route::any('/alipay/getpay/{order_no}', 'AlipayController@getpay')->name('alipay_getpay');
 Route::any('/alipay/notify_url', 'AlipayController@notify_url')->name('alipay_notify');

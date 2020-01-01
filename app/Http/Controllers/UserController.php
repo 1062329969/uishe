@@ -136,27 +136,36 @@ class UserController extends Controller
 
     public function dofav(Request $request, $do){
         $id = $request->id;
+
         if($do == 'add'){
             $new = News::find($id);
-            UsersCollect::insert([
+            $uc = UsersCollect::insert([
                 'user_id' => Auth::user('users')->id,
                 'collect_id' => $id,
                 'title' =>$new['title'],
                 'img' =>$new['cover_img'],
             ]);
         }elseif($do == 'del'){
-            UsersCollect::where([
+            $uc = UsersCollect::where([
                 ['user_id', '=', Auth::user('users')->id],
                 ['collect_id', '=', $id],
             ])->delete();
         }elseif($do == 'check'){
+            $user_id = Auth::guard('users')->id();
+            if(!$user_id){
+                return response()->json(['status' => 0]);
+            }
+
+            $user = User::find($user_id);
             $uc = UsersCollect::where([
-                ['user_id', '=', Auth::user('users')->id],
+                ['user_id', '=', $user->id],
                 ['collect_id', '=', $id],
             ])->first();
-            if($uc){
-                return response()->json(1, '收藏成功');
-            }
+        }
+        if($uc){
+            return response()->json(['status' => 1]);
+        }else{
+            return response()->json(['status' => 0]);
         }
     }
 }

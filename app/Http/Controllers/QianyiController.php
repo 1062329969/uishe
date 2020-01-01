@@ -92,6 +92,7 @@ class QianyiController extends Controller
 
         $new_tag = [];
         foreach ($tag as $k => $v) {
+//            echo $v['term_id'].',';
             $new_tag[] = [
                 'id' => $v['term_id'],
                 'name' => $terms[$v['term_id']]['name'],
