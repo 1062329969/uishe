@@ -105,10 +105,11 @@ class QianyiController extends Controller
 
     public function move_comment()
     {
-        $comments = WpComments::where('comment_approved', 1)->get()->toArray();
+        $comments = WpComments::get()->toArray();
         $new_comments = [];
         foreach ($comments as $item) {
             $new_comments[] = [
+                'id' => $item['comment_ID'],
                 'created_at' => $item['comment_date'],
                 'new_id' => $item['comment_post_ID'],
                 'user_id' => $item['user_id'],
@@ -118,6 +119,7 @@ class QianyiController extends Controller
                 'status' => Comments::Comments_Status_Allow,
                 'agent' => $item['comment_agent'],
                 'parent_id' => $item['comment_parent'],
+                'mail_notify' => $item['comment_mail_notify'],
             ];
         }
         Comments::insert($new_comments);
