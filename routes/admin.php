@@ -229,7 +229,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
 });
 
-//消息管理
+//订单管理
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:system.orders']], function () {
     //消息管理
     Route::group(['middleware' => 'permission:system.orders'], function () {
@@ -238,6 +238,22 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::get('orders/{id}/show', 'OrderController@show')->name('admin.orders.show');
         Route::get('orders/{id}/edit', 'OrderController@edit')->name('admin.orders.edit')->middleware('permission:admin.orders.edit');
         Route::delete('orders/destroy', 'OrderController@destroy')->name('admin.orders.destroy')->middleware('permission:admin.orders.destroy');
+
+    });
+
+
+});
+
+//评论管理
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:system.comments']], function () {
+    //消息管理
+    Route::group(['middleware' => 'permission:system.comments'], function () {
+        Route::get('comments', 'commentsController@index')->name('admin.comments');
+        Route::get('comments/data', 'commentsController@data')->name('admin.comments.data');
+        Route::get('comments/{id}/show', 'commentsController@show')->name('admin.comments.show');
+        Route::put('comments/store', 'commentsController@store')->name('admin.comments.store')->middleware('permission:admin.comments.store');
+        Route::get('comments/{id}/edit', 'commentsController@edit')->name('admin.comments.edit')->middleware('permission:admin.comments.edit');
+        Route::delete('comments/destroy', 'commentsController@destroy')->name('admin.comments.destroy')->middleware('permission:admin.comments.destroy');
 
     });
 

@@ -69,7 +69,7 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-//        dump($request->toArray());
+//        dd($request->toArray());
         DB::beginTransaction();
         $tag_id = $request->tags;
         $tag_new = [];
@@ -185,6 +185,7 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, $id)
     {
+        dd($id);
         DB::beginTransaction();
         $tag_id = $request->tags;
         $tag_new = [];

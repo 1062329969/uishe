@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comments extends Model
 {
+    use SoftDeletes;
     //
     const Comments_Status_Allow = 'allow';
     const Comments_Status_Refuse = 'refuse';
