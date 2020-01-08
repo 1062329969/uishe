@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Overtrue\LaravelSocialite\Socialite;
+use function Sodium\randombytes_random16;
 
 class SocialiteController extends Controller
 {
@@ -84,7 +85,7 @@ class SocialiteController extends Controller
         } else { // 注册新用户
             DB::beginTransaction();
 
-            if ($user_info = User::create(['name' => $user->name, 'avatar_url' => $user->avatar])) {
+            if ($user_info = User::create(['name'=>'Q'.random_string(10),'nicename' => $user->name, 'avatar_url' => $user->avatar])) {
                 if ($res = $user_info->user_qq()->create(["openid" => $user->id, 'access_token' => $user->token])) {
                     DB::commit();
                     Auth::guard('users')->login($user_info);
@@ -119,7 +120,7 @@ class SocialiteController extends Controller
         } else { // 注册新用户
             DB::beginTransaction();
 
-            if ($user_info = User::create(['name' => $user->name, 'avatar_url' => $user->avatar])) {
+            if ($user_info = User::create(['name'=>'W'.random_string(10),'nicename' => $user->name, 'avatar_url' => $user->avatar])) {
                 if ($res = $user_info->user_weibo()->create(["openid" => $user->id, 'access_token' => $user->token])) {
                     DB::commit();
                     Auth::guard('users')->login($user_info);

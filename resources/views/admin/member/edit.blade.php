@@ -6,7 +6,7 @@
             <h2>更新账号</h2>
         </div>
         <div class="layui-card-body">
-            <form class="layui-form" action="{{route('admin.member.update',['member'=>$member])}}" method="post">
+            <form class="layui-form" action="{{route('admin.member.update',['id'=>$member->id])}}" method="post">
                 <input type="hidden" name="id" value="{{$member->id}}">
                 {{method_field('put')}}
                 @include('admin.member._form')
