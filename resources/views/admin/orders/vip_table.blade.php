@@ -8,7 +8,7 @@
 
         <tbody>
         <tr>
-            <td colspan="2">{{$orders->order_type}}</td>
+            <td colspan="2">{{$orders->order_type}}记录</td>
         </tr>
         <tr>
             <td>会员等级</td>

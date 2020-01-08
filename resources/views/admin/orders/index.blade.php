@@ -28,7 +28,7 @@
             <script type="text/html" id="options">
                 <div class="layui-btn-group">
                     @can('admin.orders.edit')
-                        <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-sm" lay-event="edit">查看</a>
                     @endcan
                     @can('admin.orders.destroy')
                         <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
@@ -76,8 +76,7 @@
                         , {field: 'pay_user_id', title: '用户ID'}
                         , {field: 'pay_at', title: '支付时间'}
                         , {field: 'created_at', title: '创建时间'}
-                        , {field: 'updated_at', title: '更新时间'}
-                        , {fixed: 'right', width: 220, align: 'center', toolbar: '#options'}
+                        , {fixed: 'right', width: 130, align: 'center', toolbar: '#options'}
                     ]]
                 });
 

@@ -84,5 +84,10 @@ class Orders extends Model
         return $this->hasMany('App\Models\OrdersVip', 'order_id', 'id');
     }
 
+    public function order_pay()
+    {
+        return $this->hasOne('App\Models\Orders_pay', 'order_id', 'id');
+    }
+
 
 }

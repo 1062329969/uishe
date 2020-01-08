@@ -1,4 +1,9 @@
 <table class="layui-table">
+    <thead>
+    <tr>
+        <th colspan="2" align="center"> 订单详情 </th>
+    </tr>
+    </thead>
     <colgroup>
         <col width="100">
         <col width="200">
@@ -37,8 +42,3 @@
 
 @include('admin.orders.'.$orders->order_type.'_table')
 
-<div class="layui-form-item">
-    <div class="layui-input-block">
-        <a class="layui-btn" href="{{route('admin.orders')}}">返 回</a>
-    </div>
-</div>
