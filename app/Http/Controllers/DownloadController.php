@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libs\WechatSDK;
 use App\Models\Category;
 use App\Models\Comments;
 use App\Models\News;
@@ -9,7 +10,10 @@ use App\Models\Tag;
 use App\Models\TagNew;
 use App\Models\Thematic;
 use App\Models\User;
+use App\Models\Usercredit;
+use App\Models\UsersDownLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class DownloadController extends Controller
@@ -38,15 +42,37 @@ class DownloadController extends Controller
                 }
 
                 $user = User::find($user_id);
-                if ( $user->user_type < $news->down_level && $news->down_type == News::Down_Type_Vip) {
+                if ( $user->user_type < $news->down_level && $news->down_level > 0) {
                     return response()->error(500, 'LevelError');
                 }
 
-                if ( $user->credit < $news->down_price && $news->down_type == News::Down_Type_Integral) {
+                if ( $user->credit < $news->down_price && $news->down_price > 0) {
                     return response()->error(500, 'CreditError');
                 }
 
                 if ( $news->down_url ) {
+
+                    if ( $news->down_price > 0 ) {
+                        $user->credit = $user->credit - $news->down_price;
+                        $user->save();
+
+                        Usercredit::insert([
+                            'user_id' => $user_id,
+                            'content' => '下载素材ID'.$id,
+                            'from' => 'new',
+                            'edit_credit' => -$news->down_price
+                        ]);
+                    }
+
+                    UsersDownLog::insert([
+                        'new_id' => $id,
+                        'new_name' => $news->title,
+                        'log_time' => Carbon::now()->toDateTimeString(),
+                        'user_id' => $user_id,
+                        'user_name' => $user->name,
+                        'user_ip' => WechatSDK::get_client_ip(),
+                    ]);
+
                     if ( strpos($news->down_url, 'pan.baidu.com') !== false ) {
                         $down_url = explode('|', $news->down_url);
                         return response()->success([
@@ -67,10 +93,9 @@ class DownloadController extends Controller
                         ]);
                     }
                 }
-
-
                 break;
         }
+
     }
 
     public function newsDownload(Request $request, $id) {

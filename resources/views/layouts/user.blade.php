@@ -5,7 +5,7 @@
         .main{width:100%;padding-bottom:50px;}
         .myvip{width:900px;height:270px;margin:auto;}
         .current-vip-title{height:18px;line-height: 18px;color:#3a3a3a;}
-        .vip-type{width:220px;height:190px;float:left;margin-right:20px;margin-top:24px;box-shadow:0 0 4px rgba(0,0,0,0.2);border-radius:4px;border:1px solid #ececec\9;padding-bottom: 25px;}
+        .vip-type{width:270px;height:100px;float:left;margin-right:20px;margin-top:24px;box-shadow:0 0 4px rgba(0,0,0,0.2);border-radius:4px;border:1px solid #ececec\9;padding-bottom: 25px;}
         .vip-title{height:51px;line-height: 51px;text-align: center;color:#3f3f3f;}
         .vip-price{height:41px;line-height: 41px;font-size: 28px;color:red;text-align: center;}
         .vip-price span{color:#292929;}
@@ -83,6 +83,7 @@
                 <div class="username-box fl">
                     <span class="block username">{{ Auth::user()->name }}</span>
                     <span class="block userid fn14">ID:{{ Auth::user()->id }}</span>
+                    <span class="block userid fn14">积分:{{ Auth::user()->credit }}</span>
                 </div>
             </div>
             <div class="myinfo pa">

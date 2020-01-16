@@ -124,7 +124,6 @@ class NewsController extends Controller
             $comments_recommend = Comments::getRecommendComments();
         }
         $recommend_tag = Tag::where('recommend', Tag::Tag_Recommend_On)->pluck('name');
-
         // 专题
         $thematic = Thematic::get();
         return view('home.png', [

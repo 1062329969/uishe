@@ -64,19 +64,48 @@
         padding: 0 10px;
     }
     .comment-box ul li{
-        padding: 20px 0;
         border-bottom: 1px dotted #E6E6E6;
+        padding:20px;
+        background: #f9f9f9;
+        margin-bottom: 20px;
     }
     .cmt{
          position: relative;
          border-radius: 3px;
          -webkit-border-radius: 3px;
          padding: 8px 12px;
-         background: #F7F7F7;
+         /*background: #F7F7F7;*/
          line-height: 20px;
          font-size: 13px;
          color: #31424e;
      }
+    .comment_title{
+        background: #f7f7f7;
+        height: 50px;
+        border-bottom: 1px #ccc solid;
+        line-height: 50px;
+        padding-left: 20px;
+        font-size: 20px;
+        color: #7f7f7f;
+        font-weight: bold;
+    }
+    .perMsg{
+        overflow: hidden;
+    }
+    .comment_avater, .txt{
+        float: left;
+    }
+    .txt{
+        line-height: 40px;
+        margin-left: 20px;
+    }
+    .cmt{
+        line-height: 25px;
+        margin-top: 15px;
+        font-size: 16px;
+        text-indent: 2em;
+    }
+    .comment_avater img { width: 80px;height: 80px; display: block; border-radius: 80px;}
 </style>
 <div class="main"> <!--location start-->
     <div class="location-box oh">
@@ -208,7 +237,7 @@
                 <div class="tags fn14">
                     <p style="display: inline;">
                         @foreach(json_decode($new['tag'], true) as $new_tag)
-                            <a style="color: #fff; display: inline-block;text-align: center;margin-top: 5px;" class="png_tags_on" href="{{ url('/tag/'.$new_tag)}}">{{ $new_tag }}</a>
+                            <a style="color: #fff; display: inline-block;width: auto;text-align: center;margin-top: 5px;" class="png_tags_on" href="{{ url('/tag/'.$new_tag)}}">{{ $new_tag }}</a>
                         @endforeach
                     </p>
                 </div>
@@ -282,131 +311,74 @@
             </div>
         </div>
 
-        <div class="relative-search-box pr" style="height: auto;">
+        <div class="relative-search-box pr" style="height: auto;border: 1px #ccc solid;">
+            <div class="comment_title">社友热评</div>
+            <div class="self_comment">
+                <form action="http://www.uishe.cn/wp-comments-post.php" class="comment_form" method="post" id="commentform">
+                    <div class="single-post-comment__form cf">
+                        <textarea class="textarea form-control" data-widearea="enable" id="comment" name="comment" placeholder="你怎么看？"></textarea>
+                        <input type="hidden" name="comment_post_ID" value="15172" id="comment_post_ID">
+                        <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                        <p style="display: none;">
+                            <input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="f3797f5d79">
+                        </p>
+                        <span class="mail-notify-check">
+                            <input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked" style="vertical-align:middle;">
+                            <label for="comment_mail_notify" style="vertical-align:middle;">有人回复时邮件通知我</label>
+                        </span>
+                    </div>
 
-            <div class="comment-box">
-                <div class="self_comment"></div>
+                    <div id="comboxinfo" class="comboxinfo cl">
+                        <div class="cominfodiv cominfodiv-author ">
+                            <p for="author" class="nicheng">
+                                <input type="text" name="author" id="author" class="texty" value="" tabindex="1">
+                                <span class="required">昵称*</span>
+                            </p>
+                        </div>
+                        <div class="cominfodiv cominfodiv-email">
+                            <p for="email">
+                                <input type="text" name="email" id="email" class="texty" value="" tabindex="2">
+                                <span class="required">邮箱*</span>
+                            </p>
+                        </div>
+
+                        <button type="submit" class="ladda-button comment-submit-btn">
+                            <span class="ladda-label">提交评论</span>
+                        </button>
+                        <div id="cancel_comment_reply">
+                            <a rel="nofollow" id="cancel-comment-reply-link" href="/15172.html#respond" style="display:none;">取消回复</a>
+                        </div>
+                    </div>
+                    <input type="hidden" id="ak_js" name="ak_js" value="1579165621966"></form>
+            </div>
+            <div class="comment-box" style="padding: 10px;">
                 <ul>
+                    @foreach($comments_recommend as $comments_item)
                     <li class="sidcomment">
-                        <div class="cmt">
-                            <em class="arrow"></em>
-                            不能下载
-                        </div>
                         <div class="perMsg cl">
-                            <a href="https://www.uishe.cn/564.html" target="_blank" class="avater" rel="nofollow">
-                                <img src="http://qzapp.qlogo.cn/qzapp/101214606/6EB1E86CD71993912377E404C7C66F87/100" class="avatar" width="40" height="40">                        </a>
+                            <a href="{{ url('/'.$comments_item['new_id'].'.html') }}" target="_blank" class="comment_avater" rel="nofollow">
+                                <img src="{{ $comments_item['avatar_url'] }}" class="avatar" onerror="this.src = 'http://qzapp.qlogo.cn/qzapp/101214606/6EB1E86CD71993912377E404C7C66F87/100'">
+                            </a>
                             <div class="txt">
                                 <div class="rows cl">
-                                    <a href="https://www.uishe.cn/564.html" target="_blank" class="name" rel="nofollow"><span>龙之火</span>评论文章：</a>
-                                    <span class="time"> 01月03日</span>
+                                    <a href="{{ url('/'.$comments_item['new_id'].'.html') }}" target="_blank" class="name" rel="nofollow">
+                                        <span>{{ $comments_item['user_name'] }}</span>
+                                        评论文章：
+                                    </a>
+                                    <span class="time"> {{ $comments_item['created_at'] }} </span>
                                 </div>
                                 <div class="artHeadTit">
-                                    <a href="https://www.uishe.cn/564.html" target="_blank" title="免费的psd导航按钮&nbsp;">
-                                        免费的psd导航按钮&nbsp;                                </a>
+                                    <a href="{{ url('/'.$comments_item['new_id'].'.html') }}" target="_blank" title="{{ $comments_item['new_title'] }}&nbsp;">
+                                        {{ $comments_item['new_title'] }}&nbsp;
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </li>
-                    <li class="sidcomment">
                         <div class="cmt">
-                            <em class="arrow"></em>
-                            已经失效了，不能下载！
-                        </div>
-                        <div class="perMsg cl">
-                            <a href="https://www.uishe.cn/494.html" target="_blank" class="avater" rel="nofollow">
-                                <img src="http://qzapp.qlogo.cn/qzapp/101214606/6EB1E86CD71993912377E404C7C66F87/100" class="avatar" width="40" height="40">                        </a>
-                            <div class="txt">
-                                <div class="rows cl">
-                                    <a href="https://www.uishe.cn/494.html" target="_blank" class="name" rel="nofollow"><span>龙之火</span>评论文章：</a>
-                                    <span class="time"> 01月03日</span>
-                                </div>
-                                <div class="artHeadTit">
-                                    <a href="https://www.uishe.cn/494.html" target="_blank" title="白色蓝色风格UI主题包">
-                                        白色蓝色风格UI主题包                                </a>
-                                </div>
-                            </div>
+                            {{ $comments_item['content'] }}
                         </div>
                     </li>
-                    <li class="sidcomment">
-                        <div class="cmt">
-                            <em class="arrow"></em>
-                            提取码也不给？
-                        </div>
-                        <div class="perMsg cl">
-                            <a href="https://www.uishe.cn/12020.html" target="_blank" class="avater" rel="nofollow">
-                                <img src="https://tva1.sinaimg.cn/crop.177.274.162.162.50/44c7e4b8jw8expa9gg9qhj20go0q6n3t.jpg?KID=imgbed,tva&amp;Expires=1577952807&amp;ssig=dALVusyaL%2B" class="avatar" width="40" height="40">                        </a>
-                            <div class="txt">
-                                <div class="rows cl">
-                                    <a href="https://www.uishe.cn/12020.html" target="_blank" class="name" rel="nofollow"><span>塑料僵尸</span>评论文章：</a>
-                                    <span class="time"> 01月02日</span>
-                                </div>
-                                <div class="artHeadTit">
-                                    <a href="https://www.uishe.cn/12020.html" target="_blank" title="Illustrator 渐变色工具包 .ai素材下载">
-                                        Illustrator 渐变色工具包 .ai素材下载                                </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="sidcomment">
-                        <div class="cmt">
-                            <em class="arrow"></em>
-                            嗯嗯
-                        </div>
-                        <div class="perMsg cl">
-                            <a href="https://www.uishe.cn/11022.html" target="_blank" class="avater" rel="nofollow">
-                                <img src="http://qzapp.qlogo.cn/qzapp/101214606/EF801A9AD6A5F02927CCB9BF7904B4FE/100" class="avatar" width="40" height="40">                        </a>
-                            <div class="txt">
-                                <div class="rows cl">
-                                    <a href="https://www.uishe.cn/11022.html" target="_blank" class="name" rel="nofollow"><span>独望星空丶</span>评论文章：</a>
-                                    <span class="time"> 01月01日</span>
-                                </div>
-                                <div class="artHeadTit">
-                                    <a href="https://www.uishe.cn/11022.html" target="_blank" title="完整的Creation Web UI kit 网站主题包 .psd素材下载&amp;.sketch素材下载">
-                                        完整的Creation Web UI kit 网站主题包 .psd素材下载&amp;.sketch素材下载                                </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="sidcomment">
-                        <div class="cmt">
-                            <em class="arrow"></em>
-                            字母安装啊
-                        </div>
-                        <div class="perMsg cl">
-                            <a href="https://www.uishe.cn/12020.html" target="_blank" class="avater" rel="nofollow">
-                                <img src="http://qzapp.qlogo.cn/qzapp/101214606/A8863D1B1816C1D8FAC00C14DEB599B6/100" class="avatar" width="40" height="40">                        </a>
-                            <div class="txt">
-                                <div class="rows cl">
-                                    <a href="https://www.uishe.cn/12020.html" target="_blank" class="name" rel="nofollow"><span>So</span>评论文章：</a>
-                                    <span class="time"> 12月29日</span>
-                                </div>
-                                <div class="artHeadTit">
-                                    <a href="https://www.uishe.cn/12020.html" target="_blank" title="Illustrator 渐变色工具包 .ai素材下载">
-                                        Illustrator 渐变色工具包 .ai素材下载                                </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="sidcomment">
-                        <div class="cmt">
-                            <em class="arrow"></em>
-                            有 Mac的吗？
-                        </div>
-                        <div class="perMsg cl">
-                            <a href="https://www.uishe.cn/12020.html" target="_blank" class="avater" rel="nofollow">
-                                <img src="http://qzapp.qlogo.cn/qzapp/101214606/0A3DB65F1951C34874C25C1A0FE1C700/100" class="avatar" width="40" height="40">                        </a>
-                            <div class="txt">
-                                <div class="rows cl">
-                                    <a href="https://www.uishe.cn/12020.html" target="_blank" class="name" rel="nofollow"><span>妹妹,</span>评论文章：</a>
-                                    <span class="time"> 12月18日</span>
-                                </div>
-                                <div class="artHeadTit">
-                                    <a href="https://www.uishe.cn/12020.html" target="_blank" title="Illustrator 渐变色工具包 .ai素材下载">
-                                        Illustrator 渐变色工具包 .ai素材下载                                </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
 

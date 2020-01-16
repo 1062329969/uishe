@@ -524,7 +524,7 @@ class WechatSDK
         }
     }
 
-    private static function get_client_ip()
+    public static function get_client_ip()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];

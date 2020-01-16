@@ -24,7 +24,7 @@ class OrdersVip extends Model
             'vip_level' => $vip['level'],
             'vip_id' => $vip['id'],
             'vip_name' => $vip['name'],
-            'orders_pay_code' => $order->code[Orders::Order_Pay_Type_Alipay]
+            'orders_pay_code' => $currency_type == Orders::Currency_Type_Credit ? '' : $order->code[Orders::Order_Pay_Type_Alipay]
         ]);
         if($res){
             $res = Orders::where('id', $order->id)->update(['actual_price' => $actual_price]);
@@ -43,12 +43,17 @@ class OrdersVip extends Model
     private static function getActualPrice($order, $vip, $currency_type){
         $user = Auth::user();
         //打折做活动使用
-        $now_vip = VipOption::where([
-            ['status', '=', VipOption::Option_Status_On],
-            ['level', '=', $user->user_type],
-            ['currency_type', '=', $currency_type],
-        ])->first();
-        $price = $vip['actual_price'] - $now_vip->actual_price;
+        if ( $user->user_type == 0 ){
+            $price = $vip['actual_total'];
+        }else{
+            $now_vip = VipOption::where([
+                ['status', '=', VipOption::Option_Status_On],
+                ['level', '=', $user->user_type],
+                ['currency_type', '=', $currency_type],
+            ])->first();
+            $price = $vip['actual_total'] - $now_vip->actual_total;
+        }
+
         return $price;
     }
 
@@ -59,7 +64,7 @@ class OrdersVip extends Model
             ['level', '=', $request->vip_type],
             ['currency_type', '=', $currency_type],
         ])
-            ->first();
+            ->first()->toArray();
         if(!$vip){
             return redirect(route('buyvip'))->withErrors(['status'=>'未找到会员等级']);
         }
@@ -68,16 +73,16 @@ class OrdersVip extends Model
         }
 
         $day = Carbon::now()->diffInDays($user->startTime, false);
-        if($day <= VipOption::Option_Spread_Day){
+        if($day <= VipOption::Option_Spread_Day && $day != 0){
             $now_vip = VipOption::where([
                 ['status', '=', VipOption::Option_Status_On],
                 ['level', '=', $user->user_type],
                 ['currency_type', '=', $currency_type],
             ])->first();
-            $price = $vip['actual_price'] - $now_vip->actual_price;
+            $price = $vip['actual_total'] - $now_vip->actual_total;
             $remark = $now_vip->name.'补差价'.$vip['name'];
         }else{
-            $price = $vip['actual_price'];
+            $price = $vip['actual_total'];
             $remark = '';
         }
 

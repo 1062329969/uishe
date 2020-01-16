@@ -26,6 +26,7 @@ class Comments extends Model
 
         foreach ($recommend as &$item){
             $item['new_title'] = News::where('id', $item['new_id'])->value('title');
+            $item['avatar_url'] = User::find($item['user_id'])->avatar_url;
         }
 
         return $recommend;
