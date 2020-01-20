@@ -51,7 +51,7 @@ class HomeController extends Controller
         Storage::disk('ftp')
             ->writeStream(
                 '/images/logo.png',
-                Storage::disk('local')->readStream('..//public/images/logo.png')
+                Storage::disk('local')->readStream(public_path('xxxxxx'))
             );
 
 
