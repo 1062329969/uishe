@@ -32,10 +32,7 @@
                     <td>退款回执编号</td>
                     <td>  {{$orders->order_pay->refund_no}}</td>
                 </tr>
-                <tr>
-                    <td>退款方式</td>
-                    <td>  {{$orders->order_pay->refund_type}}</td>
-                </tr>
+
                 <tr>
                     <td>退款金额</td>
                     <td>  {{$orders->order_pay->refund_price}}</td>

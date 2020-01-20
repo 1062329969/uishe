@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Overtrue\LaravelSocialite\Socialite;
 use Validator;
 
@@ -46,7 +47,15 @@ class HomeController extends Controller
 
     public function test()
     {
-        return view('test');
+//        dd(public_path('/images/logo.png'));
+        Storage::disk('ftp')
+            ->writeStream(
+                '/images/logo.png',
+                Storage::disk('local')->readStream('..//public/images/logo.png')
+            );
+
+
+//        return view('test');
     }
     public function templet()
     {

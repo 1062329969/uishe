@@ -45,7 +45,17 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app/uploads'),
+            'root' => '/',
+        ],
+
+        'ftp' => [
+            'driver' => 'sftp',
+            'host' => '39.106.74.138',
+            'username' => 'root',
+            'password' => 'Liu111111',
+            'root' => '/www/data',
+            'passive' => false,
+            'timeout' => 100,
         ],
 
         'public' => [
