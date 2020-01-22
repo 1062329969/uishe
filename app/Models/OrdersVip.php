@@ -16,7 +16,7 @@ class OrdersVip extends Model
     protected $hidden = ['updated_at', 'deleted_at'];
 
     public static function create($order, $vip, $currency_type){
-
+        $request->pay_type
         $actual_price = self::getActualPrice($order, $vip, $currency_type);
         $res = OrdersVip::insert([
             'order_id' => $order->id,

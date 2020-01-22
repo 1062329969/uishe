@@ -254,7 +254,7 @@
                 </div>
             </div>
 
-            <div class="info-box fr pr" style="margin-top: 20px;">
+            <div class="info-box fr pr" style="margin-top: 20px;    clear: both">
                 <div class="tags fn14 show-box tags_thematic_div">
                     <p class="tags_thematic_p" >相关专题</p>
                     <p class="thematic_itme">

@@ -54,7 +54,7 @@ Route::any('/test', 'HomeController@test')->name('test');
 
 
 Route::get('/download/check/{type}/{id}', 'DownloadController@check')->where('name', '[0-9]+')->name('check_download');
-Route::post('/download/news/{id}', 'DownloadController@newsDownload')->where('name', '[0-9]+')->name('down_new');
+Route::get('/download/news/{id}', 'DownloadController@newsDownload')->where('name', '[0-9]+')->name('down_new');
 
 Route::middleware(['auth:users'])->group(function () {
 
@@ -90,6 +90,7 @@ Route::any('/alipay/getpay/{order_no}', 'AlipayController@getpay')->name('alipay
 Route::any('/alipay/notify_url', 'AlipayController@notify_url')->name('alipay_notify');
 Route::any('/alipay/return_url', 'AlipayController@return_url')->name('alipay_return');
 
+Route::any('/wx/notify_url', 'AlipayController@notify_url')->name('alipay_notify');
 
 //文件上传接口，前后台共用
 Route::post('uploadImg', 'PublicController@uploadImg')->name('uploadImg');

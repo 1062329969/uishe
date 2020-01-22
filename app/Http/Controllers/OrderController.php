@@ -41,7 +41,7 @@ class OrderController extends Controller
 
         switch ($request->order_type){
             case Orders::Order_Type_Vip:
-                $res = OrdersVip::create($order, $vip, $currency_type);
+                $res = OrdersVip::create($order, $vip, $currency_type, $request->pay_type);
                 if($res){
 
                     if($currency_type == Orders::Currency_Type_Credit){

@@ -38,8 +38,8 @@ class CronController extends Controller
     }
 
     public function daily(){
-//        $this->getPexels();
-        $this->getOursketch();
+        $this->getPexels();
+//        $this->getOursketch();
     }
 
     public function getPexels(){
@@ -54,14 +54,14 @@ class CronController extends Controller
 
         $pexels = new Pexels(self::Pexels_Key);
 
-        $img = $pexels->search('ui');
-        $pexels_img = json_decode($img->getBody(), true);
-        $img_list = json_decode($pexels_img, true)['photos'];
+        $img = $pexels->search('web',2);
+        $img_list = json_decode($img->getBody(), true)['photos'];
+//        dd($img_list);
 
         $category = Category::where('alias', 'img')->first();
 
         foreach ($img_list as $item){
-
+            sleep(1);
             if(!file_exists($this->pexels_path . $item['id'] . DIRECTORY_SEPARATOR)){ // 创建这个id的文件夹
                 mkdir($this->pexels_path . $item['id'] . DIRECTORY_SEPARATOR, 0777, true);
                 chmod($this->pexels_path . $item['id'] . DIRECTORY_SEPARATOR,0777);
@@ -149,6 +149,9 @@ class CronController extends Controller
                 ];
             }
 
+            dump($tag_id);
+            dump($tag_zh);
+            die;
             $news_id = News::insertGetId([
                 'admin_id' => 1,
                 'title' => $title,
@@ -176,6 +179,7 @@ class CronController extends Controller
             }
 
             TagNew::insert($tag_new_item);
+            die;
         }
         return response()->json($img_list);
     }
