@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libs\PasswordHash;
 use App\Models\DownLog;
 use App\Models\News;
 use App\Models\Usercredit;
@@ -101,7 +102,7 @@ class UserController extends Controller
     }
 
     public function saveself(Request $request){
-        if($request->tab == 'edit_info'){
+        if ( $request->tab == 'edit_info' ) {
             $this->validate($request,[
                 'display_name'  => 'required|string',
                 'email'  => 'required|string',
@@ -114,6 +115,32 @@ class UserController extends Controller
                 return redirect()->to(route('selfinfo'))->with(['status'=>'保存成功']);
             }else{
                 return redirect()->to(route('selfinfo'))->with(['status'=>'保存失败']);
+            }
+        } elseif ($request->tab == 'save_avatar_url'){
+            if ( !$request->avatar_url ) {
+                return response()->error(500, '请上传头像');
+            }
+            $res = User::where('id', Auth::user()->id)->update([ 'avatar_url' => $request->avatar_url ]);
+            if($res){
+                return response()->success('保存成功');
+            }else{
+                return response()->error(500, '保存失败');
+            }
+        } elseif ( $request->tab == 'edit_password' ) {
+            $this->validate($request,[
+                'old_password'  => 'required|string',
+                'new_password' => 'required|max:16|string',
+                'com_password' => 'required|max:16|string', "same:password",
+            ]);
+
+            $wp_hasher = new PasswordHash(8, TRUE);
+            $password = $wp_hasher->HashPassword($request->new_password);
+
+            $res = User::where('id', Auth::user()->id)->update([ 'password' => $password ]);
+            if($res){
+                return redirect()->to(route('selfinfo', ['tab' => $request->tab]))->with(['status'=>'保存成功']);
+            }else{
+                return redirect()->to(route('selfinfo', ['tab' => $request->tab]))->with(['status'=>'保存失败']);
             }
         }
     }

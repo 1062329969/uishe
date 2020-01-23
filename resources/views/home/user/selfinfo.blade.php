@@ -3,9 +3,9 @@
 @section('content')
     <div id="selfinfo">
         <div id="selfinfo_tag">
-            <a class="edit_info @if($tab == 'edit_info') tag_on @endif" >编辑资料</a>
-            <a class="bind_account @if($tab == 'bind_account') tag_on @endif" >绑定账号</a>
-            <a class="edit_password @if($tab == 'edit_password') tag_on @endif" >修改密码</a>
+            <a href="{{ route('selfinfo', ['tab' => 'edit_info']) }}" class="edit_info @if($tab == 'edit_info') tag_on @endif" >编辑资料</a>
+            <a href="{{ route('selfinfo', ['tab' => 'bind_account']) }}" class="bind_account @if($tab == 'bind_account') tag_on @endif" >绑定账号</a>
+            <a href="{{ route('selfinfo', ['tab' => 'edit_password']) }}" class="edit_password @if($tab == 'edit_password') tag_on @endif" >修改密码</a>
         </div>
 
         @if($tab == 'edit_info')
@@ -33,7 +33,7 @@
                 </form>
                 <link href="{{ asset('static/home/layui/css/layui.css') }}" rel="stylesheet" type="text/css">
                 <div id="edit_info_img" class="layui-upload">
-                    <img id="avatar_url_img" src="{{ Auth::user()->avatar_url }}">
+                    <img id="avatar_url_img" width="200px" height="200px" src="{{ Auth::user()->avatar_url }}">
                     <script>
                         var upload = layui.upload; //得到 upload 对象
                         //创建一个上传组件
@@ -45,9 +45,19 @@
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             }
                             ,done: function(res, index, upload){ //上传后的回调
-                                console.log(res)
-                                console.log(index)
-                                console.log(upload)
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '{{ route('saveself', ['tab' => 'save_avatar_url']) }}',
+                                    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                                    data: {avatar_url: res.url},
+                                    success: function (data) {
+                                        if(data.code == 0){
+                                            layer.msg('上传成功',{icon:6})
+                                            $('#avatar_url_img').attr('src', res.url)
+                                        }
+                                    }
+                                })
                             }
                             //,accept: 'file' //允许上传的文件类型
                             //,size: 50 //最大允许上传的文件大小
@@ -72,8 +82,32 @@
         @endif
         @if($tab == 'edit_password')
             <div id="edit_password" >
-                <form>
-                    aaaaaaaaaaaaaaaa
+                <form id="edit_info_form" method="post" action="{{ route('saveself', ['tab' => $tab]) }}">
+                    {{ csrf_field() }}
+                    <div class="form-group height_72">
+                        <label for="display_name" class="edit_info_label">旧密码：</label>
+                        <div class="edit_info_form_item">
+                            <input type="text" class="form-control" name="old_password" value="">
+                        </div>
+                    </div>
+                    <div class="form-group height_72">
+                        <label for="display_name" class="edit_info_label">新密码：</label>
+                        <div class="edit_info_form_item">
+                            <input type="text" class="form-control" name="new_password" value="">
+                        </div>
+                    </div>
+                    <div class="form-group height_72">
+                        <label for="display_name" class="edit_info_label">确认密码：</label>
+                        <div class="edit_info_form_item">
+                            <input type="text" class="form-control" name="com_password" value="">
+                        </div>
+                    </div>
+                    <div class="form-group height_72">
+                        <label for="display_name" class="edit_info_label">&nbsp;</label>
+                        <div class="edit_info_form_item">
+                            <input type="submit" value="保存" class="submit_button">
+                        </div>
+                    </div>
                 </form>
             </div>
         @endif
