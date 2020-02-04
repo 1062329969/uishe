@@ -147,4 +147,23 @@ class NewsController extends Controller
 
         dd($list);
     }
+
+    public function save_commont(Request $request, $from, $id){
+        comment
+        comment_post_ID
+        author
+        email
+
+
+`new_id` int(11) DEFAULT NULL COMMENT '文章id',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
+  `user_name` varchar(255) DEFAULT NULL COMMENT '用户名',
+  `user_ip` varchar(255) DEFAULT NULL COMMENT '用户ip',
+  `content` varchar(255) DEFAULT NULL COMMENT '内容',
+  `status` varchar(255) DEFAULT NULL COMMENT '状态',
+  `agent` varchar(255) DEFAULT NULL COMMENT '代理，浏览器头部信息',
+  `parent_id` int(11) DEFAULT NULL,
+  `recommend` varchar(255) DEFAULT NULL COMMENT '推荐',
+  `mail_notify` int(11) DEFAULT '0',
+    }
 }

@@ -79,6 +79,7 @@ class WebOptionController extends Controller
                 break;
             case 'index':
                 $all_option = WebOption::where('op_type', $weboption)->value('op_value');
+//                dd($all_option);
                 $data['op_type'] = $weboption;
                 $data['all_option'] = json_decode($all_option, true);
                 //分类

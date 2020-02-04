@@ -81,9 +81,11 @@
         <div class="layui-form-item">
             <label for="" class="layui-form-label">栏目热门设置</label>
             <div class="layui-input-block serach_div" @if(!isset($item['search']) || empty($item['search'])) style="display: none" @endif>
-                @foreach($item['search'] as $search_item)
-                    <button type="button" class="layui-btn" onclick="$(this).remove()">{{ $search_item }}</button>
-                @endforeach
+                @if(isset($item['search']))
+                    @foreach($item['search'] as $search_item)
+                        <button type="button" class="layui-btn" onclick="$(this).remove()">{{ $search_item }}</button>
+                    @endforeach
+                @endif
             </div>
             <div class="layui-input-block">
                 <input type="text" value="" lay-verify="required|numeric"  class="layui-input serach_input" onkeydown="setSerachData(event, this)">

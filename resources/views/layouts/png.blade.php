@@ -314,18 +314,15 @@
         <div class="relative-search-box pr" style="height: auto;border: 1px #ccc solid;">
             <div class="comment_title">社友热评</div>
             <div class="self_comment">
-                <form action="http://www.uishe.cn/wp-comments-post.php" class="comment_form" method="post" id="commentform">
+                <form action="{{ route('save_commont', ['id' => $new['id'], 'from' => 'news']) }}" class="comment_form" method="post" id="commentform">
                     <div class="single-post-comment__form cf">
                         <textarea class="textarea form-control" data-widearea="enable" id="comment" name="comment" placeholder="你怎么看？"></textarea>
-                        <input type="hidden" name="comment_post_ID" value="15172" id="comment_post_ID">
-                        <input type="hidden" name="comment_parent" id="comment_parent" value="0">
-                        <p style="display: none;">
-                            <input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="f3797f5d79">
-                        </p>
-                        <span class="mail-notify-check">
+                        <input type="hidden" name="comment_post_ID" value="{{ $new['id']  }}" id="comment_post_ID">
+                        {{ csrf_token() }}
+                        {{--<span class="mail-notify-check">
                             <input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked" style="vertical-align:middle;">
                             <label for="comment_mail_notify" style="vertical-align:middle;">有人回复时邮件通知我</label>
-                        </span>
+                        </span>--}}
                     </div>
 
                     <div id="comboxinfo" class="comboxinfo cl">
@@ -345,9 +342,6 @@
                         <button type="submit" class="ladda-button comment-submit-btn">
                             <span class="ladda-label">提交评论</span>
                         </button>
-                        <div id="cancel_comment_reply">
-                            <a rel="nofollow" id="cancel-comment-reply-link" href="/15172.html#respond" style="display:none;">取消回复</a>
-                        </div>
                     </div>
                     <input type="hidden" id="ak_js" name="ak_js" value="1579165621966"></form>
             </div>

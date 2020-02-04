@@ -53,10 +53,13 @@ Route::any('/login/weibo_bind', 'HomeController@weibo_bind')->name('weibo_bind')
 Route::any('/test', 'HomeController@test')->name('test');
 
 
-Route::get('/download/check/{type}/{id}', 'DownloadController@check')->where('name', '[0-9]+')->name('check_download');
-Route::get('/download/news/{id}', 'DownloadController@newsDownload')->where('name', '[0-9]+')->name('down_new');
+Route::get('/download/check/{type}/{id}', 'DownloadController@check')->where('id', '[0-9]+')->name('check_download');
+Route::get('/download/news/{id}', 'DownloadController@newsDownload')->where('id', '[0-9]+')->name('down_new');
 
 Route::middleware(['auth:users'])->group(function () {
+
+
+    Route::post('/news/save_commont/{from}/{id}', 'NewsController@save_commont')->where('id', '[0-9]+')->name('save_commont');
 
     Route::any('/socialite_bind/{socialite}', function (Request $request, $category) {
         return (new SocialiteController())->socialite_bind($request, $category);
